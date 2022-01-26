@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,7 +21,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>Action</code> - Specifies the type of action (Add, Move, Delete, or Rename) to carry out
- * for the specified categories.
+ * for the specified eBay Store categories.
  * <br> <B>Input property:</B> <code>ItemDestinationCategoryID</code> - Items can only be contained within child categories. A parent category
  * cannot contain items. If adding, moving, or deleting categories displaces
  * items, you must specify a destination child category under which the
@@ -32,18 +32,18 @@ import com.ebay.soap.eBLBaseComponents.*;
  * the top level, set the value to -999.
  * <br> <B>Input property:</B> <code>StoreCategories</code> - Specifies the store categories on which to act.
  * <br> <B>Output property:</B> <code>ReturnedTaskID</code> - The task ID associated with the category structure change request. For a
- * simple change, the SetStoreCategories call is processed synchronously.
+ * simple change, the <b>SetStoreCategories</b> call is processed synchronously.
  * That is, simple changes are made immediately and then the response is
  * returned. For synchronous processing, the task ID in the response is 0.
  * If the category structure changes affect many listings, the changes will
  * be processed asynchronously and the task ID will be a positive number.
- * Use the non-zero task ID with GetStoreCategoryUpdateStatus to monitor
+ * Use the non-zero task ID with <b>GetStoreCategoryUpdateStatus</b> to monitor
  * the status of asynchronously processed changes.
- * <br> <B>Output property:</B> <code>ReturnedStatus</code> - When a category structure change is processed synchronously, the status
- * is returned as Complete or Failed. For asynchronously processed changes,
- * the status is reported as Pending. Use GetStoreCategoryUpdateStatus to
+ * <br> <B>Output property:</B> <code>ReturnedStatus</code> - When an eBay Store category structure change is processed synchronously, the status
+ * is returned as 'Complete' or 'Failed'. For asynchronously processed changes,
+ * the status is reported as 'InProgress' or 'Pending'. Use <b>GetStoreCategoryUpdateStatus</b> to
  * monitor the status of asynchronously processed changes.
- * <br> <B>Output property:</B> <code>ReturnedCustomCategory</code> - Contains data for store categories that you have created.
+ * <br> <B>Output property:</B> <code>ReturnedCustomCategory</code> - Contains hierarchy data for eBay Store categories that you have created/modified.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -78,7 +78,7 @@ public class SetStoreCategoriesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Changes the category structure of an eBay store.
+   * This call allows you to set or modify the category structure of an eBay Store. Sellers must have an eBay Store subscription in order to use this call.
    * 
    * <br>
    * @throws ApiException

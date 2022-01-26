@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -22,17 +22,17 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>SaleTemplateID</code> - The ID of the sale template. You can obtain a
- * SaleTemplateID by calling GetSellingManagerInventory or AddSellingManagerTemplate.
+ * <br> <B>Input property:</B> <code>SaleTemplateID</code> - The unique identifier of the Selling Manager template. You can obtain a
+ * <b>SaleTemplateID</b> value by calling <b>GetSellingManagerInventory</b>.
  * <br> <B>Input property:</B> <code>ProductID</code> - Reserved for future use.
- * <br> <B>Input property:</B> <code>SaleTemplateName</code> - The name of the sale template.
- * <br> <B>Input property:</B> <code>Item</code> - Required. In Item.ItemID, specify the same value as the
- * value you specified in SaleTemplateID.
+ * <br> <B>Input property:</B> <code>SaleTemplateName</code> - The name of the Selling Manager template.
+ * <br> <B>Input property:</B> <code>Item</code> - This container is used to modify the Selling Manager template. In the <b>Item.ItemID</b> field, you specify the same value as the
+ * one specified in <b>SaleTemplateID</b>.
  * Other child elements hold the values for properties that are being changed.
  * Set values in the Item object only for those properties that are
- * changing. Use DeletedField to remove a property.
+ * changing. Use <b>DeletedField</b> to remove a property.
  * <br> <B>Input property:</B> <code>DeletedField</code> - Specifies the name of a field to remove from a template.
- * See the eBay Features Guide for rules on removing values when revising items.
+ * See the eBay Web Services guide for rules on removing values when revising items.
  * Also see the relevant field descriptions to determine when to use DeletedField (and potential consequences).
  * The request can contain zero, one, or many instances of DeletedField (one for each field to be removed).
  * DeletedField accepts the following path names, which remove the corresponding fields:
@@ -52,7 +52,6 @@ import com.ebay.soap.eBLBaseComponents.*;
  * Item.PostalCode<br>
  * Item.ProductListingDetails<br>
  * item.ShippingDetails.PaymentInstructions<br>
- * Item.ShippingServiceCostOverrideList<br>
  * item.SKU<br>
  * Item.SubTitle<br><br>
  * These values are case-sensitive. Use values that match the case of the schema element names
@@ -65,8 +64,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * This means you still need to include either a first picture
  * or a gallery URL in your revised listing.
  * <br> <B>Input property:</B> <code>VerifyOnly</code> - Use this field to verify the template instead of revising it.
- * <br> <B>Output property:</B> <code>ReturnedSaleTemplateID</code> - This sale template ID uniquely identifies the template that was revised 
- * in the request. This sale template ID should match the 
+ * <br> <B>Output property:</B> <code>ReturnedSaleTemplateID</code> - This sale template ID uniquely identifies the template that was revised
+ * in the request. This sale template ID should match the
  * template ID specified in the request.
  * specified for the call.
  * <br> <B>Output property:</B> <code>ReturnedFees</code> - Child elements contain the estimated listing fees for the revised item
@@ -74,20 +73,17 @@ import com.ebay.soap.eBLBaseComponents.*;
  * be determined until an item is sold. Revising an item does not itself
  * incur a fee. However, certain item properties are fee-based and result
  * in the return of fees in the call's response.
- * Not applicable to Half.com.
  * <br> <B>Output property:</B> <code>ReturnedCategoryID</code> - ID of the primary category in which the item was listed.
  * Only returned if you set Item.CategoryMappingAllowed to true in the request
  * and the ID passed in Item.PrimaryCategory was mapped to a new ID by eBay.
  * If the primary category has not changed or it has expired with no replacement,
  * CategoryID does not return a value.
- * Not applicable to Half.com.
  * <br> <B>Output property:</B> <code>ReturnedCategory2ID</code> - ID of the secondary category in which the item was listed.
  * Only returned if you set Item.CategoryMappingAllowed to true in the request
  * and the ID passed in Item.SecondaryCategory was mapped to a new ID by eBay.
  * If the secondary category has not changed or it has expired with no replacement,
  * Category2ID does not return a value.
- * Not applicable to Half.com.
- * <br> <B>Output property:</B> <code>ReturnedVerifyOnly</code> - Instead of revising, only verifies the template. 
+ * <br> <B>Output property:</B> <code>ReturnedVerifyOnly</code> - Instead of revising, only verifies the template.
  * <br> <B>Output property:</B> <code>ReturnedSaleTemplateName</code> - The name of the sale template.
  * <br> <B>Output property:</B> <code>ReturnedSellingManagerProductDetails</code> - The details of the product that this template belongs to.
  * 
@@ -132,7 +128,7 @@ public class ReviseSellingManagerTemplateCall extends com.ebay.sdk.ApiCall
   /**
    * Revises a Selling Manager template.
    * This call is subject to change without notice; the
-   * deprecation process is inapplicable to this call.
+   * deprecation process is inapplicable to this call. The user must have a Selling Manager Pro subscription to use this call.
    * 
    * <br>
    * @throws ApiException

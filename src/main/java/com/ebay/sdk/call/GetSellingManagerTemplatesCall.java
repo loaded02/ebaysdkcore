@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,15 +20,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>SaleTemplateID</code> - The ID of the template whose data will be returned.
- * A SaleTemplateID is the ID of a Selling Manager template.
- * A Selling Manager template contains the data needed to list an item.
- * One or more template IDs can be specified, each in
- * its own container.
- * You can obtain a <b>SaleTemplateID</b> by calling <b>GetSellingManagerInventory</b>.
- * <br> <B>Output property:</B> <code>ReturnedSellingManagerTemplateDetailsArray</code> - Contains the data of the templates requested on input. 
- * A Selling Manager template contains the data needed to list an item.
- * Empty if no items are available that match the request.
+ * <br> <B>Input property:</B> <code>SaleTemplateID</code> - The unique identifier of the Selling Manager Template whose data will be returned. A Selling Manager Template contains the data needed to list an item. One or more template IDs can be specified, each in its own field. You can obtain a <b>SaleTemplateID</b> by calling <b>GetSellingManagerInventory</b>.
+ * <br> <B>Output property:</B> <code>ReturnedSellingManagerTemplateDetailsArray</code> - This container consists of an array of Selling Manager Templates that match the input criteria.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -58,9 +51,7 @@ public class GetSellingManagerTemplatesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves Selling Manager templates.
-   * This call is subject to change without notice; the
-   * deprecation process is inapplicable to this call.
+   * Retrieves Selling Manager templates. This call is subject to change without notice; the deprecation process is inapplicable to this call. The user must have a Selling Manager Pro subscription to use this call.
    * 
    * <br>
    * @throws ApiException

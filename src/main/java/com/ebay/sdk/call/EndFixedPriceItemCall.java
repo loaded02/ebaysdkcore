@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,31 +20,19 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemID</code> - Unique item ID that identifies the item listing that you want to end.
+ * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier of the listing that you want to end.
  * <br><br>
- * In the EndFixedPriceItem request, either ItemID or SKU is required.
+ * In the <b>EndFixedPriceItem</b> request, either <b>ItemID</b> or <b>SKU</b> value is required.
  * If both are passed in and they don't refer to the same listing, eBay
- * ignores SKU and considers only the ItemID.
- * <br> <B>Input property:</B> <code>EndingReason</code> - Indicates the seller's reason for ending the listing early. This field
- * is required if the seller is ending the item early and the item did
- * not successfully sell.
- * <br> <B>Input property:</B> <code>SKU</code> - The unique SKU of the item being ended. A SKU (stock keeping unit) is
- * an identifier defined by a seller. SKU can only be used to end an
- * item if you listed the item by using AddFixedPriceItem or
- * RelistFixedPriceItem, and you set Item.InventoryTrackingMethod to SKU
- * at the time the item was listed. (These criteria are necessary to
- * uniquely identify the listing by a SKU.)
+ * ignores <b>SKU</b> and considers only the <b>ItemID</b>.
+ * <br> <B>Input property:</B> <code>EndingReason</code> - The seller's reason for ending the listing early is input into this required field. The seller is not allowed to use the <code>ProductDeleted</code> value, as this ending reason can only be used internally by eBay to administratively end a listing due to the associated Catalog product being removed from the eBay Catalog.
+ * <br> <B>Input property:</B> <code>SKU</code> - The seller-defined SKU (stock keeping unit) value of the item in the listing being ended. The <b>SKU</b> field can only be used to end a listing if that listing was created or relisted with an <b>AddFixedPriceItem</b> or <b>RelistFixedPriceItem</b> call, and the <b>Item.InventoryTrackingMethod</b> was included in the call and set to <code>SKU</code>.
  * <br><br>
- * In the EndFixedPriceItem request, either ItemID or SKU is required. If
- * both are passed in and they don't refer to the same listing, eBay
- * ignores SKU and considers only the ItemID.
- * <br><br>
- * To remove a SKU when you revise or relist an item, use DeletedField in
- * the revision or relist call.
- * <br> <B>Output property:</B> <code>ReturnedEndTime</code> - Timestamp that indicates the date and time (GMT) that the specified item listing
- * was ended.
- * <br> <B>Output property:</B> <code>ReturnedSKU</code> - If a SKU (stock-keeping unit) exists for the item listing, it is returned in
- * the response.
+ * In the <b>EndFixedPriceItem</b> request, either <b>ItemID</b> or <b>SKU</b> is required.
+ * If both are passed in and they don't refer to the same listing, eBay
+ * ignores <b>SKU</b> and considers only the lt;b>ItemID</b>.
+ * <br> <B>Output property:</B> <code>ReturnedEndTime</code> - Timestamp that indicates the date and time (GMT) that the specified  listing was ended.
+ * <br> <B>Output property:</B> <code>ReturnedSKU</code> - If a SKU (stock-keeping unit) exists for the item in the listing, it is returned in the response.
  * 
  * @author Ron Murphy
  * @version 1.0

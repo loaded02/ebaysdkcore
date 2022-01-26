@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,99 +20,75 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>WatchList</code> - Returns the list of items being watched by the user.
+ * <br> <B>Input property:</B> <code>WatchList</code> - Include this container and set the <b>WatchList.Include</b> field to <code>true</code> to return the list of items on the eBay user's Watch List.
  * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>BidList</code> - Returns the list of items on which the user has bid.
+ * The user also has the option of using pagination and sorting for the list of watched items that will be returned.
+ * <br> <B>Input property:</B> <code>BidList</code> - Include this container and set the <b>BidList.Include</b> field to <code>true</code> to return the list of auction items on which the eBay user has bid.
  * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>BestOfferList</code> - Returns the list of items on which the user has placed best offers.
+ * The user also has the option of using pagination and sorting for the list of auction items that will be returned.
+ * <br> <B>Input property:</B> <code>BestOfferList</code> - Include this container and set the <b>BestOfferList.Include</b> field to <code>true</code> to return the list of items on which the eBay user has made a Best Offer.
  * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>WonList</code> - Returns the list of items on which the use has bid.
+ * The user also has the option of using pagination and sorting for the list of items that will be returned.
+ * <br> <B>Input property:</B> <code>WonList</code> - Include this container and set the <b>WonList.Include</b> field to <code>true</code> to return the list of auction items on which the eBay user has bid on and won.
  * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>LostList</code> - Returns the list of items on which the user has bid on and lost.
+ * The user also has the option of using pagination and sorting for the list of auction items that will be returned.
+ * <br> <B>Input property:</B> <code>LostList</code> - Include this container and set the <b>LostList.Include</b> field to <code>true</code> to return the list of auction items on which the eBay user has bid on and lost.
  * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>FavoriteSearches</code> - Returns the list of searches that the user has saved in My eBay. Returned
- * only if the user has saved searches.
- * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>FavoriteSellers</code> - Returns the list of favorite sellers that the user has saved in My eBay.
- * Returned only if the user has saved a list of favorite sellers.
- * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>SecondChanceOffer</code> - Returns the list of second chance offers made by the user. Returned only
- * if the user has made second chance offers.
- * <br><br>
- * Set Include to true to return the default response set.
+ * The user also has the option of using pagination and sorting for the list of auction items that will be returned.
+ * <br> <B>Input property:</B> <code>FavoriteSearches</code> - Include this container and set the <b>FavoriteSearches.Include</b> field to <code>true</code> to return the list of the eBay user's saved searches.
+ * <br> <B>Input property:</B> <code>FavoriteSellers</code> - Include this container and set the <b>FavoriteSellers.Include</b> field to <code>true</code> to return the list of the eBay user's saved sellers.
+ * <br> <B>Input property:</B> <code>SecondChanceOffer</code> - Include this container and set the <b>SecondChanceOffer.Include</b> field to <code>true</code> to return any Second Chance Offers that the eBay user has received.
  * <br> <B>Input property:</B> <code>BidAssistantList</code> - This field is deprecated.
- * <br> <B>Input property:</B> <code>DeletedFromWonList</code> - Returns the list of items the user has won, and subsequently deleted from
- * their My eBay page.
+ * <br> <B>Input property:</B> <code>DeletedFromWonList</code> - Include this container and set the <b>DeletedFromWonList.Include</b> field to <code>true</code> to return the list of auction items on which the eBay user has bid on and won, but has deleted from their My eBay page.
  * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>DeletedFromLostList</code> - Returns the list of items (auctions) the user did not win and were
- * subsequently deleted from their My eBay page.
+ * The user also has the option of using pagination and sorting for the list of auction items that will be returned.
+ * <br> <B>Input property:</B> <code>DeletedFromLostList</code> - Include this container and set the <b>DeletedFromLostList.Include</b> field to <code>true</code> to return the list of auction items on which the eBay user has bid on and lost, and has deleted from their My eBay page.
  * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>BuyingSummary</code> - Returns a summary of the user's buying activity.
- * <br><br>
- * <span class="tablenote"><b>Note:</b>
- * The buying summary container is
- * not included in the response by default. To include a <b>BuyingSummary</b> element, add an <b>Include</b> field set to <code>true</code> to the request.
- * </span>
- * <br> <B>Input property:</B> <code>UserDefinedLists</code> - Returns the user defined lists, which are lists created by the user in the eBay
- * UI and filled with items, or sellers, or searches using the 
- * "Add to List" feature.
- * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>HideVariations</code> - If true, the Variations node is omitted for all multi-variation
- * listings in the response.
- * If false, the Variations node is returned for all
- * multi-variation listings in the response. <br>
+ * The user also has the option of using pagination and sorting for the list of auction items that will be returned.
+ * <br> <B>Input property:</B> <code>BuyingSummary</code> - Include this container and set the <b>BuyingSummary.Include</b> field to <code>true</code> to return the <b>BuyingSummary</b> container in the response. The <b>BuyingSummary</b> container consists of buying/bidding activity counts and values.
+ * <br> <B>Input property:</B> <code>UserDefinedLists</code> - Include this container and set the <b>UserDefinedLists.Include</b> field to <code>true</code> to return one or more user-defined lists. User-defined lists are lists created by the user in My eBay and consists of a combination of items, saved sellers, and/or saved searches.
+ * <br> <B>Input property:</B> <code>HideVariations</code> - If this field is included and set to <code>true</code>, the <b>Variations</b> node (and all variation data) is omitted for all multiple-variation listings in the response. If this field is omitted or set to <code>false</code>, the <b>Variations</b> node is returned for all multiple-variation listings in the response.
  * <br>
- * <span class="tablenote"><b>Note:</b>
- * If the seller includes a large number of
- * variations in many listings, retrieving variations (setting this
- * flag to false) may degrade the call's performance. Therefore,
- * when this is false, you may need to reduce the total
- * number of items you're requesting at once (by using other input
- * fields, such as Pagination).
- * </span>
- * <br> <B>Output property:</B> <code>ReturnedBuyingSummary</code> - Contains a summary of the items the user has bid on. Returned at all detail
- * levels.
- * <br> <B>Output property:</B> <code>ReturnedWatchList</code> - Contains the items the user is watching. Only returned if items exist that
- * meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedBidList</code> - Contains all the items the buyer has bid on.
- * Only returned if items exist that meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedBestOfferList</code> - Contains the items the user has placed Best Offers on. Only returned if
- * items exist that meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedWonList</code> - Contains the items the user has bid on and won. Only returned if items
- * exist that meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedLostList</code> - Contains the items the user has bid on and lost. Only returned if items
- * exist that meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedFavoriteSearches</code> - Contains a list of the user's favorite searches. Only returned if the
- * user has Favorite Searches. The search name, search query, and search
- * elements, such as QueryKeywords, SortOrder, and Condition are returned.
+ * <br> <B>Output property:</B> <code>ReturnedBuyingSummary</code> - This container consists of buying/bidding activity counts and values. For this container to be returned, the user must include the <b>BuyingSummary.Include</b> field in the request and set its value to <code>true</code>.
+ * <br> <B>Output property:</B> <code>ReturnedWatchList</code> - This container consists of the items on the eBay user's Watch List. This container will be returned if the eBay user has one or more items on their Watch List.
  * <br><br>
- * You can paste the Search Query response, that comes back as a URL, into a browser
- * to re-play the Favorite Search.
+ * This container will not be returned in the response (even if there are items on the Watch List) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>WatchList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedBidList</code> - This container consists of the auction items on which the eBay user has bid. This container will be returned if the eBay user has bid on one or more auction items.
  * <br><br>
- * The search elements that are returned by this call can be used as input
- * for the Shopping API FindItemsAdvanced request.
- * <br> <B>Output property:</B> <code>ReturnedFavoriteSellers</code> - Contains a list of the user's favorite sellers. Only returned if items
- * exist that meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedSecondChanceOffer</code> - Contains the list of second chance offers the user has received. Only
- * returned if items exist that meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedBidAssistantList</code> - Contains the items that were bid on using the Bid Assistant feature.
- * <br> <B>Output property:</B> <code>ReturnedDeletedFromWonList</code> - Contains the items the buyer has bid on, won, and deleted from My eBay.
- * Only returned if items exist that meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedDeletedFromLostList</code> - Contains the items the buyer has bid on, lost, and deleted from My eBay.
- * Only returned if items exist that meet the request criteria.
- * <br> <B>Output property:</B> <code>ReturnedUserDefinedList</code> - Contains the items, searches, or sellers that the user has saved to this 
- * list using the "Add to list" feature.  The name of the list is given by the 
- * "Name" element. Returned only if UserDefineLists is specified in the request.
+ * This container will not be returned in the response (even if there are items on the Bid List) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>BidList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedBestOfferList</code> - This container consists of the items on which the eBay user has made Best Offers. This container will be returned if the eBay user has made one or more Best Offers.
+ * <br><br>
+ * This container will not be returned in the response (even if user has made Best Offers) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>BestOfferList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedWonList</code> - This container consists of the auction items on which the eBay user has won. This container will be returned if the eBay user has won one or more auction items.
+ * <br><br>
+ * This container will not be returned in the response (even if there are items on the Won List) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>WonList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedLostList</code> - This container consists of the auction items on which the eBay user has bid on but lost. This container will be returned if the eBay user has lost one or more auction items.
+ * <br><br>
+ * This container will not be returned in the response (even if the buyer has lost one or more auction items) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>LostList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedFavoriteSearches</code> - This container consists of the eBay user's saved searches. This container will be returned if the eBay user has one or more saved searches.
+ * <br><br>
+ * This container will not be returned in the response (even if the user has saved searches) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>FavoriteSearches.Include</b> field is omitted or set to <code>false</code>.
+ * <br><br>
+ * This container consists of the search name, search query, and other search
+ * elements. The user can copy and paste the URL in the <b>SearchQuery</b> field into a browser to view the search results again.
+ * <br> <B>Output property:</B> <code>ReturnedFavoriteSellers</code> - This container consists of the eBay user's saved sellers. This container will be returned if the eBay user has one or more saved sellers.
+ * <br><br>
+ * This container will not be returned in the response (even if the user has saved sellers) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>FavoriteSellers.Include</b> field is omitted or set to <code>false</code>.
+ * <br><br>
+ * This container consists of the saved sellers' user IDs and eBay Store names (if applicable).
+ * <br> <B>Output property:</B> <code>ReturnedSecondChanceOffer</code> - This container consists of the items on which the eBay user has received a Second Chance Offer. This container will be returned if the eBay user has made one or more Second Chance Offers.
+ * <br><br>
+ * This container will not be returned in the response (even if user has received Second Chance Offers) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>SecondChanceOffer.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedBidAssistantList</code> - This field is deprecated.
+ * <br> <B>Output property:</B> <code>ReturnedDeletedFromWonList</code> - This container consists of the auction items on which the eBay user has won but deleted from their My eBay page. This container will be returned if the eBay user has won one or more auction items but have deleted these items from My eBay.
+ * <br><br>
+ * This container will not be returned in the response (even if they have won and then deleted one or more items) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>DeletedFromWonList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedDeletedFromLostList</code> - This container consists of the auction items on which the eBay user has lost and then deleted from their My eBay page. This container will be returned if the eBay user has lost one or more auction items and then deleted those items from My eBay.
+ * <br><br>
+ * This container will not be returned in the response (even if they have lost and then deleted one or more items) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>DeletedFromLostList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedUserDefinedList</code> - This container consists of data for a user-defined list that was created by the user in My eBay. User-defined lists consists of a combination of items, saved sellers, and/or saved searches.
+ * <br><br>
+ * This container will not be returned in the response (even if one or more user-defined lists exist) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>UserDefinedList.Include</b> field is omitted or set to <code>false</code>.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -168,8 +144,7 @@ public class GetMyeBayBuyingCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves information regarding a user's buying activity, such as items they are watching, bidding on, have
-   * won, did not win, and have made Best Offers on.
+   * Retrieves information regarding a user's buying activity, such as items they are watching, bidding on, have won, did not win, and have made Best Offers on.
    * 
    * <br>
    * @throws ApiException

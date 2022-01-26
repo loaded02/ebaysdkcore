@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,15 +20,10 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>Action</code> - The seller must include this field and set it to 'Add' to create a new 
- * promotional sale, or set it to 'Update' to modify an existing promotional sale, 
- * or set it to 'Delete' to delete a promotional sale.
- * <br> <B>Input property:</B> <code>PromotionalSaleDetails</code> - This container must be included in each <b>SetPromotionalSale</b> call. 
- * The fields of this container that will be used will depend on whether the seller is 
- * adding a new promotional sale, updating an existing promotional sale, or deleting an 
- * existing promotional sale.
- * <br> <B>Output property:</B> <code>ReturnedStatus</code> - Contains the status of a promotional sale.
- * <br> <B>Output property:</B> <code>ReturnedPromotionalSaleID</code> - Contains the ID of a promotional sale.
+ * <br> <B>Input property:</B> <code>Action</code> - The seller must include this field and set it to 'Add' to create a new promotional sale, or set it to 'Update' to modify an existing promotional sale, or set it to 'Delete' to delete a promotional sale.
+ * <br> <B>Input property:</B> <code>PromotionalSaleDetails</code> - This container must be included in each <b>SetPromotionalSale</b> call. The fields of this container that will be used will depend on whether the seller is adding a new promotional sale, updating an existing promotional sale, or deleting an existing promotional sale.
+ * <br> <B>Output property:</B> <code>ReturnedStatus</code> - The enumeration value in this field indicates the status of the promotional sale action (add or delete). See <b>PromotionalSaleStatusCodeType</b> for more information on status values.
+ * <br> <B>Output property:</B> <code>ReturnedPromotionalSaleID</code> - The unique identifier of the new promotional sale, or in the case of a delete or modify action, the unique identifier of the existing promotional sale that was deleted or modified.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -61,7 +56,7 @@ public class SetPromotionalSaleCall extends com.ebay.sdk.ApiCall
 
   /**
    * Creates or modifies a promotional sale. Promotional sales enable sellers
-   * to apply discounts and/or free shipping across many listings.
+   * to apply discounts and/or free shipping across many listings. To use this call, the seller must be a registered eBay Store owner.
    * 
    * <br>
    * @throws ApiException

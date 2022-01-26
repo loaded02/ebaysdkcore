@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,10 +21,10 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemID</code> - ItemID which should be created as a template and saved to inventory.
+ * <br> <B>Input property:</B> <code>ItemID</code> - The unique identifier of the eBay listing which should be used as a model to create the Selling Manager template and save it to Selling Manager inventory.
  * <br> <B>Input property:</B> <code>ProductID</code> - Associates the new template with a product.
  * <br> <B>Input property:</B> <code>TemplateName</code> - Name associated with the template. If no name is submitted, the template will be named automatically.
- * <br> <B>Output property:</B> <code>ReturnedTemplateID</code> - Template ID that is newly created.
+ * <br> <B>Output property:</B> <code>ReturnedTemplateID</code> - The unique identifier of the newly-created Selling Manager template. As long as the call was successful, this field is always returned.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -56,9 +56,9 @@ public class SaveItemToSellingManagerTemplateCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Creates a Selling Manager listing template that is similar to an item.
+   * Creates a Selling Manager template based on an existing eBay listing.
    * This call is subject to change without notice; the
-   * deprecation process is inapplicable to this call.
+   * deprecation process is inapplicable to this call. The user must have a Selling Manager Pro subscription to use this call.
    * 
    * <br>
    * @throws ApiException

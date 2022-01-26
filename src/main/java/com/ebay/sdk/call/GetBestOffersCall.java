@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,26 +20,15 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemID</code> - The unique identifier of a fixed-price or classified ad listing. If an <b>ItemID</b> is used by itself in the call request, all Best Offers in all states are retrieved for this listing. However, the seller can also combine <b>ItemID</b> and a <b>BestOfferStatus</b> value if that seller only wants to see Best Offers in a specific state. If a <b>BestOfferID</b> field is included in the call request, any <b>ItemID</b> value will be ignored since eBay will only search for and return the Best Offer identified in the <b>BestOfferID</b> field.
+ * <br> <B>Input property:</B> <code>ItemID</code> - The unique identifier of an eBay listing. If an <b>ItemID</b> is used by itself in the call request, all Best Offers in all states are retrieved for this listing. However, the seller can also combine <b>ItemID</b> and a <b>BestOfferStatus</b> value if that seller only wants to see Best Offers in a specific state. If a <b>BestOfferID</b> field is included in the call request, any <b>ItemID</b> value will be ignored since eBay will only search for and return the Best Offer identified in the <b>BestOfferID</b> field.
  * <br> <B>Input property:</B> <code>BestOfferID</code> - The unique identifier of a Best Offer. An identifier for a Best Offer is automatically created by eBay once a prospective buyer makes a Best Offer on a Best Offer-enabled listing. If a <b>BestOfferID</b> value is supplied in the call request, any <b>ItemID</b> or <b>BestOfferStatus</b> values will be ignored. Only the Best Offer identified by the <b>BestOfferID</b> value will be returned.
  * <br> <B>Input property:</B> <code>BestOfferStatus</code> - This field can be used if the seller wants to retrieve Best Offers in a specific state. The typical use case for this field is when the seller wants to retrieve Best Offers in all states for a specific listing. In fact, the <b>All</b> value can only be used if an <b>ItemID</b> value is also supplied in the call request. If a <b>BestOfferID</b> field is included in the call request, any <b>BestOfferStatus</b> value will be ignored since eBay will only search for and return the Best Offer identified in the <b>BestOfferID</b> field.
+ * <br/>
  * <br> <B>Input property:</B> <code>Pagination</code> - This container can be used if the seller is expecting that the <b>GetBestOffers</b> call will retrieve a large number of results, so that seller wishes to view just a subset (one page of multiple pages) of those results at a time. See this container's child fields for more information on how pagination is used.
- * <br> <B>Output property:</B> <code>ReturnedBestOffers</code> - All Best Offers for the item according to the filter or
- * Best Offer id (or both) used in the input. The buyer and
- * seller messages are returned only if the detail level is
- * defined. Includes the buyer and seller message only if the
- * ReturnAll detail level is used.
- * Only returned if Best Offers have been made.
- * <br> <B>Output property:</B> <code>ReturnedItem</code> - The item for which Best Offers are being returned.
- * Only returned if Best Offers have been made.
+ * <br> <B>Output property:</B> <code>ReturnedBestOffers</code> - All Best Offers for the item according to the filter or Best Offer ID (or both) used in the input. The buyer and seller messages are returned only if the detail level is defined. Includes the buyer and seller message only if the <code>ReturnAll</code> detail level is used. Only returned if Best Offers have been made.
+ * <br> <B>Output property:</B> <code>ReturnedItem</code> - This container consists of several details about the listing for which a Best Offer has been made, including the Item ID, the current price of the item (not the Best Offer price), and the time that the listing is scheduled to end.
  * <br> <B>Output property:</B> <code>ReturnedItemBestOffersArray</code> - A collection of details about the Best Offers received for a specific item. Empty if there are no Best Offers.
- * <br> <B>Output property:</B> <code>ReturnedPageNumber</code> - Specifies the number of the page of data to return in the response.
- * Default is 1 for most calls. For some calls, the default is 0. Specify a
- * positive value equal to or lower than the number of pages available (which you
- * determine by examining the results of your initial request).
- * See the documentation for other individual calls to determine the correct
- * default value. For GetOrders, PageNumber is only applicable to Half.com (is not
- * applicable to eBay.com).
+ * <br> <B>Output property:</B> <code>ReturnedPageNumber</code> - This integer value indicates the current page number of Best Offers that is currently being shown. This value will be the same value passed into the <b>Pagination.PageNumber</b> field in the request.
  * <br> <B>Output property:</B> <code>ReturnedPaginationResult</code> - Provides information about the data returned, including the number of pages and the number
  * of entries.
  * 
@@ -79,6 +68,10 @@ public class GetBestOffersCall extends com.ebay.sdk.ApiCall
 
   /**
    * This is the base request type of the <b>GetBestOffers</b> call. Depending on the input parameters that are used, this call can be used by a seller to retrieve all active Best Offers, all Best Offers on a specific listing, a specific Best Offer for a specific listing, or Best Offers in a specific state.
+   * <br/><br/>
+   * <span class="tablenote"><b>Note: </b>
+   * The Best Offer feature is now available for auction listings on the following sites: US, Canada, UK, Germany, Australia, France, Italy, and Spain. However, sellers must choose between offering Best Offer or Buy It Now on an auction listing, as both features cannot be enabled on the same auction listing.
+   * </span>
    * 
    * <br>
    * @throws ApiException

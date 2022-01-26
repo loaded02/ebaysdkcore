@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,85 +20,41 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ShowBidderNoticePreferences</code> - If included and set to <code>true</code>, the seller's preference for receiving contact
- * information for unsuccessful bidders is returned in the response.
- * <br> <B>Input property:</B> <code>ShowCombinedPaymentPreferences</code> - If included and set to <code>true</code>, the seller's combined payment preferences are
- * returned in the response. These preferences are used to allow Combined Invoice
- * orders.
- * <br><br>
- * <span class="tablenote"><strong>Note:</strong>
- * The <strong>CombinedPaymentPreferences.CombinedPaymentOption</strong> field is the only
- * preference that should be managed with the <strong>GetUserPreferences</strong> and
- * <strong>SetUserPreferences</strong> calls. All other combined payment preferences should be
- * managed with the <strong>SetDiscountProfiles</strong> and <strong>GetDiscountProfiles</strong> calls.
- * </span>
+ * <br> <B>Input property:</B> <code>ShowBidderNoticePreferences</code> - If included and set to <code>true</code>, the seller's preference for receiving contact information for unsuccessful bidders is returned in the response.
+ * <br> <B>Input property:</B> <code>ShowCombinedPaymentPreferences</code> - If included and set to <code>true</code>, the seller's combined invoice preferences are returned in the response. These preferences are used to allow Combined Invoice orders.
+ * <br>
  * <br> <B>Input property:</B> <code>ShowCrossPromotionPreferences</code> - This field is deprecated.
- * <br> <B>Input property:</B> <code>ShowSellerPaymentPreferences</code> - If included and set to <code>true</code>, the seller's payment preferences are returned
- * in the response.
- * <br> <B>Input property:</B> <code>ShowEndOfAuctionEmailPreferences</code> - If included and set to <code>true</code>, the seller's preferences for the end-of-auction
- * email sent to the winning bidder is returned in the response. These
- * preferences are only applicable for auction listings.
- * <br> <B>Input property:</B> <code>ShowSellerFavoriteItemPreferences</code> - If included and set to <code>true</code>, the seller's favorite item preferences are
- * returned in the response.
+ * <br> <B>Input property:</B> <code>ShowSellerPaymentPreferences</code> - If included and set to <code>true</code>, the seller's payment preferences are returned in the response.
+ * <br> <B>Input property:</B> <code>ShowEndOfAuctionEmailPreferences</code> - If included and set to <code>true</code>, the seller's preferences for the end-of-auction email sent to the winning bidder is returned in the response. These preferences are only applicable for auction listings.
+ * <br> <B>Input property:</B> <code>ShowSellerFavoriteItemPreferences</code> - If included and set to <code>true</code>, the seller's favorite item preferences are returned in the response.
  * <br> <B>Input property:</B> <code>ShowProStoresPreferences</code> - This field is deprecated.
- * <br> <B>Input property:</B> <code>ShowEmailShipmentTrackingNumberPreference</code> - If included and set to <code>true</code>, the seller's preference for sending an email to
- * the buyer with the shipping tracking number is returned in the response.
- * <br> <B>Input property:</B> <code>ShowRequiredShipPhoneNumberPreference</code> - If included and set to <code>true</code>, the seller's preference for requiring that the
- * buyer supply a shipping phone number upon checkout is returned in the
- * response. Some shipping carriers require the receiver's phone number.
- * <br> <B>Input property:</B> <code>ShowSellerExcludeShipToLocationPreference</code> - If included and set to <code>true</code>, all of the seller's excluded shipping locations
- * are returned in the response. The returned list mirrors the seller's current
- * Exclude shipping locations list in My eBay's Shipping Preferences. An
- * excluded shipping location in My eBay can be an entire geographical region
- * (such as Middle East) or only an individual country (such as Iraq). Sellers
- * can override these default settings for an individual listing by using the
- * <b>Item.ShippingDetails.ExcludeShipToLocation</b> field in the <b>AddItem</b> family of
- * calls.
- * <br> <B>Input property:</B> <code>ShowUnpaidItemAssistancePreference</code> - If included and set to <code>true</code>, the seller's Unpaid Item Assistant preferences
- * are returned in the response. The Unpaid Item Assistant automatically opens
- * an Unpaid Item dispute on the behalf of the seller.
- * <br><br>
- * <span class="tablenote"><strong>Note:</strong>
- * To return the list of buyers excluded from the Unpaid Item Assistant
- * mechanism, the <b>ShowUnpaidItemAssistanceExclusionList</b> field must also be
- * included and set to <code>true</code> in the request. Excluded buyers can be viewed in
- * the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field.
- * </span>
- * <br> <B>Input property:</B> <code>ShowPurchaseReminderEmailPreferences</code> - If included and set to <code>true</code>, the seller's preference for sending a purchase
- * reminder email to buyers is returned in the response.
- * <br> <B>Input property:</B> <code>ShowUnpaidItemAssistanceExclusionList</code> - If included and set to <code>true</code>, the list of eBay user IDs on the Unpaid Item
- * Assistant Excluded User list is returned through the
- * <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field in the response. 
- * <br/><br/>							
- * For
- * excluded users, an Unpaid Item dispute is not automatically filed through
- * the UPI Assistance mechanism. The Excluded User list is managed through the
- * <b>SetUserPreferences</b> call.
- * <br><br>
- * <span class="tablenote"><strong>Note:</strong>
- * To return the list of buyers excluded from the Unpaid Item Assistant
- * mechanism, the <b>ShowUnpaidItemAssistancePreference</b> field must also be
- * included and set to <b>true</b> in the request.
- * </span>
- * <br> <B>Input property:</B> <code>ShowSellerProfilePreferences</code> - If this flag is included and set to <code>true</code>, the seller's Business Policies profile information is
- * returned in the response. This information includes a flag that indicates whether or
- * not the seller has opted into Business Policies, as well as Business Policies profiles
- * (payment, shipping, and return policy) active on the seller's account.
+ * <br> <B>Input property:</B> <code>ShowEmailShipmentTrackingNumberPreference</code> - If included and set to <code>true</code>, the seller's preference for sending an email to the buyer with the shipping tracking number is returned in the response.
+ * <br> <B>Input property:</B> <code>ShowRequiredShipPhoneNumberPreference</code> - If included and set to <code>true</code>, the seller's preference for requiring that the buyer supply a shipping phone number upon checkout is returned in the response. Some shipping carriers require the receiver's phone number.
+ * <br> <B>Input property:</B> <code>ShowSellerExcludeShipToLocationPreference</code> - If included and set to <code>true</code>, all of the seller's excluded shipping locations are returned in the response. The returned list mirrors the seller's current Exclude shipping locations list in My eBay's Shipping Preferences. An excluded shipping location in My eBay can be an entire geographical region (such as Middle East) or only an individual country (such as Iraq). Sellers can override these default settings for an individual listing by using the <b>Item.ShippingDetails.ExcludeShipToLocation</b> field in the <b>AddItem</b> family of calls.
+ * <br> <B>Input property:</B> <code>ShowUnpaidItemAssistancePreference</code> - If included and set to <code>true</code>, the seller's Unpaid Item Assistant preferences are returned in the response. The Unpaid Item Assistant automatically opens an Unpaid Item dispute on the behalf of the seller. <br><br> <span class="tablenote"><strong>Note:</strong> To return the list of buyers excluded from the Unpaid Item Assistant mechanism, the <b>ShowUnpaidItemAssistanceExclusionList</b> field must also be included and set to <code>true</code> in the request. Excluded buyers can be viewed in the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field. </span>
+ * <br> <B>Input property:</B> <code>ShowPurchaseReminderEmailPreferences</code> - If included and set to <code>true</code>, the seller's preference for sending a purchase reminder email to buyers is returned in the response.
+ * <br> <B>Input property:</B> <code>ShowUnpaidItemAssistanceExclusionList</code> - If included and set to <code>true</code>, the list of eBay user IDs on the Unpaid Item Assistant Excluded User list is returned through the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field in the response. <br/><br/> For excluded users, an Unpaid Item dispute is not automatically filed through the UPI Assistance mechanism. The Excluded User list is managed through the <b>SetUserPreferences</b> call. <br><br> <span class="tablenote"><strong>Note:</strong> To return the list of buyers excluded from the Unpaid Item Assistant mechanism, the <b>ShowUnpaidItemAssistancePreference</b> field must also be included and set to <b>true</b> in the request. </span>
+ * <br> <B>Input property:</B> <code>ShowSellerProfilePreferences</code> - If this flag is included and set to <code>true</code>, the seller's Business Policies profile information is returned in the response. This information includes a flag that indicates whether or not the seller has opted into Business Policies, as well as Business Policies profiles (payment, shipping, and return policy) active on the seller's account.
  * <br> <B>Input property:</B> <code>ShowSellerReturnPreferences</code> - If this flag is included and set to <code>true</code>, the <b>SellerReturnPreferences</b> container is returned in the response and indicates whether or not the seller has opted in to eBay Managed Returns.
  * <br><br>
- * eBay Managed Returns are currently only available on the US and UK sites.
+ * eBay Managed Returns are currently only available on the US, UK, DE, AU, and CA (English and French) sites.
  * <br> <B>Input property:</B> <code>ShowGlobalShippingProgramPreference</code> - If this flag is included and set to <code>true</code>, the seller's preference for offering the Global Shipping Program to international buyers will be returned in <strong>OfferGlobalShippingProgramPreference</strong>.
- * <br> <B>Input property:</B> <code>ShowDispatchCutoffTimePreferences</code> - If included and set to <code>true</code>, the seller's same day handling cut off time is returned in <strong>DispatchCutoffTimePreference.CutoffTime</strong>.
+ * <br> <B>Input property:</B> <code>ShowDispatchCutoffTimePreferences</code> - If included and set to <code>true</code>, the seller's same-day handling cutoff time is returned in <strong>DispatchCutoffTimePreference.CutoffTime</strong>.
+ * <br>
+ * <br>
+ * <span class="tablenote"><b>Note:</b> This field is not applicable for sellers who have opted into the Handling Time Option of eBay Guaranteed Delivery, as this field only shows a single order cutoff time, but with the Handling Time Option, a seller can set a different order cutoff time for each business day. Currently, eBay Guaranteed Delivery is only available in the US.</span>
+ * <br>
  * <br> <B>Input property:</B> <code>ShowGlobalShippingProgramListingPreference</code> - If included and set to <code>true</code>, the <strong>GlobalShippingProgramListingPreference</strong> field is returned. A returned value of <code>true</code> indicates that the seller's new listings will enable the Global Shipping Program by default.
  * <br> <B>Input property:</B> <code>ShowOverrideGSPServiceWithIntlServicePreference</code> - If included and set to <code>true</code>, the <strong>OverrideGSPServiceWithIntlServicePreference</strong> field is returned. A returned value of <code>true</code> indicates that for the seller's listings that specify an international shipping service for any Global Shipping-eligible country, the specified service will take precedence and be the listing's default international shipping option for buyers in that country, rather than the Global Shipping Program.
  * <br/><br/>
  * A returned value of <code>false</code> indicates that the Global Shipping program will take precedence over any international shipping service as the default option in Global Shipping-eligible listings for shipping to any Global Shipping-eligible country.
- * <br> <B>Input property:</B> <code>ShowPickupDropoffPreferences</code> - If included and set to <code>true</code>, the <strong>PickupDropoffSellerPreference</strong> field is returned. A returned value of <code>true</code> indicates that the seller's new listings will enable the Click and Collect feature by default. 
+ * <br> <B>Input property:</B> <code>ShowPickupDropoffPreferences</code> - If included and set to <code>true</code>, the <strong>PickupDropoffSellerPreference</strong> field is returned. A returned value of <code>true</code> indicates that the seller's new listings will by default be eligible to be evaluated for the Click and Collect feature.
  * <br/><br/>
- * With the Click and Collect feature, a buyer can purchase certain items on eBay and collect them at a local store. Buyers are notified by eBay once their items are available. The Click and Collect feature is only available to large merchants on the eBay UK (site ID - 3) and eBay Australia (Site ID - 15) sites.
- * <br> <B>Input property:</B> <code>ShowOutOfStockControlPreference</code> - If included and set to <code>true</code>, the seller's preferences related to the Out-of-Stock feature will be returned. This feature is set using the
- * <a href="SetUserPreferences.html#Request.OutOfStockControlPreference">SetUserPreferences</a> call.
- * <br/>
+ * With the Click and Collect feature, a buyer can purchase certain items on eBay and collect them at a local store. Buyers are notified by eBay once their items are available. The Click and Collect feature is only available to large merchants on the eBay UK (site ID 3), eBay Australia (Site ID 15), and eBay Germany (Site ID 77) sites.
+ * <br/><br/>
+ * <span class="tablenote"><b>Note:</b> The Click and Collect program no longer allows sellers to set the Click and Collect preference at the listing level.
+ * </span>
+ * <br> <B>Input property:</B> <code>ShowOutOfStockControlPreference</code> - If included and set to <code>true</code>, the seller's preferences related to the Out-of-Stock feature will be returned. This feature is set using the <a href="SetUserPreferences.html#Request.OutOfStockControlPreference">SetUserPreferences</a> call.
  * <br> <B>Input property:</B> <code>ShoweBayPLUSPreference</code> - To determine whether a seller can offer eBay Plus in qualified listings, include this field and set it to <code>true</code>.
  * <br/><br/>
  * eBay Plus is a premium account option for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items. Top Rated eBay sellers must opt in to eBay Plus, and can offer the program on a per-listing basis.
@@ -106,10 +62,10 @@ import com.ebay.soap.eBLBaseComponents.*;
  * The <strong>eBayPLUSPreference</strong> container is returned in the response with information about each country where the seller is eligible to offer eBay Plus on listings (one <strong>eBayPLUSPreference</strong> container per country), as well as the seller's opt-in status and listing preference for each country.
  * <br/><br/>
  * <span class="tablenote">
- * <strong>Note:</strong> Currently, eBay Plus is available only to buyers in Germany (DE).
+ * <strong>Note:</strong> Currently, eBay Plus is available only to buyers in Germany, Austria, and Australia.
  * </span>
  * <br> <B>Output property:</B> <code>ReturnedBidderNoticePreferences</code> - Container consisting of the seller's preference for receiving contact information for unsuccessful bidders. This container is returned when <b>ShowBidderNoticePreferences</b> is included and set to <code>true</code> in the request. This preference is only applicable for auction listings.
- * <br> <B>Output property:</B> <code>ReturnedCombinedPaymentPreferences</code> - ../../../../guides/ebayfeatures/Development/Listing-AnItem.html#CombinedInvoice
+ * <br> <B>Output property:</B> <code>ReturnedCombinedPaymentPreferences</code> - Container consisting of the seller's Combined Invoice preferences. These preferences are used to allow Combined Invoice orders. This container is returned when <b>ShowCombinedPaymentPreferences</b> is included and set to <code>true</code> in the request.
  * <br> <B>Output property:</B> <code>ReturnedCrossPromotionPreferences</code> - This container is deprecated.
  * <br> <B>Output property:</B> <code>ReturnedSellerPaymentPreferences</code> - Container consisting of the seller's payment preferences. This container is returned when <b>ShowSellerPaymentPreferences</b> is included and set to <code>true</code> in the request.
  * <br> <B>Output property:</B> <code>ReturnedSellerFavoriteItemPreferences</code> - Container consisting of the seller's preferences for displaying items on a buyer's Favorite Sellers' Items page or Favorite Sellers' Items digest. This container is returned when <b>ShowSellerFavoriteItemPreferences</b> is included and set to <code>true</code> in the request.
@@ -122,28 +78,35 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <span class="tablenote"><b>Note:</b>
  * To return the list of buyers excluded from the Unpaid Item Assistant mechanism, the <b>ShowUnpaidItemAssistanceExclusionList</b> field must also be included and set to <code>true</code> in the request. Excluded buyers can be viewed in the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field.
  * </span>
- * <br> <B>Output property:</B> <code>ReturnedSellerExcludeShipToLocationPreferences</code> - Container consisting of a list of the seller's excluded shipping locations. The returned list mirrors the seller's current Exclude shipping locations list in My eBay's shipping preferences. An excluded shipping location in My eBay can be an entire geographical region (such as Middle East) or only an individual country (such as Iraq). 
+ * <br> <B>Output property:</B> <code>ReturnedSellerExcludeShipToLocationPreferences</code> - Container consisting of a list of the seller's excluded shipping locations. The returned list mirrors the seller's current <a href="http://cgi5.ebay.com/ws/eBayISAPI.dll?ExcludeShippingList" target="_blank">Exclude shipping locations</a> list in My eBay's shipping preferences. An excluded shipping location in My eBay can be an entire geographical region (such as Middle East) or only an individual country (such as Iraq).
  * <br/><br/>
  * Sellers can override these default settings for an individual listing by using the <b>Item.ShippingDetails.ExcludeShipToLocation</b> field in the Add/Revise/Relist calls. This container is returned if the <b>ShowSellerExcludeShipToLocationPreference</b> field is included and set to <code>true</code> in the request.
  * <br> <B>Output property:</B> <code>ReturnedPurchaseReminderEmailPreferences</code> - Container consisting of a seller's preference for sending a purchase reminder email to buyers. This container is returned if the <b>ShowPurchaseReminderEmailPreferences</b> field is included and set to <code>true</code> in the request.
- * <br> <B>Output property:</B> <code>ReturnedSellerThirdPartyCheckoutDisabled</code> - This flag is set with the <b>SellerThirdPartyCheckoutDisabled</b> field of the <b>SetUserPreferences</b> call, and is used to disable the use of a third-party application to handle the checkout flow for a seller. If <code>true</code>, Third-Party Checkout is disabled and any checkout flow initiated on the seller's application is redirected to the eBay checkout flow. This field is only returned if the <b>SellerThirdPartyCheckoutDisabled</b> field has been set with the <b>SetUserPreferences</b> call.
+ * <br> <B>Output property:</B> <code>ReturnedSellerThirdPartyCheckoutDisabled</code> - This field is deprecated along with third-party checkout.
  * <br> <B>Output property:</B> <code>ReturnedSellerProfilePreferences</code> - Parent response container consisting of high-level information for all Business Policies defined for the user's account. This container is returned if <b>ShowSellerProfilePreferences</b> is included and set to <code>true</code> in the <b>GetUserPreferences</b> request (and one or more Business Policies are defined for the user's account).
  * <br> <B>Output property:</B> <code>ReturnedSellerReturnPreferences</code> - Container consisting of the <b>OptedIn</b> flag that indicates whether or not the seller has opted in to eBay Managed Returns. This container is only returned if <b>ShowSellerReturnPreferences</b> is included and set to <code>true</code> in the request.
  * <br> <B>Output property:</B> <code>ReturnedOfferGlobalShippingProgramPreference</code> - This flag indicates whether the seller has opted in to the Global Shipping Program and is able to offer global shipping to international buyers. Returned when <b>ShowGlobalShippingProgramPreference</b> is included and set to <code>true</code>.
- * <br> <B>Output property:</B> <code>ReturnedDispatchCutoffTimePreference</code> - Contains information about a seller's order cut off time preferences for same-day shipping. If the seller specifies a value of '0' in <b>Item.DispatchTimeMax</b> to offer same-day handling when listing an item, the seller's shipping time commitment depends on the order cut off time set for the listing site, as indicated by <b>DispatchCutoffTimePreference.CutoffTime</b>.
+ * <br> <B>Output property:</B> <code>ReturnedDispatchCutoffTimePreference</code> - Contains information about a seller's order cutoff time preferences for same-day shipping. If the seller specifies a value of '0' in <b>Item.DispatchTimeMax</b> to offer same-day handling when listing an item, the seller's shipping time commitment depends on the order cutoff time set for the listing site, as indicated by <b>DispatchCutoffTimePreference.CutoffTime</b>. Returned when <b>ShowDispatchCutoffTimePreferences</b> is included and set to <code>true</code>.
+ * <br>
+ * <br>
+ * <span class="tablenote"><b>Note:</b> The order cutoff is may not be accurate for sellers who have opted into the Handling Time Option of eBay Guaranteed Delivery, as this field only shows a single order cutoff time, but with the Handling Time Option, a seller can set a different order cutoff time for each business day. Currently, eBay Guaranteed Delivery is only available in the US.</span>
+ * <br>
  * <br> <B>Output property:</B> <code>ReturnedGlobalShippingProgramListingPreference</code> - If the <b>ShowGlobalShippingProgramListingPreference</b> field is submitted and set to <code>true</code>, this flag is returned. A returned value of <code>true</code> indicates that the seller's new listings will enable the Global Shipping Program by default.
  * <br> <B>Output property:</B> <code>ReturnedOverrideGSPServiceWithIntlServicePreference</code> - If the <b>ShowOverrideGSPServiceWithIntlServicePreference</b> field is submitted and set to <code>true</code>, this flag is returned. A returned value of <code>true</code> indicates that for the seller's listings that specify an international shipping service for any Global Shipping-eligible country, the specified service will take precedence and be the listing's default international shipping option for buyers in that country, rather than the Global Shipping Program.
  * <br/><br/>
  * A returned value of <code>false</code> indicates that the Global Shipping program will take precedence over any international shipping service as the default option in Global Shipping-eligible listings for shipping to any Global Shipping-eligible country.
- * <br> <B>Output property:</B> <code>ReturnedPickupDropoffSellerPreference</code> - This boolean field is returned if the <b>ShowPickupDropoffPreferences</b> field is included and set to <code>true</code> in the request. This field will be returned as <code>true</code> if the seller has enabled the Click and Collect feature at the account level. All of the seller's new listings will enable the Click and Collect feature by default. With the Click and Collect feature, a buyer can purchase certain items on eBay and collect them at a local store. Buyers are notified by eBay once their items are available. The Click and Collect feature is only available to large merchants on the eBay UK (site ID - 3) and eBay Australia (Site ID - 15) sites.
- * <br> <B>Output property:</B> <code>ReturnedOutOfStockControlPreference</code> - This boolean field is returned if the <b>ShowOutOfStockControlPreference</b> field is included and set to <code>true</code> in the request. This field will be returned as <code>true</code> if the seller has set 
+ * <br> <B>Output property:</B> <code>ReturnedPickupDropoffSellerPreference</code> - This boolean field is returned if the <b>ShowPickupDropoffPreferences</b> field is included and set to <code>true</code> in the request. This field will be returned as <code>true</code> if the seller has enabled the Click and Collect feature at the account level. All of the seller's new listings will by default be eligible to be evaluated for the Click and Collect feature. With the Click and Collect feature, a buyer can purchase certain items on eBay and collect them at a local store. Buyers are notified by eBay once their items are available. The Click and Collect feature is only available to large merchants on the eBay UK (site ID 3), eBay Australia (Site ID 15), and eBay Germany (Site ID 77) sites.
+ * <br/><br/>
+ * <span class="tablenote"><b>Note:</b> The Click and Collect program no longer allows sellers to set the Click and Collect preference at the listing level.
+ * </span>
+ * <br> <B>Output property:</B> <code>ReturnedOutOfStockControlPreference</code> - This boolean field is returned if the <b>ShowOutOfStockControlPreference</b> field is included and set to <code>true</code> in the request. This field will be returned as <code>true</code> if the seller has set
  * <a href="SetUserPreferences.html#Request.OutOfStockControlPreference">SetUserPreferences.OutOfStockControlPreference</a> to <code>true</code>.
  * <br> <B>Output property:</B> <code>ReturnedEBayPLUSPreference</code> - Contains information about each country where the seller is eligible to offer eBay Plus on listings (one <strong>eBayPLUSPreference</strong> container per country), as well as the seller's opt-in status and listing preference for each country.
  * <br/><br/>
  * eBay Plus is a premium account option for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items. Top Rated eBay sellers must opt in to eBay Plus to offer the program on a per-listing basis.
  * <br/><br/>
  * <span class="tablenote">
- * <strong>Note:</strong> Currently, eBay Plus is available only to buyers in Germany (DE).
+ * <strong>Note:</strong> Currently, eBay Plus is available only to buyers in Germany, Austria, and Australia.
  * </span>
  * 
  * @author Ron Murphy

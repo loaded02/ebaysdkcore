@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,13 +20,12 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>TaskID</code> - The task ID returned by the SetStoreCategories call. If the
- * SetStoreCategories call was processed asynchronously, the TaskID will be
- * a positive number. If SetStoreCategories returned a TaskID with a value of
- * 0, the change was completed at the time the call was made (and there is
- * no need to check status).
- * <br> <B>Output property:</B> <code>ReturnedStatus</code> - The status (Pending, InProgress, Complete, or Failed) of an update to the 
- * store category structure. 
+ * <br> <B>Input property:</B> <code>TaskID</code> - The unique identifier of an eBay Store Category hierarchy change task. A <b>TaskID</b> value is returned in the response of a successful <b>SetStoreCategories</b> call.
+ * <br/><br/>
+ * <span class="tablenote"><b>Note: </b> Depending on the breadth of changes being made to an eBay Store Category hierarchy, it is is possible that the <b>SetStoreCategories</b> call will complete the task simultaneously with the call response. A seller will know if an eBay Store Category hierarchy task was completed simultaneously if the <b>TaskID</b> value is returned as <code>0</code>, and the <b>Status</b> field is returned with a value of <code>Complete</code>. If the task was not completely simultaneously, the <b>TaskID</b> value will be a positive integer, and the <b>Status</b> field will show a value of <code>InProgress</code> or <code>Pending</code>.
+ * </span>
+ * <br> <B>Output property:</B> <code>ReturnedStatus</code> - The enumeration value indicates the status of an update to the
+ * eBay Store Category hierarchy.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -56,8 +55,7 @@ public class GetStoreCategoryUpdateStatusCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Returns the status of the processing for category-structure changes specified
-   * with a call to SetStoreCategories.
+   * This call is used to retrieve the status of an eBay Store Category hierarchy change that was made with a <b>SetStoreCategories</b> call.
    * 
    * <br>
    * @throws ApiException

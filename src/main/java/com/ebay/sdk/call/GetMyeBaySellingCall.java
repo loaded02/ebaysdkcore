@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,65 +20,49 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ScheduledList</code> - Returns the list of items the user has scheduled to sell but whose
- * listings have not yet opened.
+ * <br> <B>Input property:</B> <code>ScheduledList</code> - Include this container and set the <b>ScheduledList.Include</b> field to <code>true</code> to return the list of items that are scheduled to become active listings on eBay.com at a future date/time.
  * <br><br>
- * Set <b>Include</b> to 
- * <code>true</code> to return the default response set.
- * <br> <B>Input property:</B> <code>ActiveList</code> - Returns the list of items the user is actively selling (the currently
- * active listings).
+ * The user also has the option of using pagination and sorting for the list of Scheduled listings that will be returned.
+ * <br> <B>Input property:</B> <code>ActiveList</code> - Include this container and set the <b>ActiveList.Include</b> field to <code>true</code> to return the list of active listings on eBay.com.
  * <br><br>
- * Set <b>Include</b> to 
- * <code>true</code> to return the default response set.
- * <br> <B>Input property:</B> <code>SoldList</code> - Returns the list of items the user has sold.
+ * The user also has the option of using pagination and sorting for the list of active listings that will be returned.
+ * <br> <B>Input property:</B> <code>SoldList</code> - Include this container and set the <b>SoldList.Include</b> field to <code>true</code> to return the list of sold order line items.
  * <br><br>
- * Set <b>Include</b> to 
- * <code>true</code> to return the default response set.
- * <br> <B>Input property:</B> <code>UnsoldList</code> - Returns the list of items the user has listed, but whose listings
- * have ended without being sold.
+ * The user also has the option of using pagination and sorting for the list of sold items that will be returned.
+ * <br> <B>Input property:</B> <code>UnsoldList</code> - Include this container and set the <b>UnsoldList.Include</b> field to <code>true</code> to return the listings that have ended without a purchase.
  * <br><br>
- * Set <b>Include</b> to 
- * <code>true</code> to return the default response set.
- * <br> <B>Input property:</B> <code>BidList</code> - Return the list of active items on which there are bids.
+ * The user also has the option of using pagination and sorting for the list of unsold items that will be returned.
+ * <br> <B>Input property:</B> <code>BidList</code> - This container is deprecated as a Bid List is no longer returned in <b>GetMyeBaySelling</b>.
+ * <br> <B>Input property:</B> <code>DeletedFromSoldList</code> - Include this container and set the <b>DeletedFromSoldList.Include</b> field to <code>true</code> to return the list of sold order line items that have since been deleted from the seller's My eBay page.
  * <br><br>
- * Set Include to true to return the default response set.
- * <br> <B>Input property:</B> <code>DeletedFromSoldList</code> - Returns the list of items the user sold, and then deleted from
- * their My eBay page. Allowed values for DurationInDays are 0-90.
+ * The user also has the option of using pagination and sorting for the list of deleted, sold items that will be returned.
+ * <br> <B>Input property:</B> <code>DeletedFromUnsoldList</code> - Include this container and set the <b>DeletedFromUnsoldList.Include</b> field to <code>true</code> to return the list of unsold order line items that have since been deleted from the seller's My eBay page.
  * <br><br>
- * Set <b>Include</b> to 
- * <code>true</code> to return the default response set.
- * <br> <B>Input property:</B> <code>DeletedFromUnsoldList</code> - Returns the list of items the user either ended or did not sell, and
- * subsequently were deleted them from their My eBay page. Allowed
- * values for DurationInDays are 0-90.
- * <br><br>
- * Set <b>Include</b> to 
- * <code>true</code> to return the default response set.
- * <br> <B>Input property:</B> <code>SellingSummary</code> - Returns a summary of the user's buying activity.
- * <br><br>
- * The <b>SellingSummary</b> is always
- * returned by default. Add a <b>SellingSummary</b> element with an <b>Include</b> field
- * set to false to exclude the <b>SellingSummary</b> from your response.
- * <br> <B>Input property:</B> <code>HideVariations</code> - If true, the <b>Variations</b> node is omitted for all multi-variation
- * listings in the response.
- * If false, the <b>Variations</b> node is returned for all
- * multi-variation listings in the response. <br>
+ * The user also has the option of using pagination and sorting for the list of deleted, unsold items that will be returned.
+ * <br> <B>Input property:</B> <code>SellingSummary</code> - Include this container and set the <b>SellingSummary.Include</b> field to <code>true</code> to return the <b>SellingSummary</b> container in the response. The <b>SellingSummary</b> container consists of selling activity counts and values.
+ * <br> <B>Input property:</B> <code>HideVariations</code> - If this field is included and set to <code>true</code>, the <b>Variations</b> node (and all variation data) is omitted for all multiple-variation listings in the response. If this field is omitted or set to <code>false</code>, the <b>Variations</b> node is returned for all multiple-variation listings in the response.
  * <br>
- * Please note that if the seller includes a large number of
- * variations in many listings, retrieving variations (setting this
- * flag to <code>false</code>) may degrade the call's performance. Therefore,
- * when this is false, you may need to reduce the total
- * number of items you're requesting at once (by using other input
- * fields, such as <b>Pagination</b>).
- * <br> <B>Output property:</B> <code>ReturnedSellingSummary</code> - Contains summary information about the items the user is selling.
- * <br> <B>Output property:</B> <code>ReturnedScheduledList</code> - Contains the items the user has scheduled for sale, but whose listings have
- * not yet started.
- * <br> <B>Output property:</B> <code>ReturnedActiveList</code> - Contains the items the user is selling that have active listings.
- * <br> <B>Output property:</B> <code>ReturnedSoldList</code> - Contains the items the user has sold.
- * <br> <B>Output property:</B> <code>ReturnedUnsoldList</code> - Contains the items whose listings have ended but that have not sold.
- * <br> <B>Output property:</B> <code>ReturnedSummary</code> - Contains summary information about the items the user is selling.
+ * <br> <B>Output property:</B> <code>ReturnedSellingSummary</code> - This container consists of seller activity counts and values. For this container to be returned, the user must include the <b>SellingSummary.Include</b> field in the request and set its value to <code>true</code>.
+ * <br> <B>Output property:</B> <code>ReturnedScheduledList</code> - This container consists of the items that are scheduled to become active at a future date/time. This container will be returned if the eBay user has one or more listings scheduled to become active at a future date/time.
+ * <br><br>
+ * This container will not be returned in the response (even if there are listings scheduled to become active) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>ScheduledList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedActiveList</code> - This container consists of active listings. This container will be returned if the eBay user has one or more active listings on eBay.com.
+ * <br><br>
+ * This container will not be returned in the response (even if there are one or more active listings) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>ActiveList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedSoldList</code> - This container consists of order line items that have been sold. This container will be returned if the eBay user has one or more listings that have had recent sales.
+ * <br><br>
+ * This container will not be returned in the response (even if there are one or more sales) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>SoldList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedUnsoldList</code> - This container consists of listings that have ended without sales. This container will be returned if the eBay user has one or more listings that have ended without sales.
+ * <br><br>
+ * This container will not be returned in the response (even if there are one or more listings that ended without sales) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>UnsoldList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedSummary</code> - This container consists of seller activity counts and values. This container is always returned if there has been recent sell activity.
  * <br> <B>Output property:</B> <code>ReturnedBidList</code> - This container is no longer applicable to <b>GetMyeBaySelling</b>.
- * <br> <B>Output property:</B> <code>ReturnedDeletedFromSoldList</code> - Contains the items the seller has sold and deleted from My eBay.
- * <br> <B>Output property:</B> <code>ReturnedDeletedFromUnsoldList</code> - Contains the items with listings that were ended or did not sell and have been deleted from My eBay.
+ * <br> <B>Output property:</B> <code>ReturnedDeletedFromSoldList</code> - This container consists of listings that have had sales but have been deleted from My eBay. This container will be returned if the eBay user has one or more listings with sales that have been deleted from My eBay.
+ * <br><br>
+ * This container will not be returned in the response (even if there are one or more listings that have sales but have been deleted) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>DeletedFromSoldList.Include</b> field is omitted or set to <code>false</code>.
+ * <br> <B>Output property:</B> <code>ReturnedDeletedFromUnsoldList</code> - This container consists of listings that have ended without sales and have been deleted from My eBay. This container will be returned if the eBay user has one or more listings with sales that have been deleted from My eBay.
+ * <br><br>
+ * This container will not be returned in the response (even if there are one or more listings that have sales but have been deleted) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>DeletedFromSoldList.Include</b> field is omitted or set to <code>false</code>.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -125,9 +109,7 @@ public class GetMyeBaySellingCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves information regarding the user's selling activity,
-   * such as items that the user is currently selling (the Active list),
-   * items that have bids, sold items, and unsold items.
+   * Retrieves information regarding the user's selling activity, such as items that the user is currently selling (the Active list), auction listings that have bids, sold items, and unsold items.
    * 
    * <br>
    * @throws ApiException

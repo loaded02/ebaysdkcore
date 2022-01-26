@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.pictureservice.eps;
@@ -145,6 +145,14 @@ public class eBayPictureServiceXMLCall implements PictureService {
 	        conn.setRequestProperty("X-EBAY-API-CALL-NAME", "UploadSiteHostedPictures");
 	        conn.addRequestProperty("X-EBAY-API-COMPATIBILITY-LEVEL", apiContext.getWSDLVersion());
 		   
+		    //set X-EBAY-API-IAF-TOKEN http request header with OAuthToken value 
+		    String oAuthToken = apiContext.getApiCredential().getOAuthToken();
+			String tokenString = apiContext.getApiCredential().geteBayToken();
+		    if ( (oAuthToken != null || oAuthToken.trim().length() > 0) && 
+		       (tokenString == null || tokenString.trim().length() == 0)) {
+			  conn.addRequestProperty("X-EBAY-API-IAF-TOKEN", oAuthToken);
+			
+		    }
 	        PrintWriter output = new PrintWriter(new OutputStreamWriter(conn.getOutputStream()));
 	        
 	        output.println(requestXml);
@@ -469,7 +477,7 @@ public class eBayPictureServiceXMLCall implements PictureService {
 		c.setRequestMethod("POST");
 		//c.setRequestProperty("ProtocolVersion", "HTTP/1.0");
 		//Set request headers
-		c.setRequestProperty("Content-Type", "multipart/form-data, boundary=" + BOUNDARY);
+		c.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 		c.addRequestProperty("X-EBAY-API-COMPATIBILITY-LEVEL", apiContext.getWSDLVersion());
         
 		c.addRequestProperty("X-EBAY-API-CALL-NAME", API_CALL_NAME);
@@ -477,6 +485,15 @@ public class eBayPictureServiceXMLCall implements PictureService {
 		c.addRequestProperty("X-EBAY-API-SITEID",
         		String.valueOf(SiteIDUtil.toNumericalID(this.apiContext.getSite())));
 		c.addRequestProperty("X-EBAY-API-DETAIL-LEVEL","0");
+		
+		//set X-EBAY-API-IAF-TOKEN http request header with OAuthToken value 
+		String tokenString = apiContext.getApiCredential().geteBayToken();
+		String oAuthToken = apiContext.getApiCredential().getOAuthToken();
+		if ( (oAuthToken != null || oAuthToken.trim().length() > 0) && 
+		     (tokenString == null || tokenString.trim().length() == 0)) {
+			c.addRequestProperty("X-EBAY-API-IAF-TOKEN", oAuthToken);
+			
+		}
 		//Set additional request properties
 		c.setUseCaches(false);
 		c.setDoInput(true);
@@ -490,12 +507,15 @@ public class eBayPictureServiceXMLCall implements PictureService {
 	 */
 	private void addAuthToken(Document doc) throws SdkException{
 		Node node = XmlUtil.getChildByName(doc, "UploadSiteHostedPicturesRequest");
-		Node requesterCredentials = XmlUtil.appendChildNode(doc, EBAY_NAMESPACE, node, "RequesterCredentials");
 		String tokenString = apiContext.getApiCredential().geteBayToken();
-		if(tokenString == null || tokenString.length() == 0){
-			throw new SdkException("No Token Found!!!");
-		} else {
-			XmlUtil.appendChildNode(doc, requesterCredentials, "eBayAuthToken", tokenString);
+		String oAuthToken = apiContext.getApiCredential().getOAuthToken();
+		if(tokenString == null || tokenString.trim().length() == 0){
+			if(oAuthToken == null || oAuthToken.trim().length() == 0){
+				throw new SdkException("No Token Found!!!");
+			}
+		} else if(tokenString != null || tokenString.trim().length() > 0){	
+		    Node requesterCredentials = XmlUtil.appendChildNode(doc, EBAY_NAMESPACE, node, "RequesterCredentials");
+		    XmlUtil.appendChildNode(doc, requesterCredentials, "eBayAuthToken", tokenString);
 		}
 	}
 

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -32,7 +32,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br> <B>Input property:</B> <code>SellingManagerProductSpecifics</code> - Specifies an eBay category associated with the product,
  * defines Item Specifics that are relevant to the product,
  * and defines variations available for the product
- * (which may be used to create multivariation listings).
+ * (which may be used to create multi-variation listings).
  * <br> <B>Output property:</B> <code>ReturnedSellingManagerProductDetails</code> - The details of the product.
  * 
  * @author Ron Murphy
@@ -66,10 +66,10 @@ public class ReviseSellingManagerProductCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Revises a Selling Manager product.
+   * Revises a Selling Manager Product.
    * <br><br>
    * This call is subject to change without notice; the
-   * deprecation process is inapplicable to this call.
+   * deprecation process is inapplicable to this call. The user must have a Selling Manager Pro subscription to use this call.
    * 
    * <br>
    * @throws ApiException

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,26 +21,10 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemID</code> - Unique item ID that identifies the item listing to end.
- * <br><br>
- * For Half.com listings, you can either specify ItemID or
- * SellerInventoryID.
- * <br><br>
- * Applicable to Half.com.
- * <br> <B>Input property:</B> <code>EndingReason</code> - Indicates the seller's reason for ending the listing early.
- * This field is required if the seller is ending the item early and
- * the item did not successfully sell.
- * <br><br>
- * Applicable to Half.com.
- * <br> <B>Input property:</B> <code>SellerInventoryID</code> - Unique identifier that the seller specified when they listed the
- * Half.com item. For Half.com items, you can either specify ItemID or
- * SellerInventoryID. If you specify both ItemID and SellerInventoryID,
- * they must be for the same item (otherwise an error will occur).
- * <br><br>
- * Applicable only to Half.com.
- * <br> <B>Output property:</B> <code>ReturnedEndTime</code> - Indicates the date and time (returned in GMT) the specified item listing
- * was ended.
- * Also applicable to Half.com.
+ * <br> <B>Input property:</B> <code>ItemID</code> - Unique item ID that identifies the listing that you want to end.
+ * <br> <B>Input property:</B> <code>EndingReason</code> - The seller's reason for ending the listing early is input into this required field. The seller is not allowed to use the <code>ProductDeleted</code> value, as this ending reason can only be used internally by eBay to administratively end a listing due to the associated Catalog product being removed from the eBay Catalog.
+ * <br> <B>Input property:</B> <code>SellerInventoryID</code> - This field was previously only used to identify and end Half.com listings, and since the Half.com site has been shut down, this element is no longer applicable.
+ * <br> <B>Output property:</B> <code>ReturnedEndTime</code> - This timestamp indicates the date and time (returned in GMT) when the specified eBay listing was ended.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -72,7 +56,7 @@ public class EndItemCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Ends the specified item listing before the date and time at which it would normally end per the listing duration.&nbsp;<b>Also for Half.com</b>.
+   * Ends the specified item listing before the date and time at which it would normally end per the listing duration.
    * 
    * <br>
    * @throws ApiException

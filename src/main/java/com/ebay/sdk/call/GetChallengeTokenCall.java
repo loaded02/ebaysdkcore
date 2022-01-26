@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -57,7 +57,7 @@ public class GetChallengeTokenCall extends com.ebay.sdk.ApiCall
   /**
    * This is the base request type for the <b>GetChallengeToken</b> call. This call retrieves a botblock token and URLs for an image or audio clip that the user is to match.
    * <br/><br/>
-   * This call does not have any call-specific input parameters
+   * This call does not have any call-specific input parameters.
    * 
    * <br>
    * @throws ApiException

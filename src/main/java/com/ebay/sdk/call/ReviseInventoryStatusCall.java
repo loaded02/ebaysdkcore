@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -19,31 +19,15 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>InventoryStatus</code> - Contains the updated quantity and/or price of a listing
- * being revised. You should not modify the same listing twice
- * (by using a duplicate ItemID or SKU) in the same request;
- * otherwise, you may get an error or unexpected results.
- * (For example, you should not use one InventoryStatus node to
- * update the quantity and another InventoryStatus node to update
- * the price of the same item.) You can pass up to 4 InventoryStatus nodes in a single request.
- * <br> <B>Output property:</B> <code>ReturnedInventoryStatus</code> - Confirms the quantity and price associated with a listing 
- * or variation that was revised.
- * <br> <B>Output property:</B> <code>ReturnedFees</code> - Child elements contain the estimated listing fees for a 
- * listing that was revised. Use the ItemID to correlate the 
- * Fees data with the InventoryStatus data in the response. 
- * The fees do not include the Final Value Fee (FVF), 
- * which can't be determined until the listing has sales.<br>
+ * <br> <B>Input property:</B> <code>InventoryStatus</code> - One <b>InventoryStatus</b> container is required for each item or item variation that is being revised. Whether updating the price and/or quantity of a single-variation listing or a specific variation within a multiple-variation listing, the limit of items or item variations that can be modified with one call is four.
+ * <br> <B>Output property:</B> <code>ReturnedInventoryStatus</code> - One <b>InventoryStatus</b> container is returned for each item or item variation that was revised. Whether updating the price and/or quantity of a single-variation listing or a specific variation within a multiple-variation listing, the limit of items or item variations that can be modified with one call is four.
  * <br>
- * If you revise a variation in a multi-variation listing, 
- * the fees are for the entire listing. The insertion fee and
- * listing fee are affected by the highest priced variation 
- * in the listing (which is not necessarily the variation that
- * you passed in the request).<br>
  * <br>
- * Also note that the call returns only one Fees node per listing.
- * For example, if you revise 4 variations from the same 
- * multi-variation listing, the response includes 4 
- * InventoryStatus nodes and 1 Fees node.
+ * Note that all four elements of this container are returned even if these fields would not supplied in the call request. The <b>SKU</b> field is returned as an empty tag if it is not defined for a single-variation listing.
+ * <br> <B>Output property:</B> <code>ReturnedFees</code> - A <b>Fees</b> container is returned for each fixed-price listing that was modified with the <b>ReviseInventoryStatus</b> call. This container consists of the estimated listing fees for the revised listing, and the listing is identified in the <b>ItemID</b> field. Each type of fee is returned even if it is not appplicable (has a value of <code>0.0</code>. The Final Value Fee (FVF) is not in this container, as this value cannot be determined until a sale is made. Note that these fees are at the listing level, so if multiple variations within a multiple-variation listing were modified, the fees in this container would be cumulative totals, and would not single out the fees associated with each modified item variation.
+ * <br>
+ * <br>
+ * Please note that since fees are returned at the listing level, it is possible that the response will include one <b>Fees</b> container and four <b>InventoryStatus</b> containers if you made revisions to four different item variations within the same multiple-variation listing.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -74,31 +58,10 @@ public class ReviseInventoryStatusCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables a seller to change the price and quantity of a currently-
-   * active, fixed-price listing. Using ReviseInventoryStatus to modify
-   * data qualifies as revising the listing.
-   * <br><br>
-   * Inputs are the item IDs or SKUs of the listings being revised,
-   * and the price and quantity that are
-   * being changed for each revision. Only applicable to fixed-price listings.<br>
-   * <br><br>
-   * Changing the price or quantity of a currently-
-   * active, fixed-price listing does not reset the Best Match performance score.
-   * For Best Match information related to multi-variation listings, see the Best
-   * Match information at the following topic:
-   * <a href="http://pages.ebay.com/sell/variation/">Multi-quantity Fixed Price
-   * listings with variations</a>.<br>
-   * <br><br>
-   * As with all listing calls, the site you specify in the request URL
-   * (for SOAP) or the X-EBAY-API-SITEID HTTP header (for XML)
-   * should match the original listing's <b>Item.Site</b> value.
-   * In particular, this is a best practice when you submit new and
-   * revised listings.<br>
-   * <br><b>
-   * For Large Merchant Services users:</b> When you use ReviseInventoryStatus within a Merchant Data file,
-   * it must be enclosed within two BulkDataExchangeRequest tags.
-   * A namespace is returned in the BulkDataExchangeResponseType
-   * (top level) of the response. The BulkDataExchange tags are not shown in the call input/output descriptions.
+   * Enables a seller to change the price and/or quantity of one to four
+   * active, fixed-price listings. The fixed-price listing to modify is identified with the <b>ItemID</b> of the listing and/or the <b>SKU</b> value of the item (if a seller-defined SKU value exists for the listing). If the seller is modifying one or more variations within a multiple-variation listing, the <b>ItemID</b> and <b>SKU</b> fields in the <b>InventoryStatus</b> container become required, with the <b>ItemID</b> value identifying the listing, and the <b>SKU</b> value identifying the specific product variation within that multiple-variation listing. Each variation within a multiple-variation listing requires a seller-defined SKU value.
+   * <br/><br/>
+   * Whether updating the price and/or quantity of a single-variation listing or a specific variation within a multiple-variation listing, the limit of items or item variations that can be modified with one call is four.
    * 
    * <br>
    * @throws ApiException

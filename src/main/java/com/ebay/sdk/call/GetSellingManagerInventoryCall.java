@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,13 +21,13 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>Sort</code> - Sets the sorting method for the results.
- * <br> <B>Input property:</B> <code>FolderID</code> - Specifies the inventory folder containing the requested inventory information.
- * <br> <B>Input property:</B> <code>Pagination</code> - Details about how many Products to return per page and which page to view.
- * <br> <B>Input property:</B> <code>SortOrder</code> - Order to be used for sorting retrieved product lists.
- * <br> <B>Input property:</B> <code>Search</code> - Specifies types and values to search for in the seller's listings.
- * <br> <B>Input property:</B> <code>StoreCategoryID</code> - Specifies a store category whose products will be returned.
- * <br> <B>Input property:</B> <code>Filter</code> - Container for the list of filters that can be applied to the inventory information requested.
+ * <br> <B>Input property:</B> <code>Sort</code> - This field is used if the seller would like to sort Selling Manager Inventory results based on a specific aspect such as Product Name, Average Price, etc. See <b>SellingManagerProductSortCodeType</b> to read more about the available sorting options.
+ * <br> <B>Input property:</B> <code>FolderID</code> - This field is included if the seller wants to view Selling Manager Inventory from a specific folder.
+ * <br> <B>Input property:</B> <code>Pagination</code> - This container is used if the seller would like to control how many products are returned per page and which page to view.
+ * <br> <B>Input property:</B> <code>SortOrder</code> - This field allows the seller to sort in ascending or descending order (based on the selected aspect in the <b>Sort</b> field).
+ * <br> <B>Input property:</B> <code>Search</code> - This container is used if the seller would like to search for Selling Manager Inventory based on certain identifiers like Item ID, listing title, buyer user ID, etc. The seller will specify one of the supported search types in <b>SellingManagerSearchTypeCodeType</b>, and then provides the value for that search type.
+ * <br> <B>Input property:</B> <code>StoreCategoryID</code> - This field is used if the seller would like to retrieve all Selling Manager Inventory listed in a specific eBay Store Category.
+ * <br> <B>Input property:</B> <code>Filter</code> - One or more <b>Filter</b> fields can be used to retrieve Selling Manager Inventory that is in a certain state, such as active listings, inactive listings, or listings that are low in stock.
  * <br> <B>Output property:</B> <code>ReturnedInventoryCountLastCalculatedDate</code> - Returns the date the inventory counts were last calculated.
  * <br> <B>Output property:</B> <code>ReturnedSellingManagerProduct</code> - Container for information about the requested products and templates.
  * <br> <B>Output property:</B> <code>ReturnedPaginationResult</code> - Contains the total number of pages (TotalNumberOfPages) and the total
@@ -70,9 +70,7 @@ public class GetSellingManagerInventoryCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves a paginated list containing details of a user's Selling Manager inventory.
-   * This call is subject to change without notice; the deprecation process is
-   * inapplicable to this call.
+   * Retrieves a paginated list containing details of a user's Selling Manager Inventory. This call is subject to change without notice; the deprecation process is inapplicable to this call. The user must have a Selling Manager Pro subscription to use this call.
    * 
    * <br>
    * @throws ApiException

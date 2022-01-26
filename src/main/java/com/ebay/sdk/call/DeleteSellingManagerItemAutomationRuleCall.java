@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,14 +20,14 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemID</code> - The ID of the item from which to delete automation rules.
- * <br> <B>Input property:</B> <code>DeleteAutomatedRelistingRule</code> - If true, the automated relisting rules are removed from the item.
- * <br> <B>Input property:</B> <code>DeleteAutomatedSecondChanceOfferRule</code> - If true, the automated second chance offer rule is removed from the item.
- * <br> <B>Output property:</B> <code>ReturnedAutomatedListingRule</code> - Contains the remaining automated listing rules associated with this item.
- * <br> <B>Output property:</B> <code>ReturnedAutomatedRelistingRule</code> - Contains the remaining automated relisting rules associated with this item.
- * <br> <B>Output property:</B> <code>ReturnedAutomatedSecondChanceOfferRule</code> - Contains the remaining automated second chance offer rule associated with this item.
- * <br> <B>Output property:</B> <code>ReturnedFees</code> - Contains fees that may be incurred when items are listed using the 
- * automation rules (e.g., a scheduled listing fee). Use of an automation rule 
+ * <br> <B>Input property:</B> <code>ItemID</code> - The unique identifier of the listing from which to delete automation rules.
+ * <br> <B>Input property:</B> <code>DeleteAutomatedRelistingRule</code> - This field is included and set to <code>true</code> if the user would like to disable the automated relisting rule for the listing.
+ * <br> <B>Input property:</B> <code>DeleteAutomatedSecondChanceOfferRule</code> - This field is included and set to <code>true</code> if the user would like to disable the automated Second Chance Offer rule for the listing.
+ * <br> <B>Output property:</B> <code>ReturnedAutomatedListingRule</code> - This container is returned if automated listing rules are set up for the Selling Manager item.
+ * <br> <B>Output property:</B> <code>ReturnedAutomatedRelistingRule</code> - This container is returned if automated relisting rules are set up for the Selling Manager item.
+ * <br> <B>Output property:</B> <code>ReturnedAutomatedSecondChanceOfferRule</code> - This container is returned if automated Second Chance Offer rules are set up for the Selling Manager item.
+ * <br> <B>Output property:</B> <code>ReturnedFees</code> - Contains fees that may be incurred when items are listed using the
+ * automation rules (e.g., a scheduled listing fee). Use of an automation rule
  * does not in itself have a fee, but use can result in a fee.
  * 
  * @author Ron Murphy

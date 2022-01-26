@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -23,17 +23,17 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ViewType</code> - This field is used by the user to control which account entries are returned. The user has options to retrieve all new account entries (since last invoice), all account entries between two specified dates, or all account entries from a specified invoice. If this field is not include
+ * <br> <B>Input property:</B> <code>ViewType</code> - Specifies the report format in which to return account entries.
  * <br> <B>Input property:</B> <code>InvoiceDate</code> - This field is used to retrieve all account entries from a specific invoice, which is identified through this <b>InvoiceDate</b> field with the timestamp of the account invoice. This field is only applicable if the  <b>AccountHistorySelection</b> value is set to 'SpecifiedInvoice'; otherwise, this field will be ignored.
  * <br> <B>Input property:</B> <code>ViewPeriod</code> - Helper wrapper to set GetAccountRequestType BeginDate, EndDate:
  * TimeFrom sets GetAccountRequestType.BeginDate: 
- * This field is used to retrieve all account entries dating back to the timestamp passed into this <b>BeginDate</b> field up until the timestamp passed into the <b>EndDate</b> field. The <b>BeginDate</b> value can not be set back any further than four months into the past. 
+ * This field is used to retrieve all account entries dating back to the timestamp passed into this <b>BeginDate</b> field up until the timestamp passed into the <b>EndDate</b> field. The <b>BeginDate</b> value can not be set back any further than four months into the past.
  * <br/><br/>
  * The allowed date formats are <em>YYYY-MM-DD</em> and <em>YYYY-MM-DD HH:mm:ss</em> The <b>BeginDate</b> value must be less than or equal to the <b>EndDate</b> value. The user might use the same values in both fields if that user wanted to retrieve all account entries from a specific day (if <em>YYYY-MM-DD</em> format used) or wanted to retrieve a specific account entry (if <em>YYYY-MM-DD HH:mm:ss</em> format used).
  * <br/><br/>
  * This field is only applicable if the  <b>AccountHistorySelection</b> value is set to 'BetweenSpecifiedDates'; otherwise, this field will be ignored. fiedDates' is used, both the <b>BeginDate</b> and <b>EndDate</b> must be included.
  * TimeTo sets GetAccountRequestType.EndDate: 
- * This field is used to retrieve all account entries dating up to the timestamp passed into this <b>EndDate</b> field dating back to the timestamp passed into the <b>BeginDate</b> field. The <b>EndDate</b> value can not be set for a future date. 
+ * This field is used to retrieve all account entries dating up to the timestamp passed into this <b>EndDate</b> field dating back to the timestamp passed into the <b>BeginDate</b> field. The <b>EndDate</b> value can not be set for a future date.
  * <br/><br/>
  * The allowed date formats are <em>YYYY-MM-DD</em> and <em>YYYY-MM-DD HH:mm:ss</em> The <b>EndDate</b> value must be more than or equal to the <b>BeginDate</b> value. The user might use the same values in both fields if that user wanted to retrieve all account entries from a specific day (if <em>YYYY-MM-DD</em> format used) or wanted to retrieve a specific account entry (if <em>YYYY-MM-DD HH:mm:ss</em> format used).
  * <br/><br/>
@@ -55,6 +55,12 @@ import com.ebay.soap.eBLBaseComponents.*;
  * used, all other filters in the request are ignored. If the specified item
  * does not exist or if the requesting user is not the seller of the item, an
  * error is returned.
+ * <br> <B>Input property:</B> <code>OrderID</code> - The unique identifier of an eBay order. This field must be included if the value of the <b>AccountHistorySelection</b> filter is set to <code>OrderId</code>. A user can filter by order ID to see if there specific account entries related to a specific eBay order.
+ * <br><br>
+ * It is possible that no account entries will be found directly related to the specified order ID, and if this is the case, no <b>AccountEntries</b> container will be returned, and the <b>ack</b> value will still be <code>Success</code>.
+ * <br><br>
+ * <span class="tablenote"><b>Note: </b> In June 2019, eBay introduced a new order ID format to both legacy (including Trading API) and REST-based APIs. At this time, both old and new format order IDs will be accepted in legacy API request payloads to identify orders. In legacy API response payloads, order IDs will appear in the new format if the user is using a Trading WSDL version of '1113' (or newer), or if the user sets the <code>X-EBAY-API-COMPATIBILITY-LEVEL</code> HTTP header to a value of '1113' (or newer). If the Trading WSDL version or compatibility level is less/older than '1113', old format order IDs will be returned in legacy API response payloads. Beginning as soon as March 2020, only new format order IDs will be returned regardless of version number.
+ * </span>
  * <br> <B>Output property:</B> <code>AccountID</code> - Specifies the seller's unique account number.
  * <br> <B>Output property:</B> <code>AccountSummary</code> - Contains summary data for the seller's account, such as the overall
  * balance, bank account and credit card information, and amount and
@@ -63,12 +69,10 @@ import com.ebay.soap.eBLBaseComponents.*;
  * of residence.
  * <br> <B>Output property:</B> <code>ReturnedCurrency</code> - Indicates the currency used for monetary amounts in the report.
  * <br> <B>Output property:</B> <code>AccountEntries</code> - This container holds an array of account entries. The account entries that are returned are dependent on the selection that the user made in the <b>AccountHistorySelection</b> field in the call request. Each <b>AccountEntry</b> container consists of one credit, one debit, or one administrative action on the account. It is possible that no <b>AccountEntry</b> containers will be returned if no account entries exist since the last invoice (if 'LastInvoice' value is used), between the specified dates (if 'BetweenSpecifiedDates' value is used), or on a specified invoice (if 'SpecifiedInvoice' value is used).
- * <br> <B>Output property:</B> <code>PaginationResult</code> - This container shows the total number of account entries and the total number of  account entry pages that exist based on the filters used in the <b>GetAccount</b> call request. The total number of account entry pages is partly controlled by the <b>Pagination.EntriesPerPage</b> value that is set in the request. 
- * <br> <B>Output property:</B> <code>HasMoreEntries</code> - If this boolean value is returned as 'true', there are more account entries to view on one or more pages of data. To view additional entries, the user would have to make additional <b>GetAccount</b> calls and increment the value of the <b>Pagination.PageNumber</b> field by '1' to view additional pages of account entries. 
- * <br> <B>Output property:</B> <code>ReturnedEntriesPerPage</code> - This integer value indicates the number of account entries that are being returned per virtual page of data. This value will be the same value passed into 
- * the <b>Pagination.EntriesPerPage</b> field in the request.
- * <br> <B>Output property:</B> <code>ReturnedPageNumber</code> - This integer value indicates the current page number of account entries that is currently being shown. This value will be the same value passed into 
- * the <b>Pagination.PageNumber</b> field in the request. 
+ * <br> <B>Output property:</B> <code>PaginationResult</code> - This container shows the total number of account entries and the total number of  account entry pages that exist based on the filters used in the <b>GetAccount</b> call request. The total number of account entry pages is partly controlled by the <b>Pagination.EntriesPerPage</b> value that is set in the request.
+ * <br> <B>Output property:</B> <code>HasMoreEntries</code> - If this boolean value is returned as 'true', there are more account entries to view on one or more pages of data. To view additional entries, the user would have to make additional <b>GetAccount</b> calls and increment the value of the <b>Pagination.PageNumber</b> field by '1' to view additional pages of account entries.
+ * <br> <B>Output property:</B> <code>ReturnedEntriesPerPage</code> - This integer value indicates the number of account entries that are being returned per virtual page of data. This value will be the same value passed into the <b>Pagination.EntriesPerPage</b> field in the request.
+ * <br> <B>Output property:</B> <code>ReturnedPageNumber</code> - This integer value indicates the current page number of account entries that is currently being shown. This value will be the same value passed into the <b>Pagination.PageNumber</b> field in the request.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -87,6 +91,7 @@ public class GetAccountCall extends com.ebay.sdk.ApiCall
   private AccountEntrySortTypeCodeType accountEntrySortType = null;
   private CurrencyCodeType currency = null;
   private String itemID = null;
+  private String orderID = null;
   private String accountID=null;
   private AccountSummaryType accountSummary=null;
   private CurrencyCodeType returnedCurrency=null;
@@ -167,6 +172,8 @@ public class GetAccountCall extends com.ebay.sdk.ApiCall
       req.setCurrency(this.currency);
     if (this.itemID != null)
       req.setItemID(this.itemID);
+    if (this.orderID != null)
+      req.setOrderID(this.orderID);
 
     GetAccountResponseType resp = (GetAccountResponseType) execute(req);
 
@@ -305,6 +312,24 @@ public class GetAccountCall extends com.ebay.sdk.ApiCall
   public void setItemID(String itemID)
   {
     this.itemID = itemID;
+  }
+
+  /**
+   * Gets the GetAccountRequestType.orderID.
+   * @return String
+   */
+  public String getOrderID()
+  {
+    return this.orderID;
+  }
+
+  /**
+   * Sets the GetAccountRequestType.orderID.
+   * @param orderID String
+   */
+  public void setOrderID(String orderID)
+  {
+    this.orderID = orderID;
   }
 
   /**

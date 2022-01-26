@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -19,9 +19,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Output property:</B> <code>ReturnedAlert</code> - Container consisting of details related to a Selling Manager alert. Alert types 
- * include listing automation, inventory, PaisaPay (India only), item sold, and 
- * a general alert.
+ * <br> <B>Output property:</B> <code>ReturnedAlert</code> - Container consisting of details related to a Selling Manager alert. Alert types include listing automation, inventory, item sold, and a general alert.
  * 
  * @author Ron Murphy
  * @version 1.0

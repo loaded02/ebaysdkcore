@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -22,8 +22,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>FeedbackID</code> - A unique identifier for a Feedback record. Buying and selling partners
  * leave feedback for one another after the completion of an order.
- * Feedback is left at the order line item (transaction) level, so a
- * Feedback comment for each line item in a Combined Invoice order is
+ * Feedback is left at the order line item level, so a
+ * Feedback comment for each order line item in a Combined Payment order is
  * expected from the buyer and seller. A unique <b>FeedbackID</b> is created
  * whenever a buyer leaves feedback for a seller, and vice versa. A
  * <b>FeedbackID</b> is created by eBay when feedback is left through the eBay
@@ -33,30 +33,29 @@ import com.ebay.soap.eBLBaseComponents.*;
  * Since Feedback is always linked to a unique order line item, an
  * <b>ItemID</b>/<b>TransactionID</b> pair or an <b>OrderLineItemID</b> can also be used to
  * respond to a Feedback comment.
- * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier for an eBay item listing. A listing can have multiple
- * order line items (transactions), but only one <b>ItemID</b>. An <b>ItemID</b> can be
+ * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier for the eBay listing to which the user will be responding to Feedback. A listing can have multiple
+ * order line items, but only one <b>ItemID</b> value. An <b>ItemID</b> can be
  * paired up with a corresponding <b>TransactionID</b> and used as an input filter
  * to respond to a Feedback comment in the <b>RespondToFeedback</b> call. Unless
  * the specific Feedback record is identified by a <b>FeedbackID</b> or an
  * <b>OrderLineItemID</b> in the request, an <b>ItemID</b>/<b>TransactionID</b> pair is
  * required.
- * <br> <B>Input property:</B> <code>TransactionID</code> - Unique identifier for an eBay order line item (transaction). A
+ * <br> <B>Input property:</B> <code>TransactionID</code> - Unique identifier for an eBay order line item. A
  * <b>TransactionID</b> can be paired up with its corresponding <b>ItemID</b> and used as
  * an input filter to respond to a Feedback comment in the
  * <b>RespondToFeedback</b> call. Unless the specific Feedback record is
  * identified by a <b>FeedbackID</b> or an <b>OrderLineItemID</b> in the request, an
  * <b>ItemID</b>/<b>TransactionID</b> pair is required.
  * <br> <B>Input property:</B> <code>TargetUserID</code> - The eBay user ID of the caller's order partner. The caller is either
- * replying to or following up on this user's Feedback comment.
+ * replyting to or following up on this user's Feedback comment.
  * <br> <B>Input property:</B> <code>ResponseType</code> - Specifies whether the response is a reply or a follow-up to a Feedback
  * comment left by the user identified in the <b>TargetUserID</b> field.
  * <br> <B>Input property:</B> <code>ResponseText</code> - Textual comment that the user who is subject of feedback may leave in
  * response or rebuttal to the Feedback comment. Alternatively, when the
  * <b>ResponseType</b> is <b>FollowUp</b>, this value contains the text of the follow-up
  * comment.
- * <br> <B>Input property:</B> <code>OrderLineItemID</code> - <b>OrderLineItemID</b> is a unique identifier for an eBay order line item and
- * is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a
- * hyphen in between these two IDs. Since Feedback is always linked to a
+ * <br>
+ * <br> <B>Input property:</B> <code>OrderLineItemID</code> - <b>OrderLineItemID</b> is a unique identifier for an eBay order line item. Since Feedback is always linked to a
  * unique order line item, an <b>OrderLineItemID</b> can be used to respond
  * to a Feedback comment.
  * <br><br>
@@ -97,8 +96,8 @@ public class RespondToFeedbackCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables a seller to reply to feedback that has been left for a user, or to post a
-   * follow-up comment to a feedback comment the user has left for someone else.
+   * Enables a seller to reply to Feedback that has been left for a user, or to post a
+   * follow-up comment to a Feedback comment the user has left for someone else.
    * 
    * <br>
    * @throws ApiException

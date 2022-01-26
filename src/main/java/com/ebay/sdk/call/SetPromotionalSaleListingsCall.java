@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -27,33 +27,14 @@ import com.ebay.soap.eBLBaseComponents.*;
  * removing (specify 'Delete) one or more listings from the promotional sale
  * identified by the <b>PromotionalSaleID</b> value in the request.
  * <br><br>
- * If you specify 'Delete', you must include one or more <b>ItemID</b>
- * values under the <b>PromotionalSaleItemIDArray</b> container, and
- * you cannot use the other filter options in the request. If you specify 'Add',
- * you can add one or more listings using any of the filtering options in the
- * request. Active auction listings that have one or more bids cannot be added to
- * or removed from a promotional sale.
- * <br> <B>Input property:</B> <code>PromotionalSaleItemIDArray</code> - Container consisting of one or more <b>ItemID</b> values. Based on
- * the <b>Action</b> value, the listings identified by these
- * <b>ItemID</b> values are either added to or removed from the
- * promotional sale.
- * <br><br>
- * This container is required if listings are being removed (<b>Action</b>='Delete')
- * from the promotional sale.
- * <br> <B>Input property:</B> <code>StoreCategoryID</code> - If a <b>StoreCategoryID</b> value is included in the call request,
- * all active items in this store category are added to the promotional sale. This
- * field cannot be used if the <b>Action</b> field is set to 'Delete'.
- * <br> <B>Input property:</B> <code>CategoryID</code> - If a <b>CategoryID</b> value is included in the call request,
- * all active items in this eBay category are added to the promotional sale. This
- * field cannot be used if the <b>Action</b> field is set to 'Delete'.
- * <br> <B>Input property:</B> <code>AllFixedPriceItems</code> - If this field is included and set to 'true' in the call request, all fixed-price
- * listings are added to the promotional sale. This field cannot be used if the
- * <b>Action</b> field is set to 'Delete'.
+ * If you specify 'Delete', you must include one or more <b>ItemID</b> values under the <b>PromotionalSaleItemIDArray</b> container, and you cannot use the other filter options in the request. If you specify 'Add', you can add one or more listings using any of the filtering options in the request. Active auction listings that have one or more bids cannot be added to or removed from a promotional sale.
+ * <br> <B>Input property:</B> <code>PromotionalSaleItemIDArray</code> - Container consisting of one or more <b>ItemID</b> values. Based on the <b>Action</b> value, the listings identified by these <b>ItemID</b> values are either added to or removed from the promotional sale. <br><br> This container is required if listings are being removed (<b>Action</b>='Delete') from the promotional sale.
+ * <br> <B>Input property:</B> <code>StoreCategoryID</code> - If a <b>StoreCategoryID</b> value is included in the call request, all active items in this eBay Store category are added to the promotional sale. This field cannot be used if the <b>Action</b> field is set to 'Delete'.
+ * <br> <B>Input property:</B> <code>CategoryID</code> - If a <b>CategoryID</b> value is included in the call request, all active items in this eBay category are added to the promotional sale. This field cannot be used if the <b>Action</b> field is set to 'Delete'.
+ * <br> <B>Input property:</B> <code>AllFixedPriceItems</code> - If this field is included and set to 'true' in the call request, all fixed-price listings are added to the promotional sale. This field cannot be used if the <b>Action</b> field is set to 'Delete'.
  * <br> <B>Input property:</B> <code>AllStoreInventoryItems</code> - This field is deprecated and should no longer be used because Store Inventory is no longer a supported listing format.
- * <br> <B>Input property:</B> <code>AllAuctionItems</code> - If this field is included and set to 'true' in the call request, all auction
- * listings are added to the promotional sale. This field cannot be used if the
- * <b>Action</b> field is set to 'Delete'.
- * <br> <B>Output property:</B> <code>ReturnedStatus</code> - Contains the status of a promotional sale.
+ * <br> <B>Input property:</B> <code>AllAuctionItems</code> - If this field is included and set to 'true' in the call request, all auction listings are added to the promotional sale. This field cannot be used if the <b>Action</b> field is set to 'Delete'.
+ * <br> <B>Output property:</B> <code>ReturnedStatus</code> - The enumeration value in this field indicates the status of the promotional sale action (add or delete). See <b>PromotionalSaleStatusCodeType</b> for more information on status values.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -90,7 +71,7 @@ public class SetPromotionalSaleListingsCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables the seller to change the item listings that are affected by a promotional sale.
+   * Enables the seller to change the item listings that are affected by a promotional sale. To use this call, the seller must be a registered eBay Store owner.
    * 
    * <br>
    * @throws ApiException

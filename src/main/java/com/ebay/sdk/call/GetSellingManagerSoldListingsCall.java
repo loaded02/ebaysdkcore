@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,21 +21,16 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>Search</code> - Search filters for sold listings.
- * <br> <B>Input property:</B> <code>StoreCategoryID</code> - Listings with this store category ID will be listed.
- * <br> <B>Input property:</B> <code>Filter</code> - This holds the list of filters that can be applicable for sold listings.
- * <br> <B>Input property:</B> <code>Archived</code> - Requests listing records that are more than 90 days old. Records are archived between 90
- * and 120 days after being created, and thereafter can only be retrieved using this tag.
- * <br> <B>Input property:</B> <code>Sort</code> - Field to be used to sort the response.
- * <br> <B>Input property:</B> <code>SortOrder</code> - Order to be used for sorting the requested listings.
- * <br> <B>Input property:</B> <code>Pagination</code> - Details about how many listings to return per page and which page to view.
- * <br> <B>Input property:</B> <code>SaleDateRange</code> - Specifies the earliest (oldest) and latest (most recent) dates to use in a date
- * range filter based on item start time. A time range can be up to 120
- * days.
- * <br> <B>Output property:</B> <code>ReturnedSaleRecord</code> - Returns a Selling Manager user's sold listings.
- * <br> <B>Output property:</B> <code>ReturnedPaginationResult</code> - Contains the total number of pages (<b>TotalNumberOfPages</b>) and the total
- * number of products entries (<b>TotalNumberOfEntries</b>) that can be returned
- * on repeated calls with the same format and report criteria.
+ * <br> <B>Input property:</B> <code>Search</code> - This container is used if the seller would like to search for Selling Manager Sele Records based on certain identifiers like Saler Record ID, Item ID, listing title, buyer user ID, etc. The seller will specify one of the supported search types in <b>SellingManagerSearchTypeCodeType</b>, and then provides the value for that search type.
+ * <br> <B>Input property:</B> <code>StoreCategoryID</code> - This field is used if the seller would like to retrieve all Selling Manager Sale Records for products listed in a specific eBay Store Category.
+ * <br> <B>Input property:</B> <code>Filter</code> - One or more <b>Filter</b> fields can be used to retrieve Selling Manager Sale Records for orders that are in a certain state. See <b>SellingManagerSoldListingsPropertyTypeCodeType</b> for the supported values.
+ * <br> <B>Input property:</B> <code>Archived</code> - This field is included and set to <code>true</code> if the seller would like to retrieve one or more archived orders between 90 and 120 days old.
+ * <br> <B>Input property:</B> <code>Sort</code> - This field is used if the seller would like to sort Selling Manager Sale Record results based on a specific aspect such as purchase date, checkout status, total price, etc. See <b>SellingManagerSoldListingsSortTypeCodeType</b> to read more about the available sorting options.
+ * <br> <B>Input property:</B> <code>SortOrder</code> - This field allows the seller to sort in ascending or descending order (based on the selected aspect in the <b>Sort</b> field).
+ * <br> <B>Input property:</B> <code>Pagination</code> - This container is used if the seller would like to control how many Sale Records are returned per page and which page to view.
+ * <br> <B>Input property:</B> <code>SaleDateRange</code> - This container allows the seller to retrieve orders that were purchased within a specified time range. A time range can be set up to 90 days in the past (or up to 120 days if the <b>Archived</b> field is included and set to <code>true</code>.
+ * <br> <B>Output property:</B> <code>ReturnedSaleRecord</code> - A <b>SaleRecord</b> container is returned for each order that matches the input criteria.
+ * <br> <B>Output property:</B> <code>ReturnedPaginationResult</code> - Contains the total number of pages (<b>TotalNumberOfPages</b>) and the total number of products entries (<b>TotalNumberOfEntries</b>) that can be returned on repeated calls with the same format and report criteria.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -73,10 +68,9 @@ public class GetSellingManagerSoldListingsCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves a Selling Manager user's sold listings.
+   * Returns a Selling Manager user's sold listings.
    * <br><br>
-   * This call is subject to change without notice; the deprecation process is
-   * inapplicable to this call.
+   * This call is subject to change without notice; the deprecation process is inapplicable to this call. The user must have a Selling Manager Pro subscription to use this call.
    * 
    * <br>
    * @throws ApiException

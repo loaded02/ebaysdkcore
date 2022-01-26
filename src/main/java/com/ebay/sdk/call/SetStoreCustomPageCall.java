@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -19,8 +19,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>StoreCustomPage</code> - The custom page being submitted.
- * <br> <B>Output property:</B> <code>ReturnedStoreCustomPageType</code> - The custom page that was submitted.
+ * <br> <B>Input property:</B> <code>StoreCustomPage</code> - This container is used to create a new eBay Store custom page or modify an existing custom page.
+ * <br> <B>Output property:</B> <code>ReturnedStoreCustomPageType</code> - This container consists of details for the newly-added or modified eBay Store custom page.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -50,7 +50,7 @@ public class SetStoreCustomPageCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Creates or updates a custom page on a user's eBay Store.
+   * Creates or updates a custom page on a user's eBay Store. Sellers must have an eBay Store subscription in order to use this call.
    * 
    * <br>
    * @throws ApiException

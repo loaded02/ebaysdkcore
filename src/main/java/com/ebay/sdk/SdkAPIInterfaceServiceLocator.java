@@ -1,10 +1,10 @@
 /*
-Copyright (c) 2013 eBay, Inc.
+Copyright (c) 2017 eBay, Inc.
 This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 package com.ebay.sdk;
 
@@ -40,7 +40,7 @@ class SdkAPIInterfaceServiceLocator {
 	  //eBay API instance pool
 	  private static final ArrayList<EBayAPIInterface> apiPool = new ArrayList<EBayAPIInterface>();
 	  //the eBay wsdl is packaged with ebaysdkcore.jar
-	  private static final String EBAY_WSDL= "com/ebay/sdk/eBaySvc.wsdl";
+	  private static final String EBAY_WSDL= "eBaySvc.wsdl";
 	  private static final String EBAY_SERVICE_NAME = "eBayAPIInterfaceService";
 	  
 	  private static final String READ_TIMEOUT = "com.sun.xml.ws.request.timeout";
@@ -126,7 +126,7 @@ class SdkAPIInterfaceServiceLocator {
 		if (api == null) return;
 		
 		Map<String, Object> requestContext = ((BindingProvider)api).getRequestContext();
-		
+	    Map<String, List<String>> httpHeaders = new HashMap<String, List<String>>();
 		//set ApiContext
 		requestContext.put(HandlerConstants.API_CONTEXT, apiContext);
 		
@@ -148,7 +148,7 @@ class SdkAPIInterfaceServiceLocator {
 		//set http gzip compression
 		boolean isEnableHTTPCompression = reqContext.isHttpCompressionEnabled();
 		if (isEnableHTTPCompression) {
-			Map<String, List<String>> httpHeaders = new HashMap<String, List<String>>();
+		
 			//now our server does not support gzipped request
 			//httpHeaders.put("Content-Encoding", Collections.singletonList("gzip"));
 			httpHeaders.put("Accept-Encoding", Collections.singletonList("gzip"));
@@ -158,19 +158,53 @@ class SdkAPIInterfaceServiceLocator {
 				requestContext.remove(MessageContext.HTTP_REQUEST_HEADERS);
 			}
 		}
-		
+	
 		//set endpoint address
 		requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, reqContext.getEndPointAddress());
 		
-		//enable full credentials or not
-		boolean isEnabledFullCredentials = reqContext.isFullCredentialsEnabled();
-		requestContext.put(HandlerConstants.ENABLE_FULL_CREDENTIALS, 
+		//OAuth Support 02/02/2017 
+		//if not oAuthTokenCredentialHTTPHeader, set SOAPRequesterCredentials Header 
+		boolean soapRequesterCredentialsHeader=false;
+		if (!reqContext.isoAuthTokenCredentialHTTPHeader() )
+        	soapRequesterCredentialsHeader=true;
+		
+		//set SOAPRequesterCredentials Header or not 02/02/2017 
+		if (soapRequesterCredentialsHeader) {
+			requestContext.put(HandlerConstants.NEED_SOAP_REQUESTERCREDENTIALS_HEADER,
+					soapRequesterCredentialsHeader ? Boolean.TRUE : Boolean.FALSE); //02/02/2017 
+		    //enable full credentials or not
+		    boolean isEnabledFullCredentials = reqContext.isFullCredentialsEnabled();
+		    requestContext.put(HandlerConstants.ENABLE_FULL_CREDENTIALS, 
 				isEnabledFullCredentials?Boolean.TRUE:Boolean.FALSE);
 		
-		//only need api account or not
-		boolean needApiAccountOnly = reqContext.isApiAccountOnly();
-		requestContext.put(HandlerConstants.NEED_API_ACCOUNT_ONLY, 
+		    //only need api account or not
+		    boolean needApiAccountOnly = reqContext.isApiAccountOnly();
+		    requestContext.put(HandlerConstants.NEED_API_ACCOUNT_ONLY, 
 				needApiAccountOnly?Boolean.TRUE:Boolean.FALSE);
+	    }else {//OAuth Support 02/02/2017 
+		    if (requestContext.containsKey(HandlerConstants.NEED_SOAP_REQUESTERCREDENTIALS_HEADER)){
+				requestContext.remove(HandlerConstants.NEED_SOAP_REQUESTERCREDENTIALS_HEADER);
+			}
+		    if (requestContext.containsKey(HandlerConstants.ENABLE_FULL_CREDENTIALS)){
+			    requestContext.remove(HandlerConstants.ENABLE_FULL_CREDENTIALS);
+			}
+			if (requestContext.containsKey(HandlerConstants.NEED_API_ACCOUNT_ONLY)){
+			    requestContext.remove(HandlerConstants.NEED_API_ACCOUNT_ONLY);
+			}
+	        //set  X-EBAY-API-IAF-TOKEN http request header with OAuthToken value
+			String oAuthToken = apiContext.getApiCredential().getOAuthToken();
+			if (reqContext.isoAuthTokenCredentialHTTPHeader() && (oAuthToken != null && oAuthToken.length() > 0)) {
+				
+				httpHeaders.put("X-EBAY-API-IAF-TOKEN", Collections.singletonList(oAuthToken));
+			}else {
+				if (requestContext.containsKey(MessageContext.HTTP_REQUEST_HEADERS)) {
+					requestContext.remove(MessageContext.HTTP_REQUEST_HEADERS);
+				}
+			}	
+
+		}//set  X-EBAY-API-IAF-TOKEN http request header with OAuthToken value  OAuth Support 02/02/2017 
+
+        requestContext.put(MessageContext.HTTP_REQUEST_HEADERS, httpHeaders);
 		
 	}
 

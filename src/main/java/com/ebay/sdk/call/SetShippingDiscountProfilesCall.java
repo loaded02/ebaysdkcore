@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -19,46 +19,21 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>CurrencyID</code> - The three-digit code of the currency to be used for shipping cost discounts and
- * insurance for Combined Invoice orders. A discount profile can only be associated
- * with a listing if the <b>CurrencyID</b> value of the profile matches the 
- * <b>Item.Currency</b> value specified in a listing.
+ * <br> <B>Input property:</B> <code>CurrencyID</code> - The three-digit code of the currency to be used for shipping discounts on  Combined Invoice orders. A discount profile can only be associated with a listing if the <b>CurrencyID</b> value of the profile matches the <b>Item.Currency</b> value specified in a listing. This field is required if the user is adding or updating one or more shipping discount profiles.
  * <br><br>
- * Required if the user creates flat rate shipping discount profiles, a promotional
- * discount, a packaging/handling cost profile based on a variable
- * discount rule, or if the user defines shipping insurance range/fee pairs.
- * <br><br>
- * Note: There is a currencyID attribute on many elements of SetShippingDiscountProfiles.
- * To avoid an error, be sure to use the same <b>CurrencyID</b> value 
- * in each occurrence within the same request.
- * <br> <B>Input property:</B> <code>CombinedDuration</code> - This field is used to specify the number of days after the sale of an
- * item in which the buyer or seller can combine multiple and mutual order
+ * Note that There is a <b>currencyID</b> attribute on all   <b>SetShippingDiscountProfiles</b> elements involving money. To avoid a call error, be sure to use the same currency type in these attributes as what is set for the <b>CurrencyID</b> field.
+ * <br> <B>Input property:</B> <code>CombinedDuration</code> - This field is used to specify the number of days after the purchase of an
+ * item that the buyer or seller can combine multiple and mutual order
  * line items into one Combined Invoice order. In a Combined Invoice order,
  * the buyer makes one payment for all order line items, hence only unpaid
  * order line items can be combined into a Combined Invoice order.
- * <br> <B>Input property:</B> <code>ModifyActionCode</code> - Indicates what action to take on the specified flat shipping discount,
- * calculated shipping discount or promotional discount.
- * If the action is Delete and if a flat rate or calculated shipping discount
- * profile is specified, the discount profile identified by
- * DiscountProfile.DiscountProfileID is deleted
- * (see DiscountProfile.MappedDiscountProfileID for related details).
- * <br> <B>Input property:</B> <code>FlatShippingDiscount</code> - Details of a shipping cost discount profile for flat rate shipping.
- * If this is provided, CalculatedShippingDiscount and PromotionalShippingDiscountDetails
- * should be omitted.
- * <br> <B>Input property:</B> <code>CalculatedShippingDiscount</code> - Details of a shipping cost discount profile for calculated shipping.
- * If this is provided, FlatShippingDiscount and PromotionalShippingDiscountDetails
- * should be omitted.
- * <br> <B>Input property:</B> <code>CalculatedHandlingDiscount</code> - This container is used by the seller to specify/modify packaging and handling discounts that are applied 
- * for Combined Invoice orders.
- * <br> <B>Input property:</B> <code>PromotionalShippingDiscountDetails</code> - The data for the promotional shipping discount.
- * If this is provided, FlatShippingDiscount and CalculatedShippingDiscount
- * should be omitted.
- * <br> <B>Input property:</B> <code>ShippingInsurance</code> - Information establishing what fee to apply for domestic shipping insurance
- * for Combined Invoice depending on which range the order item-total price
- * falls into.
- * <br> <B>Input property:</B> <code>InternationalShippingInsurance</code> - Information establishing what fee to apply for international shipping
- * insurance for Combined Invoice depending on which range the order item-total
- * price falls into.
+ * <br> <B>Input property:</B> <code>ModifyActionCode</code> - This field is used to set which action is being taken (<code>Add</code>, <code>Update</code>, or <code>Delete</code>) in the call. If you are adding a shipping discount rule, you will have to supply a name for that shipping discount profile. If you want to update or delete a shipping discount profile, you'll have to provide the unique identifier of this rule through the corresponding containers. The unique identifiers of these rules can be retrieved with the <b>GetShippingDiscountRules</b> call, or the seller can view these identifiers in My eBay Shipping Preferences.
+ * <br> <B>Input property:</B> <code>FlatShippingDiscount</code> - This container allows you to create, update, or delete a flat-rate shipping discount profile.
+ * <br> <B>Input property:</B> <code>CalculatedShippingDiscount</code> - This container allows you to create, update, or delete a calculated shipping discount profile.
+ * <br> <B>Input property:</B> <code>CalculatedHandlingDiscount</code> - This container allows you to create, update, or delete a calculated handling discount profile.
+ * <br> <B>Input property:</B> <code>PromotionalShippingDiscountDetails</code> - This container allows you to create, update, or delete a promotional shipping discount profile.
+ * <br> <B>Input property:</B> <code>ShippingInsurance</code> - This field is no longer applicable as it is not longer possible for a seller to offer a buyer shipping insurance.
+ * <br> <B>Input property:</B> <code>InternationalShippingInsurance</code> - This field is no longer applicable as it is not longer possible for a seller to offer a buyer shipping insurance.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -95,8 +70,11 @@ public class SetShippingDiscountProfilesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables a seller to define shipping cost discount profiles for things such as combined
-   * payments for shipping and handling costs.
+   * This call enables a seller to create and manage shipping discounts rules. These are the same shipping discount rules that can be created or managed in My eBay Shipping Preferences.
+   * <br/><br/>
+   * The types of shipping discount rules that can be created and managed with this call include flat-rate shipping rules, calculated shipping rules, and promotional shipping rules. This call can also be used by sellers to set whether or not they allow buyers to combine separate line items into one Combined Invoice order, and how many days they allow buyers to perform that action.
+   * <br/><br/>
+   * A seller can only create, update, or delete one discount rule type with each call. The action to take (either <code>Add</code>, <code>Update</code>, or <code>Delete</code>) is set and controlled with the <b>ModifyActionCode</b> field.
    * 
    * <br>
    * @throws ApiException

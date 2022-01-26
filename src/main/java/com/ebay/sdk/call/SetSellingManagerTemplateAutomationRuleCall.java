@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,17 +20,15 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>SaleTemplateID</code> - The ID of the Selling Manager template whose automation rules
- * you want to change. You can obtain a SaleTemplateID by calling
- * GetSellingManagerInventory.
+ * <br> <B>Input property:</B> <code>SaleTemplateID</code> - The ID of the Selling Manager template whose automation rules you want to change. You can obtain a <b>SaleTemplateID</b> by calling <b>GetSellingManagerInventory</b>.
  * <br> <B>Input property:</B> <code>AutomatedListingRule</code> - The information for the automated listing rule to be associated with the template.
  * <br> <B>Input property:</B> <code>AutomatedRelistingRule</code> - The information for the automated relisting rule to be associated with the template.
- * <br> <B>Input property:</B> <code>AutomatedSecondChanceOfferRule</code> - The information for the automated second chance offer rule to be associated with the template.
+ * <br> <B>Input property:</B> <code>AutomatedSecondChanceOfferRule</code> - The information for the automated Second Chance Offer rule to be associated with the template.
  * <br> <B>Output property:</B> <code>ReturnedAutomatedListingRule</code> - Contains the automated listing rule associated with this template.
  * <br> <B>Output property:</B> <code>ReturnedAutomatedRelistingRule</code> - Contains the automated relisting rule associated with this template.
- * <br> <B>Output property:</B> <code>ReturnedAutomatedSecondChanceOfferRule</code> - Contains the automated second chance offer rule associated with this template.
- * <br> <B>Output property:</B> <code>ReturnedFees</code> - Contains fees that may be incurred when items are listed using the 
- * automation rules (e.g., a scheduled listing fee). Use of an automation rule 
+ * <br> <B>Output property:</B> <code>ReturnedAutomatedSecondChanceOfferRule</code> - Contains the automated Second Chance Offer rule associated with this template.
+ * <br> <B>Output property:</B> <code>ReturnedFees</code> - Contains fees that may be incurred when items are listed using the
+ * automation rules (e.g., a scheduled listing fee). Use of an automation rule
  * does not in itself have a fee, but use can result in a fee.
  * 
  * @author Ron Murphy
@@ -67,31 +65,19 @@ public class SetSellingManagerTemplateAutomationRuleCall extends com.ebay.sdk.Ap
   }
 
   /**
-   * Revises, or adds to, the Selling Manager automation
-   * rules associated with a template.
+   * Revises, or adds to, the Selling Manager automation rules associated with a template.
    * <br>
    * <br>
-   * This call is subject to change without notice; the
-   * deprecation process is inapplicable to this call.
+   * This call is subject to change without notice; the deprecation process is inapplicable to this call. You must have a Selling Manager Pro subscription to use this call.
    * <br>
    * <br>
-   * Using this call, you can add either an autorelist rule or
-   * an autolist rule, but not both.
-   * You also can add a second chance
-   * offer rule (restricted to auction items and auction templates).
+   * Using this call, you can add either an automated listing or relisting rule, but not both. You also can add a Second Chance Offer rule.
    * <br>
    * <br>
-   * This call also enables you to specify particular information about automation
-   * rules.
+   * This call also enables you to specify particular information about automation rules.
    * <br>
    * <br>
-   * If a node is not passed in the call, the setting for the corresponding
-   * automation rule remains unchanged.
-   * <br>
-   * <br>
-   * Although this call can revise (overwrite) an existing rule,
-   * this call cannot delete an automation rule.
-   * (Instead, use DeleteSellingManagerTemplateAutomationRule.)
+   * If a node is not passed in the call, the setting for the corresponding automation rule remains unchanged.
    * 
    * <br>
    * @throws ApiException

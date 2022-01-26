@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -51,9 +51,8 @@ public class SellerReverseDisputeCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables a seller to "reverse" an Unpaid Item dispute that has been closed, for
-   * example, if buyer and seller reach an agreement. The seller's Final Value Fee
-   * credit and the buyer's strike are both reversed, if applicable.
+   * Enables a seller to "reverse" an Unpaid Item dispute that has been closed in case the buyer and seller are able to reach a mutual agreement. If this action is successful, the seller receives a Final Value Fee
+   * credit and the buyer's Unpaid Item strike are both reversed, if applicable.
    * The dispute might have resulted
    * in a strike to the buyer and a Final Value Fee credit to the seller. A buyer and
    * seller sometimes come to agreement after a dispute has been closed. In particular,

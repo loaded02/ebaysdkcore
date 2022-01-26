@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,14 +21,9 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>Item</code> - Child elements hold the values for item properties that change for the
- * relisted item. Item is a required input. At a minimum, the Item.ItemID
- * property must be set to the ID of the listing being relisted (a
- * listing that ended in the past 90 days). By default, the new listing's
- * Item object properties are the same as those of the original (ended)
- * listing. By setting a new value in the Item object, the new listing
- * uses the new value rather than the corresponding value from the old
- * listing.
+ * <br> <B>Input property:</B> <code>Item</code> - The <b>Item</b> container is used to configure the item that will be relisted. If the seller plans to relist the item with no changes, the only field under the <b>Item</b> container that is required is the <b>ItemID</b> field. In the <b>ItemID</b> field, the seller specifies the item that will be relisted. If the seller wishes to change anything else for the listing, the seller should include this field in the call request and give it a new value.
+ * <br/><br/>
+ * If the seller wants to delete one or more optional settings in the listing, the seller should use the <b>DeletedField</b> tag.
  * <br> <B>Input property:</B> <code>DeletedField</code> - Specifies the name of the field to delete from a listing. See the eBay Features Guide for rules on deleting values when relisting items. Also see the relevant field descriptions to determine when to use <b>DeletedField</b> (and potential consequences).
  * The request can contain zero, one, or many instances of <b>DeletedField</b> (one for each field to be deleted).
  * <br><br>
@@ -37,28 +32,20 @@ import com.ebay.soap.eBLBaseComponents.*;
  * For example, item.picturedetails.galleryUrl is not allowed.<br><br>
  * To delete a listing enhancement like 'BoldTitle', specify the value you are deleting;
  * for example, Item.ListingEnhancement[BoldTitle].
- * <br> <B>Output property:</B> <code>ReturnedItemID</code> - Unique item ID for the new listing. As VerifyRelistItem does not
- * actually relist an item, returns 0 instead of a normal item ID.
- * <br> <B>Output property:</B> <code>ReturnedFees</code> - Child elements contain the estimated listing fees for the new item
- * listing. The fees do not include the Final Value Fee (FVF), which cannot
- * be determined until an item is sold.
- * <br> <B>Output property:</B> <code>ReturnedStartTime</code> - Date and time the new listing became active on the eBay site.
- * <br> <B>Output property:</B> <code>ReturnedEndTime</code> - Date and time when the new listing ends. This is the starting time plus
- * the listing duration.
- * <br> <B>Output property:</B> <code>ReturnedDiscountReason</code> - The nature of the discount, if a discount would have applied
- * had this actually been listed at this time.
- * <br> <B>Output property:</B> <code>ReturnedProductSuggestions</code> - Provides a list of products recommended by eBay which match the item information
- * provided by the seller.
- * Not applicable to Half.com.
+ * <br> <B>Output property:</B> <code>ReturnedItemID</code> - With a successful <b>VerifyRelistItem</b> call, this field is always returned, but the returned value is always <code>0</code>, since this call only validates the data passed in through the request payload and does not actually relist an item.
+ * <br> <B>Output property:</B> <code>ReturnedFees</code> - This container consists of the estimated listing fees for the item that is to be relisted. Each type of fee is returned even if it is not appplicable (has a value of <code>0.0</code>. The Final Value Fee (FVF) is not in this container, as this value cannot be determined until a sale is made.
+ * <br> <B>Output property:</B> <code>ReturnedStartTime</code> - This timestamp indicates the date and time when the item to be relisted became active on the eBay site.
+ * <br> <B>Output property:</B> <code>ReturnedEndTime</code> - This timestamp indicates the date and time when the item to be relisted is scheduled to end on the eBay site. This date/time is calculated by using the <b>StartTime</b> and the the listing duration.
+ * <br><br>
+ * <span class="tablenote"><b>Note: </b>
+ * Starting July 1, 2019, the Good 'Til Cancelled renewal schedule will be modified from every 30 days to once per calendar month. For example, if a GTC listing is created July 5, the next monthly renewal date will be August 5. If a GTC listing is created on the 31st of the month, but the following month only has 30 days, the renewal will happen on the 30th in the following month. Finally, if a GTC listing is created on January 29-31, the renewal will happen on February 28th (or 29th during a 'Leap Year'). See the
+ * <a href="https://pages.ebay.com/seller-center/seller-updates/2019-spring/marketplace-updates.html#good-til-cancelled" target="_blank">Good 'Til Cancelled listings update</a> in the <b>Spring 2019 Seller Updates</b> for more information about this change.
+ * </span>
+ * <br> <B>Output property:</B> <code>ReturnedDiscountReason</code> - This field is returned if an eBay special offer or promotion is applicable to the listing.
+ * <br> <B>Output property:</B> <code>ReturnedProductSuggestions</code> - Provides a list of products recommended by eBay which match the item information provided by the seller.
  * <br> <B>Output property:</B> <code>ReturnedListingRecommendations</code> - Container consisting of one or more <b>Recommendation</b> containers. Each <b>Recommendation</b> container provides a message to the seller on how a listing can be improved or brought up to standard in regards to top-rated seller/listing requirements, mandated or recommended Item Specifics, picture quality requirements, pricing and/or listing format recommendations, recommended keywords and/or Item Specifics in a Title, and/or a recommendation to offer fast handling (same-day handling or handling time of 1 day) and/or a free shipping option in order to qualify the listing for a Fast 'N Free badge.
  * <br><br>
- * This container is only returned if the
- * <b>IncludeRecommendations</b> flag was included and set to 'true'
- * in the <b>VerifyRelistItem</b> request, and if at least one listing
- * recommendation exists for the item about to be relisted. If one or more listing
- * recommendations are returned, it will be at the seller's discretion about
- * whether to revise the item based on eBay's listing recommendation(s) before
- * actually relisting the item through a <b>RelistItem</b> call.
+ * This container is only returned if the <b>IncludeRecommendations</b> flag was included and set to 'true' in the <b>VerifyRelistItem</b> request, and if at least one listing recommendation exists for the item about to be relisted. If one or more listing recommendations are returned, it will be at the seller's discretion about whether to revise the item based on eBay's listing recommendation(s) before actually relisting the item through a <b>RelistItem</b> call.
  * 
  * @author Ron Murphy
  * @version 1.0

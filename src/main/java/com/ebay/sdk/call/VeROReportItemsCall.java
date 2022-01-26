@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,7 +21,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>RightsOwnerID</code> - User ID of the VeRO member reporting the items.
- * <br> <B>Input property:</B> <code>ReportItems</code> - Container (packet) for items being reported. You can report the same item 
+ * <br> <B>Input property:</B> <code>ReportItems</code> - Container (packet) for items being reported. You can report the same item
  * more than once in a packet if a different reason code is used each time.
  * <br> <B>Output property:</B> <code>ReturnedVeROReportPacketID</code> - A unique packet identifier for the items reported.
  * <br> <B>Output property:</B> <code>ReturnedVeROReportPacketStatus</code> - The processing status of the packet.
@@ -56,10 +56,10 @@ public class VeROReportItemsCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Reports items that allegedly infringe your copyright, trademark, or other 
-   * intellectual property rights. You can report one or more items at a time with this 
-   * call. You must be a member of the Verified Rights Owner (VeRO) Program to use this 
-   * call. 
+   * Reports items that allegedly infringe your copyright, trademark, or other
+   * intellectual property rights. You can report one or more items at a time with this
+   * call. You must be a member of the Verified Rights Owner (VeRO) Program to use this
+   * call.
    * 
    * <br>
    * @throws ApiException

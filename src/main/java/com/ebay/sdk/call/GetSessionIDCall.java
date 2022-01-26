@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -26,7 +26,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * process in which the user agrees to let the application wield a user token that
  * grants the application the right to access eBay data on behalf of the user.
  * Subsequently also used as input for the <b>FetchToken</b> API call. The
- * SessionID is valid for five minutes after it is retrieved.
+ * <b>SessionID</b> value is valid for five minutes after it is retrieved.
  * 
  * @author Ron Murphy
  * @version 1.0

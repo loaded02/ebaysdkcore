@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -23,8 +23,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>Item</code> - Root container holding all values that define a new
  * fixed-price listing.
- * <br> <B>Output property:</B> <code>ReturnedItemID</code> - Represents the item ID for the new fixed-price listing. VerifyAddFixedPriceItem does not
- * actually list an item, so 0 is returned instead of a normal item ID.
+ * <br> <B>Output property:</B> <code>ReturnedItemID</code> - With a successful <b>VerifyAddFixedPriceItem</b> call, this field is always returned, but the returned value is always <code>0</code>, since this call only validates the data passed in through the request payload and does not actually create an active listing.
  * <br> <B>Output property:</B> <code>ReturnedSKU</code> - Item-level SKU for the new listing, if the seller specified
  * tem.SKU in the request. Variation SKUs are not returned
  * (see GetItem instead).
@@ -47,13 +46,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * had this actually been listed at this time.
  * <br> <B>Output property:</B> <code>ReturnedListingRecommendations</code> - Container consisting of one or more <b>Recommendation</b> containers. Each <b>Recommendation</b> container provides a message to the seller on how a listing can be improved or brought up to standard in regards to top-rated seller/listing requirements, mandated or recommended Item Specifics, picture quality requirements, pricing and/or listing format recommendations, recommended keywords and/or Item Specifics in a Title, and/or a recommendation to offer fast handling (same-day handling or handling time of 1 day) and/or a free shipping option in order to qualify the listing for a Fast 'N Free badge.
  * <br><br>
- * This container is only returned if the <b>IncludeRecommendations</b>
- * flag was included and set to 'true' in the <b>VerifyAddFixedPriceItem</b> request, and if
- * at least one listing recommendation exists for the listing about to be listed. If
- * one or more listing recommendations are returned, it will be at the seller's
- * discretion about whether to revise the listing based on eBay's listing
- * recommendation(s) before actually creating the listing through an
- * <b>AddFixedPriceItem</b> call.
+ * This container is only returned if the <b>IncludeRecommendations</b> flag was included and set to 'true' in the <b>VerifyAddFixedPriceItem</b> request, and if at least one listing recommendation exists for the listing about to be listed. If one or more listing recommendations are returned, it will be at the seller's discretion about whether to revise the listing based on eBay's listing recommendation(s) before actually creating the listing through an <b>AddFixedPriceItem</b> call.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -97,7 +90,7 @@ public class VerifyAddFixedPriceItemCall extends com.ebay.sdk.ApiCall
 
   /**
    * Enables a seller to test the definition of a new fixed-price listing by
-   * submitting the definition to eBay without creating a actual listing.
+   * submitting the definition to eBay without creating an actual listing.
    * 
    * <br>
    * @throws ApiException

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk;
@@ -69,7 +69,20 @@ public class ApiCall {
   private String[] callsNeedFullCredentials = {"GetTokenStatus", "RevokeToken"};
   //now GetSessionID/FetchToken calls only need Api Account
   private String[] callsNeedApiAccountOnly = {"GetSessionID", "FetchToken"};
+  //OAuth Support 02/02/2017 
+  //OAuth is not supported API list:  GetSessionID/FetchToken/GetTokenStatus/RevokeToke  
+  private String[] OAuthIsNotSupportedAPI = { "GetSessionID", "FetchToken", "GetTokenStatus", "RevokeToken" };
   
+  //OAuth Support 02/02/2017 
+  private boolean enableoAuthTokenHTTPHeader=false;
+  
+  public void setEnableoAuthTokenHTTPHeader(boolean enableoAuthTokenHTTPHeader) {
+		this.enableoAuthTokenHTTPHeader = enableoAuthTokenHTTPHeader;
+  }
+  
+  public boolean isEnableoAuthTokenHTTPHeader() {
+		return enableoAuthTokenHTTPHeader;
+ }
 
   private static final Logger log = LoggerFactory.getLogger(ApiCall.class);
   
@@ -84,7 +97,15 @@ public class ApiCall {
   public ApiCall() {
 
   }
-  
+  //OAuth Support 02/02/2017 
+  private boolean isOauthDisabledAPI(String apiName) {
+	 for (String name : OAuthIsNotSupportedAPI) {
+		 if (name.equalsIgnoreCase(apiName)) {
+			 return true;
+		 }
+	}
+	return false;
+  }
   private boolean isFullCredentials(String apiName) {
       for (String name : callsNeedFullCredentials) {
     	  if (name.equalsIgnoreCase(apiName)) {
@@ -360,34 +381,60 @@ public class ApiCall {
       throw new SdkException(
           "Please set valid ApiContext.ApiCredential property");
    
-    
-    if(isFullCredentials(apiName)) {
-    	if (!isValidFullCredentials(cred)) {
-    		throw new SdkException(
+    // OAuth Support 02/02/2017 
+	// only if oAuthToken http header is not needed for the given apiName 
+	if (!oAuthTokenCredentialHTTPHeader(cred, apiName)) {
+        if(isFullCredentials(apiName)) {
+    	    if (!isValidFullCredentials(cred)) {
+    		    throw new SdkException(
     				"This api call needs full credentials, both eBay token and ApiAccount are needed");
-    	}
-    } else {
-        String token = cred.geteBayToken();
+    	    }
+        } else {
+            String token = cred.geteBayToken();
     	
-	    if ( token == null || token.length() == 0 )
-	    {
-	      ApiAccount ac = cred.getApiAccount();
-	      if( ac == null ) {
-	        throw new SdkException(
-	            "Please either eBay token or ApiAccount plus eBayAccount as credential.");
-	      }
+	        if ( token == null || token.length() == 0 )
+	        {
+	           ApiAccount ac = cred.getApiAccount();
+	           if( ac == null ) {
+	              throw new SdkException(
+	                 "Please either eBay token or ApiAccount plus eBayAccount as credential.");
+	           }
+	           if( ac.getDeveloper() == null )
+	              throw new SdkException("Please set the API developer (ApiAccount.setDeveloper()).");
+	           if( ac.getApplication() == null )
+	              throw new SdkException("Please set the API application (ApiAccount.setApplication()).");
+	           if( ac.getCertificate() == null )
+	             throw new SdkException("Please set the API certificate (ApiAccount.setCertificate()).");
 	
-	      if( ac.getDeveloper() == null )
-	        throw new SdkException("Please set the API developer (ApiAccount.setDeveloper()).");
-	      if( ac.getApplication() == null )
-	        throw new SdkException("Please set the API application (ApiAccount.setApplication()).");
-	      if( ac.getCertificate() == null )
-	        throw new SdkException("Please set the API certificate (ApiAccount.setCertificate()).");
-	
-	    }
-    }
+	       }
+       }
+	}
   }
   
+  
+	//OAuth Support 02/02/2017 
+	//check if the given apiName use OAuth Token Http header 
+	private boolean oAuthTokenCredentialHTTPHeader(ApiCredential cred, String apiName) {
+		String oauthToken = cred.getOAuthToken();
+		String ebaytoken = cred.geteBayToken();
+
+		if (isOauthDisabledAPI(apiName)) {
+			this.setEnableoAuthTokenHTTPHeader(false);
+		} else if ((oauthToken != null && oauthToken.length() > 0)) {
+			if (ebaytoken != null && ebaytoken.length() > 0) {
+				this.setEnableoAuthTokenHTTPHeader(false);
+			} else {
+				this.setEnableoAuthTokenHTTPHeader(true);
+			}
+
+		} else if (ebaytoken != null && ebaytoken.length() > 0) {
+			this.setEnableoAuthTokenHTTPHeader(false);
+
+		}
+		return this.isEnableoAuthTokenHTTPHeader();
+	}//OAuth Support 02/02/2017 
+
+	
   private boolean isValidFullCredentials(ApiCredential cred) {
 	    String token = cred.geteBayToken();
 	    if (token == null || token.length() == 0) return false;
@@ -427,14 +474,19 @@ public class ApiCall {
       reqContext.setEndPointAddress(dstUrl);
       reqContext.setHttpCompressionEnabled(this.enableHTTPCompression);
 
-      if (isFullCredentials(apiName)) {
-		  reqContext.setFullCredentialsEnabled(true);
-      }
-      
-      if (this.isApiAccountOnly(apiName)) {
-    	  reqContext.setApiAccountOnly(true);
-      }
-      
+	  //OAuth Support 02/02/2017 
+	  //if the given apiName uses OAuth Token Http header, set oAuthTokenCredentialHTTPHeader flag to ture for the RequestContext object 
+	  if (oAuthTokenCredentialHTTPHeader(apiContext.getApiCredential(), apiName)) {
+			this.setEnableoAuthTokenHTTPHeader(true);
+			reqContext.setoAuthTokenCredentialHTTPHeader(this.enableoAuthTokenHTTPHeader);//OAuth Support 02/02/2017 
+	  }else {
+           if (isFullCredentials(apiName)) {
+		      reqContext.setFullCredentialsEnabled(true);
+           }
+           if (this.isApiAccountOnly(apiName)) {
+    	      reqContext.setApiAccountOnly(true);
+           }
+      }   
       return reqContext;
   }
 

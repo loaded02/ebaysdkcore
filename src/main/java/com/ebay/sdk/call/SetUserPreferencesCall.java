@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,51 +20,21 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>BidderNoticePreferences</code> - Container consisting of the seller's preference for receiving contact
- * information for unsuccessful bidders. This preference is only applicable for
- * auction listings.
- * <br> <B>Input property:</B> <code>CombinedPaymentPreferences</code> - Container consisting of the seller's preference for allowing Combined Invoice 
- * orders for the same seller and buyer.
- * <br><br>
- * <span class="tablenote"><strong>Note:</strong>
- * Calculated and flat-rate shipping preferences are no longer set using this
- * call. Instead, use the <b>SetShippingDiscountProfiles</b> call to
- * set the shipping discounts for Combined Invoice orders.
- * </span>
+ * <br> <B>Input property:</B> <code>BidderNoticePreferences</code> - This container is included if the seller wishes to receive contact information for unsuccessful bidders. This preference is only applicable for auction listings.
+ * <br> <B>Input property:</B> <code>CombinedPaymentPreferences</code> - This container is included if the seller wishes to set the preference for allowing Combined Invoice orders for cases where the buyer has multiple unpaid order line items from the same seller.
+ * <br> <B>Input property:</B> <code>CrossPromotionPreferences</code> - This container is deprecated.
+ * <br> <B>Input property:</B> <code>SellerPaymentPreferences</code> - This container is included if the seller wishes to set various payment preferences. One or more preferences may be set or modified under this container. Payment preferences specified in a <b>SetUserPreferences</b> call override the settings in My eBay payment preferences.
+ * <br> <B>Input property:</B> <code>SellerFavoriteItemPreferences</code> - This container is included if the seller wishes to set preferences for displaying items on a buyer's Favorite Sellers' Items page or Favorite Sellers' Items digest. One or more preferences may be set or modified under this container.
+ * <br> <B>Input property:</B> <code>EndOfAuctionEmailPreferences</code> - This container is included if the seller wishes to set preferences for the end-of-auction email sent to the winning bidder. These preferences allow the seller to customize the Email that is sent to buyer at the end of the auction. One or more preferences may be set or modified under this container. These preferences are only applicable for auction listings.
+ * <br> <B>Input property:</B> <code>EmailShipmentTrackingNumberPreference</code> - This field is included and set to <code>true</code> if the seller wishes to email the shipment's tracking number to the buyer.
+ * <br> <B>Input property:</B> <code>RequiredShipPhoneNumberPreference</code> - This field is included and set to <code>true</code> if the seller wishes to require the buyer to provide a shipping phone number upon checkout. Some shipping carriers require the receiver's phone number.
+ * <br> <B>Input property:</B> <code>UnpaidItemAssistancePreferences</code> - This container is included if the seller wishes to set Unpaid Item Assistant preferences. The Unpaid Item Assistant automatically opens an Unpaid Item case on the behalf of the seller if the buyer has not paid for the order after a specified number of days. One or more preferences may be set or modified under this container.
+ * <br> <B>Input property:</B> <code>PurchaseReminderEmailPreferences</code> - This container is included if the seller wishes to set the preference for sending a purchase reminder email to buyers.
+ * <br> <B>Input property:</B> <code>SellerThirdPartyCheckoutDisabled</code> - This field is no longer applicable, as third-party checkout on eBay is no longer possible.
+ * <br> <B>Input property:</B> <code>DispatchCutoffTimePreference</code> - This container is included if the seller wishes to set the order cut off time for same-day shipping. If the seller specifies a value of <code>0</code> in <strong>Item.DispatchTimeMax</strong> to offer same day handling when listing an item, the seller's shipping time commitment depends on the order cut off time set for the listing site, as indicated by the <strong>DispatchCutoffTimePreference.CutoffTime</strong> field.
  * <br>
- * <span class="tablenote"><strong>Note:</strong>
- * A seller's combined payment preferences can take up to 7 days to
- * have any affect on eBay.
- * </span>
- * <br> <B>Input property:</B> <code>CrossPromotionPreferences</code> - This field is deprecated.
- * <br> <B>Input property:</B> <code>SellerPaymentPreferences</code> - Container consisting of the seller's payment preferences. One or more
- * preferences may be set or modified under this field. Payment preferences
- * specified in a <b>SetUserPreferences</b> call override the settings
- * in My eBay payment preferences.
- * <br> <B>Input property:</B> <code>SellerFavoriteItemPreferences</code> - Container consisting of the seller's preferences for displaying items on a
- * buyer's Favorite Sellers' Items page or Favorite Sellers' Items digest. One
- * or more preferences may be set or modified under this field.
- * <br> <B>Input property:</B> <code>EndOfAuctionEmailPreferences</code> - Container consisting of the seller's preferences for the end-of-auction
- * email sent to the winning bidder. These preferences allow the seller to
- * customize the Email that is sent to buyer at the end of the auction. One or
- * more preferences may be set or modified under this field. These preferences
- * are only applicable for auction listings.
- * <br> <B>Input property:</B> <code>EmailShipmentTrackingNumberPreference</code> - Flag that controls whether the shipment's tracking number is sent by Email
- * from the seller to the buyer.
- * <br> <B>Input property:</B> <code>RequiredShipPhoneNumberPreference</code> - Flag that controls whether the buyer is required to provide a shipping phone
- * number upon checkout. Some shipping carriers require the receiver's phone
- * number.
- * <br> <B>Input property:</B> <code>UnpaidItemAssistancePreferences</code> - Container consisting of a seller's Unpaid Item Assistant preferences. The
- * Unpaid Item Assistant automatically opens an Unpaid Item dispute on the
- * behalf of the seller. One or more preferences may be set or modified under
- * this field.
- * <br> <B>Input property:</B> <code>PurchaseReminderEmailPreferences</code> - Container consisting of a seller's preference for sending a purchase
- * reminder email to buyers.
- * <br> <B>Input property:</B> <code>SellerThirdPartyCheckoutDisabled</code> - A flag used to disable the use of a third-party application to handle the
- * checkout flow for a seller. If set to true, Third-Party Checkout is disabled
- * and any checkout flow initiated on the seller's application is redirected to
- * the eBay checkout flow.
- * <br> <B>Input property:</B> <code>DispatchCutoffTimePreference</code> - Contains information about a seller's order cut off time preferences for same day shipping. If the seller specifies a value of <code>0</code> in <strong>Item.DispatchTimeMax</strong> to offer same day handling when listing an item, the seller's shipping time commitment depends on the order cut off time set for the listing site, as indicated by <strong>DispatchCutoffTimePreference.CutoffTime</strong>.
+ * <br>
+ * <span class="tablenote"><b>Note:</b> This field is not applicable for sellers who have opted into the Handling Time Option of eBay Guaranteed Delivery, as this field only shows a single order cutoff time, but with the Handling Time Option, a seller can set a different order cutoff time for each business day. Currently, eBay Guaranteed Delivery is only available in the US.</span>
  * <br> <B>Input property:</B> <code>GlobalShippingProgramListingPreference</code> - If this flag is included and set to <code>true</code>, the seller's new listings will enable the Global Shipping Program by default.
  * <br/><br/>
  * <span class="tablenote">
@@ -73,26 +43,13 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br> <B>Input property:</B> <code>OverrideGSPserviceWithIntlService</code> - If this flag is included and set to <code>true</code>, and the seller specifies an international shipping service to a particular country for a given listing, the specified service will take precedence and be the listing's default international shipping option for buyers in that country, rather than the Global Shipping Program. The Global Shipping Program will still be the listing's default option for shipping to any Global Shipping-eligible country for which the seller does <em>not</em> specify an international shipping service.
  * <br/><br/>
  * If this flag is set to <code>false</code>, the Global Shipping Program will be each Global Shipping-eligible listing's default option for shipping to any Global Shipping-eligible country, regardless of any international shipping service that the seller specifies for the listing.
- * <br> <B>Input property:</B> <code>OutOfStockControlPreference</code> - When this flag is set to 'true', it enable the Out-of-Stock feature. A seller would use 
- * this feature to keep Fixed-Price GTC (Good 'Til Canceled) listings
- * alive even when the "quantity available" value goes to 0 (zero). This is useful when waiting 
- * for additional stock and eliminates the need to end the listing
- * and then recreating it when stock arrives.
+ * <br> <B>Input property:</B> <code>OutOfStockControlPreference</code> - If this flag is included and set to <code>true</code>, it enables the Out-of-Stock feature. A seller would use this feature to keep Fixed-Price GTC (Good 'Til Canceled) listings alive even when the "quantity available" value goes to 0 (zero). This is useful when waiting for additional stock and eliminates the need to end the listing and then recreating it when stock arrives. <br/><br/>
+ * While the "quantity available" value is 0, the listing would be hidden from eBay search and if that item was specifically searched for with <b>GetItem</b> (or related call), the element <b>HideFromSearch</b> would be returned as 'true' and <b>ReasonHideFromSearch</b> would be returned as 'OutOfStock'.
  * <br/><br/>
- * While the "quantity available" value is 0, the listing would be hidden from eBay search and
- * if that item was specifically searched for with <b>GetItem</b>
- * (or related call), the element <b>HideFromSearch</b> would be returned as 'true' and
- * <b>ReasonHideFromSearch</b> would be returned as 'OutOfStock'.
+ * When stock is available, the seller can use the <b>Revise</b> calls to update the inventory of the item (through the <b>Item.Quantity</b> or <b>Item.Variations.Variation.Quantity</b> fields) and the listing would appear again.
  * <br/><br/>
- * When stock is available, the seller can use the <b>Revise</b> calls to update the inventory of the item
- * (through the <b>Item.Quantity</b> or <b>Item.Variations.Variation.Quantity</b>
- * fields) and the listing would appear again.
- * <br/><br/>
- * You can return the value of this flag using the <a href="GetUserPreferences.html#Request.ShowOutOfStockControlPreference">GetUserPreferences</a> call and setting the <b>ShowOutOfStockControlPreference</b> field to 'true'.
- * <br/><br/>
- * <span class="tablenote"><b>IMPORTANT: </b>
- * When a listing using the Out-of-Stock feature has zero quantity, the seller has 90 days to add inventory without incurring a listing fee. Fees are changed at the end of each the billing cycle but are then refunded if the item is out-of-stock for an entire billing period. See <a href="../../../../guides/ebayfeatures/Development/Listings-UseOutOfStock.html#FeesForaListingWithZeroQuantity">Fees For a Listing With Zero Quantity</a> for details.
- * </span>  
+ * You can return the value of this flag using the <a href="GetUserPreferences.html#Request.ShowOutOfStockControlPreference">GetUserPreferences</a> call and setting the <b>ShowOutOfStockControlPreference</b> field to 'true'. <br/><br/>
+ * <span class="tablenote"><b>IMPORTANT: </b> When a listing using the Out-of-Stock feature has zero quantity, the seller has 90 days to add inventory without incurring a listing fee. Fees are changed at the end of each the billing cycle but are then refunded if the item is out-of-stock for an entire billing period. See <a href="../../../../guides/features-guide/default.html#development/Listings-UseOutOfStock.html#FeesForaListingWithZeroQuantity">Fees For a Listing With Zero Quantity</a> for details. </span>
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -135,7 +92,7 @@ public class SetUserPreferencesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Sets the authenticated user's preferences.
+   * This call allows an eBay user to set/modify numerous seller account preferences.
    * 
    * <br>
    * @throws ApiException

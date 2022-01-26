@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -23,29 +23,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>Item</code> - Root container holding all values that define a new
  * listing.
- * <br> <B>Input property:</B> <code>IncludeExpressRequirements</code> - This field is deprecated.
- * <br> <B>Input property:</B> <code>ExternalProductID</code> - This field is deprecated.
- * <br> <B>Output property:</B> <code>ReturnedItemID</code> - Represents the item ID for the new listing. VerifyAddItem does not
- * actually list an item, so 0 is returned instead of a normal item ID.
- * <br><br>
- * <span class="tablenote"><b>Note:</b>
- * Although we represent item IDs as strings in the schema, we recommend you store
- * them as 64-bit signed integers. If you choose to store item IDs as strings,
- * allocate at least 19 characters (assuming decimal digits are used) to hold them.
- * eBay will increase the size of IDs over time. Your code should be prepared to
- * handle IDs of up to 19 digits. For more information about item IDs, see
- * <a href=
- * "https://ebaydts.com/eBayKBDetails?KBid=468">
- * Common FAQs on eBay Item IDs and other eBay IDs</a> in the Knowledge Base.
- * </span>
- * <br> <B>Output property:</B> <code>ReturnedFees</code> - Child Fee containers provide the listing feature names, fees, and possible discounts
- * for the new item listing. The fees do not include the Final Value Fee (FVF), which
- * cannot be determined until an item is sold.
- * <br />
- * <br />
- * There is no guarantee that a PromotionalDiscount returned with VerifyAddItem will
- * be realized when the seller uses AddItem to list the same item. This is the result
- * of the timing of certain promotions.
+ * <br> <B>Output property:</B> <code>ReturnedItemID</code> - With a successful <b>VerifyAddItem</b> call, this field is always returned, but the returned value is always <code>0</code>, since this call only validates the data passed in through the request payload and does not actually create an active listing.
+ * <br> <B>Output property:</B> <code>ReturnedFees</code> - Child Fee containers provide the listing feature names, fees, and possible discounts for the new item listing. The fees do not include the Final Value Fee (FVF), which cannot be determined until an item is sold. <br /> <br /> There is no guarantee that a PromotionalDiscount returned with VerifyAddItem will be realized when the seller uses AddItem to list the same item. This is the result of the timing of certain promotions.
  * <br> <B>Output property:</B> <code>ReturnedExpressListing</code> - This field is deprecated.
  * <br> <B>Output property:</B> <code>ReturnedExpressItemRequirements</code> - This field is deprecated.
  * <br> <B>Output property:</B> <code>ReturnedCategoryID</code> - ID of the primary category in which the item would be listed.
@@ -60,9 +39,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * Category2ID does not return a value.
  * <br> <B>Output property:</B> <code>ReturnedDiscountReason</code> - The nature of the discount, if a discount would have applied
  * had this actually been listed at this time.
- * <br> <B>Output property:</B> <code>ReturnedProductSuggestions</code> - Provides a list of products recommended by eBay which match the item information
- * provided by the seller.
- * Not applicable to Half.com.
+ * <br> <B>Output property:</B> <code>ReturnedProductSuggestions</code> - Provides a list of products recommended by eBay which match the item information provided by the seller.
  * <br> <B>Output property:</B> <code>ReturnedListingRecommendations</code> - Container consisting of one or more <b>Recommendation</b> containers. Each <b>Recommendation</b> container provides a message to the seller on how a listing can be improved or brought up to standard in regards to top-rated seller/listing requirements, mandated or recommended Item Specifics, picture quality requirements, pricing and/or listing format recommendations, recommended keywords and/or Item Specifics in a Title, and/or a recommendation to offer fast handling (same-day handling or handling time of 1 day) and/or a free shipping option in order to qualify the listing for a Fast 'N Free badge.
  * <br><br>
  * This container is only returned if the <b>IncludeRecommendations</b>
@@ -81,8 +58,6 @@ public class VerifyAddItemCall extends com.ebay.sdk.ApiCall
 {
   
   private ItemType item = null;
-  private Boolean includeExpressRequirements = null;
-  private ExternalProductIDType externalProductID = null;
   private String returnedItemID=null;
   private FeesType returnedFees=null;
   private Boolean returnedExpressListing=null;
@@ -116,7 +91,7 @@ public class VerifyAddItemCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables a seller to specify the definition of a new item and submit the definition to eBay without creating a listing.&nbsp;<b>Also for Half.com</b>.
+   * Enables a seller to specify the definition of a new item and submit the definition to eBay without creating a listing.
    * <br><br>
    * Sellers who engage in cross-border trade on sites that require a recoupment agreement, must agree to the
    * recoupment terms before adding or verifying items. This agreement allows eBay to reimburse
@@ -154,10 +129,6 @@ public class VerifyAddItemCall extends com.ebay.sdk.ApiCall
     }
     if (this.item != null)
       req.setItem(this.item);
-    if (this.includeExpressRequirements != null)
-      req.setIncludeExpressRequirements(this.includeExpressRequirements);
-    if (this.externalProductID != null)
-      req.setExternalProductID(this.externalProductID);
 
     VerifyAddItemResponseType resp = (VerifyAddItemResponseType) execute(req);
 
@@ -171,42 +142,6 @@ public class VerifyAddItemCall extends com.ebay.sdk.ApiCall
     this.returnedProductSuggestions = resp.getProductSuggestions();
     this.returnedListingRecommendations = resp.getListingRecommendations();
     return this.getReturnedFees();
-  }
-
-  /**
-   * Gets the VerifyAddItemRequestType.externalProductID.
-   * @return ExternalProductIDType
-   */
-  public ExternalProductIDType getExternalProductID()
-  {
-    return this.externalProductID;
-  }
-
-  /**
-   * Sets the VerifyAddItemRequestType.externalProductID.
-   * @param externalProductID ExternalProductIDType
-   */
-  public void setExternalProductID(ExternalProductIDType externalProductID)
-  {
-    this.externalProductID = externalProductID;
-  }
-
-  /**
-   * Gets the VerifyAddItemRequestType.includeExpressRequirements.
-   * @return Boolean
-   */
-  public Boolean getIncludeExpressRequirements()
-  {
-    return this.includeExpressRequirements;
-  }
-
-  /**
-   * Sets the VerifyAddItemRequestType.includeExpressRequirements.
-   * @param includeExpressRequirements Boolean
-   */
-  public void setIncludeExpressRequirements(Boolean includeExpressRequirements)
-  {
-    this.includeExpressRequirements = includeExpressRequirements;
   }
 
   /**

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,18 +21,14 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemIDs</code> - The ID of the item to be removed from the
- * watch list. Either ItemID, RemoveAllItems, or VariationKey must
- * be specified, but NOT more than one of these.
- * Multiple ItemID fields can be specified in the same request.
- * <br> <B>Input property:</B> <code>RemoveAllItems</code> - If true, then all the items in the user's
- * watch list are removed. Either ItemID, RemoveAllItems, or VariationKey must be specified, but NOT more than one of these.
- * <br> <B>Input property:</B> <code>VariationKey</code> - A variation (or set of variations) that you want to remove
- * from the watch list. Either ItemID, RemoveAllItems, or VariationKey must be specified, but NOT more than one of these.
- * <br> <B>Output property:</B> <code>ReturnedWatchListCount</code> - The current number of items in the user's watch list (after those
- * specified in the call request have been removed)
- * <br> <B>Output property:</B> <code>ReturnedWatchListMaximum</code> - The maximum number of items allowed in watch lists. Currently this value
- * is 200, and is the same for all sites and all users.
+ * <br> <B>Input property:</B> <code>ItemIDs</code> - The unique identifier of the item to be removed from the
+ * user's Watch List. Multiple <b>ItemID</b> fields can be specified in the same request, but note that the <b>RemoveAllItems</b> field or <b>VariationKey</b> container cannot be specified if one or more <b>ItemID</b> fields are used.
+ * <br/><br/>
+ * <br> <B>Input property:</B> <code>RemoveAllItems</code> - If this field is included and set to <code>true</code>, then all the items in the user's
+ * Watch List are removed. Note that if the <b>RemoveAllItems</b> field is specified, one or more <b>ItemID</b> fields or the <b>VariationKey</b> cannot be used.
+ * <br> <B>Input property:</B> <code>VariationKey</code> - This container is used if the user want to remove one or more product variations (within a multiple-variation listing) from the Watch List. Note that if the <b>VariationKey</b> container is used, one or more <b>ItemID</b> fields or the <b>RemoveAllItems</b> field cannot be used.
+ * <br> <B>Output property:</B> <code>ReturnedWatchListCount</code> - The current number of items in the user's Watch List (considering that the items specified in the call request were successfully removed).
+ * <br> <B>Output property:</B> <code>ReturnedWatchListMaximum</code> - The maximum number of items allowed in the user's Watch List. Currently this value is 300, and is the same for all sites and all users.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -65,7 +61,9 @@ public class RemoveFromWatchListCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables a user to remove one or more items from their My eBay watch list.
+   * The call enables a user to remove one or more items from their Watch List. A user can view the items that they are currently watching by calling <b>GetMyeBayBuying</b>.
+   * <br/><br/>
+   * The user has the option of removing one or more single-variation listings, one or more product variations within a multiple-variation listing, or removing all items from the Watch List.
    * 
    * <br>
    * @throws ApiException

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -22,20 +22,16 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>Item</code> - This <b>Item</b> container is similar to the one that is used in standard Add/Revise/Relist/Verify Item calls, with the difference being that some of the product-specific data/settings will be inherited through the Selling Manager product that is referenced in the call request, and not through this <b>Item</b> container. The data that is passed in this container will become part of the listing template that is created with this call.
- * <br> <B>Input property:</B> <code>SaleTemplateName</code> - The name of the Selling Manager listing template is provided in this field. If you don't specify
- * a name, then the value in the <b>Item.Title</b> field will be used as the name instead.
+ * <br> <B>Input property:</B> <code>SaleTemplateName</code> - The name of the Selling Manager listing template is provided in this field. If you don't specify a name, then the value in the <b>Item.Title</b> field will be used as the name instead.
  * <br> <B>Input property:</B> <code>ProductID</code> - The unique identifier of the Selling Manager product that will be associated with the listing template being created. Selling Manager Product IDs are returned in the response of a <b>AddSellingManagerProduct</b> call.
  * Alternatively, the <b>GetSellingManagerInventory</b> call can be used to retrieve active Selling Manager products for the user's account.
  * <br> <B>Output property:</B> <code>ReturnedCategoryID</code> - The unique identifier of the eBay category in which the product associated with the Selling Manager template will be listed. The primary listing category is provided through the <b>PrimaryCategoryID</b> field of an <b>AddSellingManagerProduct</b> call or through the <b>Item.PrimaryCategory.CategoryID</b> field.
  * <br> <B>Output property:</B> <code>ReturnedCategory2ID</code> - The unique identifier of the secondary eBay category in which the product associated with the Selling Manager template will be listed. This field will only be returned if defined through a <b>Item.SecondaryCategory.CategoryID</b> field.
  * <br> <B>Output property:</B> <code>ReturnedSaleTemplateID</code> - This is the unique identifier of the new Selling Manager template. This value is created by eBay upon successful creation of the Selling Manager template.
- * <br> <B>Output property:</B> <code>ReturnedSaleTemplateGroupID</code> - This field is deprecated.
- * <br> <B>Output property:</B> <code>ReturnedSaleTemplateName</code> - This is the unique name of the newly created Selling Manager template.
- * This name will be the value that was provided in the <b>SaleTemplateName</b> field of the call request.
- * If the <b>SaleTemplateName</b> field was omitted the Selling Manager template inherits the name specified in the
- * <b>Item.Title</b> field instead.
+ * <br> <B>Output property:</B> <code>ReturnedSaleTemplateGroupID</code> - Ihis field is deprecated.
+ * <br> <B>Output property:</B> <code>ReturnedSaleTemplateName</code> - This is the unique name of the newly created Selling Manager template. This name will be the value that was provided in the <b>SaleTemplateName</b> field of the call request. If the <b>SaleTemplateName</b> field was omitted the Selling Manager template inherits the name specified in the <b>Item.Title</b> field instead.
  * <br> <B>Output property:</B> <code>ReturnedSellingManagerProductDetails</code> - This container consists of details related to the Selling Manager product associated with the Selling Manager template, including the unique identifer, product name, and current quantity available.
- * <br> <B>Output property:</B> <code>ReturnedFees</code> - This container consists of one or more listing fees that can be expected to be assessed against an eBay listing created with Selling Manager template. Each <b>Fee</b> container will contain the name of the listing fee, the expected amount, and any eBay promotional discount that will be applied towards the expected fee. The Final Value Fee (FVF) will never be returned in this container, as this fee cannot be determined until an item is sold.
+ * <br> <B>Output property:</B> <code>ReturnedFees</code> - This container consists of listing fees that can be expected to be assessed against an eBay listing created with Selling Manager template. Each <b>Fee</b> container will contain the name of the listing fee, the expected amount, and any eBay promotional discount that will be applied towards the expected fee. The Final Value Fee (FVF) will never be returned in this container, as this fee cannot be determined until an item is sold.
  * 
  * @author Ron Murphy
  * @version 1.0

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -39,28 +39,25 @@ import com.ebay.soap.eBLBaseComponents.*;
  * the properties they inherit, set DetailLevel to ReturnAll, and set
  * ViewAllNodes to true. If you also set AllFeaturesForCategory to true,
  * eBay returns only the site defaults with no child category information.
- * <br> <B>Input property:</B> <code>LevelLimit</code> - A level of depth in the category hierarchy. Retrieves all category
- * nodes with a CategoryLevel less than or equal to the LevelLimit
- * value.
- * <br> <B>Input property:</B> <code>ViewAllNodes</code> - You must set DetailLevel to ReturnAll in order to correctly populate the
- * response when you set ViewAllNodes to true. In this case, eBay returns the
+ * <br> <B>Input property:</B> <code>LevelLimit</code> - This field is used if the user wants to control the maximum depth of the category hierarchy to retrieve, or in other words, how many levels of eBay categories that are returned in the response. If this field is omitted, and no <b>CategoryID</b> is specified, eBay feature metadata for every eBay category from the root on down will be returned. If this field is omitted, but a <b>CategoryID</b> is specified, the specified category and all of its children (down to the leaf categories) are returned.
+ * <br>
+ * <br>
+ * If the <b>CategoryID</b> field is not used, but the <b>LevelLimit</b> field is used and set to <code>1</code>, eBay feature metadata is only returned for the top-level categories (also known as L1 categories).
+ * <br> <B>Input property:</B> <code>ViewAllNodes</code> - You must set <b>DetailLevel</b> to <code>ReturnAll</code> in order to correctly populate the
+ * response when you set <b>ViewAllNodes</b> to true. In this case, eBay returns the
  * site defaults along with all the categories that override the feature
  * settings they inherit. Here, each Category container shows only the
  * features that it has overridden from its parent node.
  * <br><br>
- * If you also specify a CategoryID, eBay returns the details for that category,
+ * If you also specify a <b>CategoryID</b>, eBay returns the details for that category,
  * along with containers for each of its child categories that have feature
  * overrides.
  * <br><br>
- * Note that if ViewAllNodes is set to false (the default) and DetailLevel is
- * set to ReturnAll, eBay returns only the leaf categories that have features
+ * Note that if <b>ViewAllNodes</b> is set to false (the default) and <b>DetailLevel</b> is
+ * set to <code>ReturnAll</code>, eBay returns only the leaf categories that have features
  * that override the settings they inherit. In this case, the call will not
  * return leaf categories that do not have overrides.
- * <br> <B>Input property:</B> <code>FeatureIDs</code> - Use this field if you want to know if specific features are enabled at the site
- * or root category level. Multiple <b>FeatureID</b> elements can be
- * used in the request. If no <b>FeatureID</b> elements are used, the
- * call retrieves data for all features, as applicable to the other request 
- * parameters.
+ * <br> <B>Input property:</B> <code>FeatureIDs</code> - Use this field if you want to know if specific features are enabled at the site or root category level. Multiple <b>FeatureID</b> elements can be used in the request. If no <b>FeatureID</b> elements are used, the call retrieves data for all features, as applicable to the other request parameters.
  * <br> <B>Input property:</B> <code>AllFeaturesForCategory</code> - Use this switch to view all of the feature settings for a specific category.
  * All feature settings are returned, regardless of the site default settings.
  * This element works in conjunction with CategoryID--refer to the notes for
@@ -89,10 +86,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * Only returned when the category is different from its parent.
  * If the category has children and they aren't returned,
  * it means the children inherit the category's feature settings.
- * <br> <B>Output property:</B> <code>ReturnedSiteDefaults</code> - Returns the feature settings defined for most categories on the site.
- * Most categories share these settings. However, some categories can
- * override some settings, as indicated in the Category nodes
- * (if any).
+ * <br> <B>Output property:</B> <code>ReturnedSiteDefaults</code> - Returns the feature settings defined for most categories on the site. Most categories share these settings. However, some categories can override some settings, as indicated in the Category nodes (if any).
  * <br> <B>Output property:</B> <code>ReturnedFeatureDefinitions</code> - Returns definitions of the various features on the site,
  * or the features you requested in FeatureID (if any).
  * Each feature has a node within FeatureDefinitions.

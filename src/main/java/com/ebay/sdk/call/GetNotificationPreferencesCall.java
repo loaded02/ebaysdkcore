@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -22,6 +22,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>PreferenceLevel</code> - Specifies the type of preferences to retrieve. For example, preferences can be associated with a user, with
  * an application, or with events.
+ * <br>
  * <br> <B>Output property:</B> <code>ReturnedApplicationDeliveryPreferences</code> - Specifies application-based event preferences that have been enabled.
  * <br> <B>Output property:</B> <code>ReturnedDeliveryURLName</code> - Specifies application delivery URL Name associated with this user.
  * <br> <B>Output property:</B> <code>ReturnedUserDeliveryPreferenceArray</code> - Specifies user-based event preferences that have been enabled or disabled.
@@ -61,10 +62,7 @@ public class GetNotificationPreferencesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves the requesting application's notification preferences. Details are only returned for events for which a
-   * preference has been set. For example, if you enabled notification for the <b>EndOfAuction</b> event and later disabled it,
-   * the <b>GetNotificationPreferences</b> response would cite the <b>EndOfAuction</b> event preference as <b>Disabled</b>. Otherwise, no
-   * details would be returned regarding <b>EndOfAuction</b>.
+   * Retrieves the requesting application's notification preferences. Details are only returned for events for which a preference has been set. For example, if you enabled notification for the <b>EndOfAuction</b> event and later disabled it, the <b>GetNotificationPreferences</b> response would cite the <b>EndOfAuction</b> event preference as <b>Disabled</b>. Otherwise, no details would be returned regarding <b>EndOfAuction</b>.
    * 
    * <br>
    * @throws ApiException

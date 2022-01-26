@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -22,8 +22,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>FolderName</code> - Name of the new Selling Manager inventory folder.
- * <br> <B>Input property:</B> <code>ParentFolderID</code> - Unique Folder ID of parent folder. If no <b>ParentFolderID</b> is submitted, Folder
- * is added to root level.
+ * <br> <B>Input property:</B> <code>ParentFolderID</code> - Unique identifier of the parent Selling Manager inventory folder. If no <b>ParentFolderID</b> is submitted, the folder
+ * is added at the root level.
  * <br> <B>Input property:</B> <code>Comment</code> - Contains comments that will be associated with this folder.
  * <br> <B>Output property:</B> <code>ReturnedFolderID</code> - The unique identifier of the newly created Selling Manager Inventory Folder. This field will generally be returned unless the call is not successful at creating the new folder.
  * 

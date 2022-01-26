@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,22 +21,31 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>MessageIDs</code> - Contains a list of up to 10 <b>MessageIDs</b>
- * <b>MessageIDs</b> values must be included in
- * the request. Messages in the Sent box cannot be moved, marked as read, or flagged.
+ * <br> <B>Input property:</B> <code>MessageIDs</code> - This container is used to specify up to 10 messages (specified with their  <b>MessageID</b> values) on which to perform on or more actions. At least one <b>MessageID</b> value must be included in the request. <b>MessageID</b> values can be retrieved with the <b>GetMyMessages</b> call with the <b>DetailLevel</b> value set to <code>ReturnHeaders</code>.
+ * <br>
+ * <br>
+ * <span class="tablenote"><b>Note:</b> Messages in the Sent folder of My Messages cannot be moved, marked as read, or flagged. </span>
  * <br> <B>Input property:</B> <code>AlertIDs</code> - This field is deprecated.
- * <br> <B>Input property:</B> <code>Read</code> - Changes the read states of all messages specified in a request. At least one of the <b>Read</b>, <b>Flagged</b>, or <b>FolderID</b> fields must be specified in the request. Messages in the Sent box cannot be moved, marked as read, or flagged. <br><br>
- * Note that messages retrieved with the API are not automatically marked read, and must be marked read with this call.
- * <br> <B>Input property:</B> <code>Flagged</code> - Changes the flagged states of all messages specified in
- * a request by their <b>MessageID</b> values. At least one of
- * the <b>Read</b>, <b>Flagged</b>, or <b>FolderID</b> fields must be specified in the
- * request. Messages in the Sent box cannot be moved,
- * marked as read, or flagged.
- * <br> <B>Input property:</B> <code>FolderID</code> - An ID that uniquely identifies the My Messages folder to
- * move messages into. At least one of
- * the <b>Read</b>, <b>Flagged</b>, or <b>FolderID</b> fields must be specified in the
- * request. Messages in the Sent box cannot be moved,
- * marked as read, or flagged.
+ * <br> <B>Input property:</B> <code>Read</code> - This boolean field is used to change the 'Read' status of the message(s) in the <b>MessageIDs</b> container. Including this field and setting its value to <code>true</code> will mark all messages in the <b>MessageIDs</b> container as 'Read'. Conversely, including this field and setting its value to <code>false</code> will mark all messages in the <b>MessageIDs</b> container as 'Unread'. The 'Read' status of a message can be retrieved by looking at the <b>Message.Read</b> boolean field of the <b>GetMyMessages</b> call response.
+ * <br>
+ * <br>
+ * In each <b>ReviseMyMessages</b> call, at least one of the following fields must be specified in the request: <b>Read</b>, <b>Flagged</b>, and <b>FolderID</b>.
+ * <br>
+ * <br>
+ * <span class="tablenote"><b>Note:</b> Messages in the Sent folder of My Messages cannot be moved, marked as read, or flagged. </span>
+ * <br> <B>Input property:</B> <code>Flagged</code> - This boolean field is used to change the 'Flagged' status of the message(s) in the <b>MessageIDs</b> container. Including this field and setting its value to <code>true</code> will flag all messages in the <b>MessageIDs</b> container. Conversely, including this field and setting its value to <code>false</code> will unflag all messages in the <b>MessageIDs</b> container. The 'Flagged' status of a message can be retrieved by looking at the <b>Message.Flagged</b> boolean field of the <b>GetMyMessages</b> call response.
+ * <br>
+ * <br>
+ * In each <b>ReviseMyMessages</b> call, at least one of the following fields must be specified in the request: <b>Read</b>, <b>Flagged</b>, and <b>FolderID</b>.
+ * <br>
+ * <br>
+ * <span class="tablenote"><b>Note:</b> Messages in the Sent folder of My Messages cannot be moved, marked as read, or flagged. </span>
+ * <br> <B>Input property:</B> <code>FolderID</code> - A unique identifier of My Messages folder. A <b>FolderID</b> value is supplied if the user want to move the message(s) in the <b>MessageIDs</b> container to a different folder. <b>FolderID</b> values can be retrieved with the <b>GetMyMessages</b> call with the <b>DetailLevel</b> value set to <code>ReturnSummary</code>. <br>
+ * <br>
+ * In each <b>ReviseMyMessages</b> call, at least one of the following fields must be specified in the request: <b>Read</b>, <b>Flagged</b>, and <b>FolderID</b>.
+ * <br>
+ * <br>
+ * <span class="tablenote"><b>Note:</b> Messages in the Sent folder of My Messages cannot be moved, marked as read, or flagged. </span>
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -69,8 +78,7 @@ public class ReviseMyMessagesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Sets the read state for messages, sets the flagged state of messages,
-   * and moves messages into and out of folders.
+   * This call can be used to mark one or more messages as 'Read', to flag one or more messages, and/or to move one or more messages to another My Messages folder. Any of these actions can be applied on up to 10 messages with one call.
    * 
    * <br>
    * @throws ApiException

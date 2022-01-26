@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,8 +20,9 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ProductID</code> - ID of the product to be deleted.
- * <br> <B>Output property:</B> <code>ReturnedDeletedSellingManagerProductDetails</code> - The details of the product.
+ * <br> <B>Input property:</B> <code>ProductID</code> - The unique identifier of the Selling Manager product to be deleted.
+ * <br> <B>Output property:</B> <code>ReturnedDeletedSellingManagerProductDetails</code> - This container consists of the unique identifier and name of the Seller
+ * Manager product.
  * 
  * @author Ron Murphy
  * @version 1.0

@@ -1,10 +1,10 @@
 /*
-Copyright (c) 2013 eBay, Inc.
+Copyright (c) 2017 eBay, Inc.
 This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 package com.ebay.sdk.handler;
 
@@ -73,7 +73,13 @@ public class ClientAuthenticationHandler extends
 	    	if (obj != null) {
 	    		needApiAccountOnly = ((Boolean)obj).booleanValue();
 	    	}
-			
+			//OAuth Support 02/02/2017
+			//is this soap request need SOAP RequesterCredential Header: <soapenv:Header><urn:RequesterCredentials></urn:RequesterCredentials></soapenv:Header> ?  
+	    	boolean needSoapRequesterCredentialsHeader = false;
+	    	obj =smc.get(HandlerConstants.NEED_SOAP_REQUESTERCREDENTIALS_HEADER);
+	    	if (obj != null) {
+	    		needSoapRequesterCredentialsHeader=((Boolean)obj).booleanValue();
+	    	}//OAuth Support 02/02/2017
 			// for request message, we add api credentials
 			try {
 				SOAPMessage msg = smc.getMessage();
@@ -82,7 +88,10 @@ public class ClientAuthenticationHandler extends
 				if(header == null) {
 					header = env.addHeader();
 				}
-				addSecurityHeader(header, apiContext, enableFullCredentials, needApiAccountOnly);
+        
+               if (needSoapRequesterCredentialsHeader){ //soap request header is needed for this SOAP request //OAuth Support 02/02/2017
+				    addSecurityHeader(header, apiContext, enableFullCredentials, needApiAccountOnly);
+			   }
 			} catch (SOAPException e) {
 		    	//get ApiLogging
 		    	ApiLogging apiLogging = apiContext.getApiLogging();

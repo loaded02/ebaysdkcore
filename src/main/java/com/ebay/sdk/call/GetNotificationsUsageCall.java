@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,33 +20,13 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>StartTime</code> - Specifies the start date and time for which notification information
- * will be retrieved. <b>StartTime</b> is optional. If no <b>StartTime</b> is specified,
- * the default value of 24 hours prior to the call time is used. If no
- * <b>StartTime</b> is specified or if an invalid <b>StartTime</b> is specified, date
- * range errors are returned in the response. For a <b>StartTime</b> to be valid,
- * it must be no more than 72 hours before the time of the call, it cannot
- * be more recent than the <b>EndTime</b>, and it cannot be later than the time of
- * the call. If an invalid <b>StartTime</b> is specified, the default value is
- * used.
- * <br> <B>Input property:</B> <code>EndTime</code> - Specifies the end date and time for which notification information
- * will be retrieved. <b>EndTime</b> is optional. 
- * <br/><br/>
- * If no <b>EndTime</b> is specified,
- * the current time (the time the call is made) is used. If no <b>EndTime</b>
- * is specified or if an invalid <b>EndTime</b> is specified, date range errors
- * are returned in the response. For an <b>EndTime</b> to be valid, it must be no
- * more than 72 hours before the time the of the call, it cannot be before
- * the <b>StartTime</b>, and it cannot be later than the time of the call. If an
- * invalid <b>EndTime</b> is specified, the current time is used.
- * <br> <B>Input property:</B> <code>ItemID</code> - Specifies an item ID for which detailed notification information will be
- * retrieved. <b>ItemID</b> is optional. If no <b>ItemID</b> is specified, the response
- * will not include any individual notification details.
+ * <br> <B>Input property:</B> <code>StartTime</code> - Specifies the start date and time for which notification information will be retrieved. <b>StartTime</b> is optional. If no <b>StartTime</b> is specified, the default value of 24 hours prior to the call time is used. If no <b>StartTime</b> is specified or if an invalid <b>StartTime</b> is specified, date range errors are returned in the response. For a <b>StartTime</b> to be valid, it must be no more than 72 hours before the time of the call, it cannot be more recent than the <b>EndTime</b>, and it cannot be later than the time of the call. If an invalid <b>StartTime</b> is specified, the default value is used.
+ * <br> <B>Input property:</B> <code>EndTime</code> - Specifies the end date and time for which notification information will be retrieved. <b>EndTime</b> is optional. <br/><br/> If no <b>EndTime</b> is specified, the current time (the time the call is made) is used. If no <b>EndTime</b> is specified or if an invalid <b>EndTime</b> is specified, date range errors are returned in the response. For an <b>EndTime</b> to be valid, it must be no more than 72 hours before the time the of the call, it cannot be before the <b>StartTime</b>, and it cannot be later than the time of the call. If an invalid <b>EndTime</b> is specified, the current time is used.
+ * <br> <B>Input property:</B> <code>ItemID</code> - Specifies an item ID for which detailed notification information will be retrieved. <b>ItemID</b> is optional. If no <b>ItemID</b> is specified, the response will not include any individual notification details.
  * <br> <B>Output property:</B> <code>ReturnedStartTime</code> - Returns the start date and time for the notification information that is
- * returned by this call. The oldest date allowed for this field is Now-3days.
- * Default is Now-1day.
+ * returned by this call.
  * <br> <B>Output property:</B> <code>ReturnedEndTime</code> - Returns the end date and time for the notification information that is
- * returned by this call. The default is Now.
+ * returned by this call.
  * <br> <B>Output property:</B> <code>ReturnedNotificationDetailsArray</code> - List of notification objects representing the notifications sent to an
  * application for the given time period. It will only be returned if ItemID
  * was specified in the input request.

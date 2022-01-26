@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,9 +20,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>AddMemberMessagesAAQToBidderRequestContainer</code> - An <b>AddMemberMessagesAAQToBidderRequestContainer</b> container is required for each message being sent to unique bidders/potential buyers.  A seller can send up to 10 messages to unique bidders/potential buyers in one <b>AddMemberMessagesAAQToBidder</b> call.
- * <br> <B>Output property:</B> <code>ReturnedAddMemberMessagesAAQToBidderResponseContainer</code> - Container consisting of the <b>Ack</b> field (indicating the result of the send message
- * operation) and the <b>CorrelationID</b> field (used to track multiple send
- * message operations performed in one call).
+ * <br> <B>Output property:</B> <code>ReturnedAddMemberMessagesAAQToBidderResponseContainer</code> - Container consisting of the <b>Ack</b> field (indicating the result of the send message operation) and the <b>CorrelationID</b> field (used to track multiple send message operations performed in one call).
  * 
  * @author Ron Murphy
  * @version 1.0

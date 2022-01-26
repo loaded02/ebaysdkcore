@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,15 +21,13 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>ItemID</code> - This is the unique identifier of the auction listing for which bidders are being retrieved. This auction listing can be active or recently ended. However, to retrieve bidders for an active auction listing, the only <b>CallMode</b> enumeration value that can be used is <code>ViewAll</code>.
- * <br> <B>Input property:</B> <code>CallMode</code> - The enumeration value that is passed into this field will control the set of bidders that will be retrieved in the response. To retrieve bidders from a recently-ended auction listing, any of the three values can be used. To retrieve bidders for an active auction listing, only the <code>ViewAll</code> enumeration value can be used. These values are discussed in more detail below.
+ * <br> <B>Input property:</B> <code>CallMode</code> - The enumeration value that is passed into this field will control the set of bidders that will be retrieved in the response. To retrieve bidders from a recently-ended auction listing, any of the three values can be used. To retrieve bidders for an active auction listing, only the <code>ViewAll</code> enumeration value can be used. These values are discussed in <b>GetAllBiddersModeCodeType</b>.
+ * <br/>
  * <br> <B>Input property:</B> <code>IncludeBiddingSummary</code> - The user must include this field and set its value to <code>true</code> if the user wishes to retrieve the  <b>BiddingSummary</b> container for each bidder. The <b>BiddingSummary</b> container consists of more detailed bidding information on each bidder.
- * <br> <B>Output property:</B> <code>ReturnedBidArray</code> - Contains a list of OfferType objects. Each
- * OfferType object represents the data for one bidder and bid.
- * <br> <B>Output property:</B> <code>ReturnedHighBidder</code> - eBay user ID for the user with the highest bid (or the earliest timestamp, in the event of a tie); a second chance offer candidate.
- * <br> <B>Output property:</B> <code>ReturnedHighestBid</code> - Bid amount offered by the HighBidder.
- * <br> <B>Output property:</B> <code>ReturnedListingStatus</code> - Specifies an active or ended listing's status in eBay's processing workflow.
- * If a listing ends with a sale (or sales), eBay needs to update the sale details (e.g., winning bidder) and other information. This processing
- * can take several minutes. If you retrieve a sold item, use this listing status information to determine whether eBay has finished processing the listing so that you can be sure the winning bidder and other details are correct and complete.
+ * <br> <B>Output property:</B> <code>ReturnedBidArray</code> - This container consists of an array of bids made on the specified auction listing. Each <b>OfferType</b> object represents the data for one bid.
+ * <br> <B>Output property:</B> <code>ReturnedHighBidder</code> - The eBay user ID for the user with the winning bid (if auction has ended) or current highest bid (if auction is still active). The seller should take note of or save this User ID as this user may be a a Second Chance Offer candidate.
+ * <br> <B>Output property:</B> <code>ReturnedHighestBid</code> - This is the dollar amount of the winning bid (if auction has ended) or dollar amount of the current highest bid (if auction is still active).
+ * <br> <B>Output property:</B> <code>ReturnedListingStatus</code> - This enumeration value indicates the listing status of the specified listing.
  * 
  * @author Ron Murphy
  * @version 1.0

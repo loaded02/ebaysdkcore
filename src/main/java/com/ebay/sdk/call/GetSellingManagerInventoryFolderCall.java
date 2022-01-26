@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -22,13 +22,11 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>FolderID</code> - If a FolderID is submitted, all child-folders below this folder will be returned.
- * <br> <B>Input property:</B> <code>MaxDepth</code> - Specifies the number of levels of subfolders to be returned. If 0, the parent folder
- * is returned. If 1, the parent and child folders are returned. If 2, the parent and
- * two levels of child folders are returned. Ignored if FullRecursion is set to True.
- * <br> <B>Input property:</B> <code>FullRecursion</code> - Displays the entire tree of a user's folders. If this is provided, FolderID and MaxDepth
- * need not be given.
- * <br> <B>Output property:</B> <code>ReturnedFolder</code> - Details of the requested folder.
+ * <br> <B>Input property:</B> <code>FolderID</code> - A unique identifier for a Selling Manager Inventory folder. The <b>FolderID</b> is used if the seller wants to retrieve a specific folder.
+ * <br> <B>Input property:</B> <code>MaxDepth</code> - This field is used to specify the number of levels of subfolders to be returned in the response. If 0, the parent folder is returned. If 1, the parent and child folders are returned. If 2, the parent and two levels of child folders are returned. Ignored if the <b>FullRecursion</b> field is included and set to <code>True</code>.
+ * <br/>
+ * <br> <B>Input property:</B> <code>FullRecursion</code> - Displays the entire tree of a user's Selling Manager Inventory folders. If this is provided, the <b>FolderID</b> and <b>MaxDepth</b> fields are no longer applicable.
+ * <br> <B>Output property:</B> <code>ReturnedFolder</code> - This container consists of detailed information on the Selling Manager Inventory folder that matches the input criteria, as well as detailed information about any child folders if <b>FullRecursion</b> was set to <code>true</code> or if the <b>MaxDepth</b> field is set to an integer value greater than <code>0</code>.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -60,9 +58,9 @@ public class GetSellingManagerInventoryFolderCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves Selling Manager inventory folders.
+   * Retrieves Selling Manager Inventory folders.
    * This call is subject to change without notice; the deprecation process is
-   * inapplicable to this call.
+   * inapplicable to this call. The user must have a Selling Manager Pro subscription to use this call.
    * 
    * <br>
    * @throws ApiException

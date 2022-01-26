@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,10 +20,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>FolderID</code> - Unique ID of the folder that will be moved. User can retrieve the FolderId
- * using GetSellingManagerInventoryFolder.
- * <br> <B>Input property:</B> <code>NewParentFolderID</code> - Unique folder ID for the new parent folder. If no NewParentFolderID is
- * submitted, the folder is moved to the root level.
+ * <br> <B>Input property:</B> <code>FolderID</code> - Unique ID of the Selling Manager Inventory folder that will be moved. A user can retrieve <b>FolderID</b> values by using <b>GetSellingManagerInventoryFolder</b>.
+ * <br> <B>Input property:</B> <code>NewParentFolderID</code> - Unique ID of the Selling Manager Inventory folder that will be the new parent folder of the Selling Manager Inventory folder specified in the <b>FolderID</b> field. A user can retrieve <b>FolderID</b> values by using <b>GetSellingManagerInventoryFolder</b>. If this field is omitted, the Selling Manager Inventory folder specified in the <b>FolderID</b> field will be moved to the root level.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -53,10 +51,10 @@ public class MoveSellingManagerInventoryFolderCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables a seller to move a Selling Manager inventory folder.
+   * Moves a Selling Manager inventory folder.
    * <br><br>
    * This call is subject to change without notice; the deprecation process is
-   * inapplicable to this call.
+   * inapplicable to this call. This call is only applicable and accessible by eBay sellers with a Selling Manager Pro subscription.
    * 
    * <br>
    * @throws ApiException

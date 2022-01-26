@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,24 +20,10 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier for an eBay listing. A listing can have multiple
- * order line items (transactions), but only one <b>ItemID</b>. To identify a
- * specific order line item for which to disable the Unpaid Item Assistant
- * mechanism, either an <b>ItemID</b>/<b>TransactionID</b> pair, an <b>OrderLineItemID</b>, or a
- * <b>DisputeID</b> (if an Unpaid Item case already exists) is required in the request.
- * <br> <B>Input property:</B> <code>TransactionID</code> - The unique identifier of an order line item (transaction). An order line
- * item is created once there is a commitment from a buyer to
- * purchase an item. To identify a specific order line item for which to
- * disable the Unpaid Item Assistant mechanism, either an <b>ItemID</b>/<b>TransactionID</b>
- * pair, an <b>OrderLineItemID</b>, or a <b>DisputeID</b> (if an Unpaid Item case already
- * exists) is required in the request.
- * <br> <B>Input property:</B> <code>DisputeID</code> - A unique identifier for an Unpaid Item case that is filed against an order line item. If an <b>ItemID</b>/<b>TransactionID</b> pair or an
- * <b>OrderLineItemID</b> is used to identify an order line item, <b>DisputeID</b> cannot be used and will be ignored if it is included in the request.
- * <br> <B>Input property:</B> <code>OrderLineItemID</code> - <b>OrderLineItemID</b> is a unique identifier for an eBay order line item and is
- * based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in
- * between these two IDs. To identify a specific order line item for which to
- * disable the Unpaid Item Assistant mechanism, either an <b>ItemID</b>/<b>TransactionID</b>
- * pair, an <b>OrderLineItemID</b>, or a <b>DisputeID</b> is required in the request.
+ * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier for an eBay listing. A listing can have multiple order line items, but only one <b>ItemID</b>. To identify a specific order line item for which to disable the Unpaid Item Assistant mechanism, either an <b>ItemID</b>/<b>TransactionID</b> pair, an <b>OrderLineItemID</b>, or a <b>DisputeID</b> (if an Unpaid Item case already exists) is required in the request.
+ * <br> <B>Input property:</B> <code>TransactionID</code> - The unique identifier of an order line item. An order line item is created once there is a commitment from a buyer to purchase an item. To identify a specific order line item for which to disable the Unpaid Item Assistant mechanism, either an <b>ItemID</b>/<b>TransactionID</b> pair, an <b>OrderLineItemID</b>, or a <b>DisputeID</b> (if an Unpaid Item case already exists) is required in the request.
+ * <br> <B>Input property:</B> <code>DisputeID</code> - A unique identifier for an Unpaid Item case that is filed against an order line item. If an <b>ItemID</b>/<b>TransactionID</b> pair or an <b>OrderLineItemID</b> is used to identify an order line item, <b>DisputeID</b> cannot be used and will be ignored if it is included in the request.
+ * <br> <B>Input property:</B> <code>OrderLineItemID</code> - <b>OrderLineItemID</b> is a unique identifier for an eBay order line item. To identify a specific order line item for which to disable the Unpaid Item Assistant mechanism, either an <b>ItemID</b>/<b>TransactionID</b> pair, an <b>OrderLineItemID</b>, or a <b>DisputeID</b> is required in the request.
  * 
  * @author Ron Murphy
  * @version 1.0

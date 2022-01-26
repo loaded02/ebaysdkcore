@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -23,17 +23,13 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br> <B>Input property:</B> <code>ApplicationDeliveryPreferences</code> - Specifies application-level event preferences that have been enabled,
  * including the URL to which notifications should be delivered and whether
  * notifications should be enabled or disabled (although the
- * UserDeliveryPreferenceArray input property specifies specific
+ * <b>UserDeliveryPreferenceArray</b> input property specifies specific
  * notification subscriptions).
  * <br> <B>Input property:</B> <code>UserDeliveryPreferenceArray</code> - Specifies events and whether or not they are enabled.
  * <br> <B>Input property:</B> <code>UserData</code> - Specifies user data for notification settings, such as mobile phone number.
  * <br> <B>Input property:</B> <code>EventProperty</code> - Characteristics or details of an event such as type, name and value.
  * Currently can only be set for wireless applications.
- * <br> <B>Input property:</B> <code>DeliveryURLName</code> - Specifies up to 25 ApplicationDeliveryPreferences.DeliveryURLDetails.DeliveryURLName
- * to associate with a user token sent in a SetNotificationPreferences request. To
- * specify multiple DeliveryURLNames, create separate instances of
- * ApplicationDeliveryPreferences.DeliveryURLDetails.DeliveryURLName, and then enable
- * up to 25 DeliveryURLNames by including them in comma-separated format in this field.
+ * <br> <B>Input property:</B> <code>DeliveryURLName</code> - Specifies up to 25 ApplicationDeliveryPreferences.DeliveryURLDetails.DeliveryURLName to associate with a user token sent in a SetNotificationPreferences request. To specify multiple DeliveryURLNames, create separate instances of ApplicationDeliveryPreferences.DeliveryURLDetails.DeliveryURLName, and then enable up to 25 DeliveryURLNames by including them in comma-separated format in this field.
  * 
  * @author Ron Murphy
  * @version 1.0

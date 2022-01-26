@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,9 +21,9 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>SaleTemplateID</code> - ID of the template to be deleted.
- * You can obtain a SaleTemplateID by calling GetSellingManagerInventory.
- * <br> <B>Output property:</B> <code>ReturnedDeletedSaleTemplateID</code> - The unique identifier of the template.
+ * <br> <B>Input property:</B> <code>SaleTemplateID</code> - Unique identifier of the Selling Manager template to be deleted.
+ * You can obtain a <b>SaleTemplateID</b> by calling <b>GetSellingManagerInventory</b>.
+ * <br> <B>Output property:</B> <code>ReturnedDeletedSaleTemplateID</code> - The unique identifier of the Selling Manager template.
  * <br> <B>Output property:</B> <code>ReturnedDeletedSaleTemplateName</code> - The name of the Selling Manager template.
  * 
  * @author Ron Murphy

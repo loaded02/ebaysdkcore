@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,9 +21,9 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ChallengeToken</code> - Botblock token that was returned by GetChallengeToken.
- * <br> <B>Input property:</B> <code>UserInput</code> - User response to a botblock challenge.
- * <br> <B>Input property:</B> <code>KeepTokenValid</code> - Whether the challenge token should remain valid for up to two minutes.
+ * <br> <B>Input property:</B> <code>ChallengeToken</code> - Botblock token that was returned by <b>GetChallengeToken</b>.
+ * <br> <B>Input property:</B> <code>UserInput</code> - User response to a bot block challenge.
+ * <br> <B>Input property:</B> <code>KeepTokenValid</code> - This boolean field is included and set to 'true' if the challenge token should remain valid for up to two minutes.
  * <br> <B>Output property:</B> <code>ReturnedValidToken</code> - Indicates whether the token is valid.
  * 
  * @author Ron Murphy

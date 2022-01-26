@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -22,22 +22,15 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>UserID</code> - The user's eBay User ID is specified in this field. If this field is used, all retrieved Feedback data will be for this eBay user. Specifies the user whose feedback data is to be returned. If this field is omitted in the call request, all retrieved Feedback records will be for the eBay user making the call.
- * <br> <B>Input property:</B> <code>FeedbackID</code> - The unique identifier of a Feedback record. This field is used if the user wants to retrieve a specific Feedback record. If <b>FeedbackID</b> is specified in the call request, all other input fields are ignored. 
- * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier for an eBay item listing. A listing can have multiple
- * order line items, but only one <b>ItemID</b>. If <b>ItemID</b> is
- * specified in the <b>GetFeedback</b> request, the returned Feedback record(s) are
- * restricted to the specified <b>ItemID</b>. The maximum number of Feedback records that can be returned is 100.
+ * <br> <B>Input property:</B> <code>FeedbackID</code> - The unique identifier of a Feedback record. This field is used if the user wants to retrieve a specific Feedback record. If <b>FeedbackID</b> is specified in the call request, all other input fields are ignored.
+ * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier for an eBay listing. A listing can have multiple order line items, but only one <b>ItemID</b>. If <b>ItemID</b> is specified in the <b>GetFeedback</b> request, the returned Feedback record(s) are restricted to the specified <b>ItemID</b>. The maximum number of Feedback records that can be returned is 100.
  * <br> <B>Input property:</B> <code>TransactionID</code> - Unique identifier for an eBay order line item. A
  * <b>TransactionID</b> can be paired up with its corresponding <b>ItemID</b> and used as
  * an input filter in the <b>GetFeedback</b> request. If an <b>ItemID</b>/<b>TransactionID</b>
- * pair or an <b>OrderLineItemID</b> value is used to retrieve a Feedback record
+ * pair or an <b>OrderLineItemID</b> value is used to retrieve a feedback record
  * on a specific order line item, the <b>FeedbackType</b> and <b>Pagination</b>
  * fields (if included) are ignored.
- * <br> <B>Input property:</B> <code>CommentType</code> - This field is used to retrieve Feedback records of a specific type (Positive, Negative, or Neutral) in 
- * <b>FeedbackDetailArray</b>. You can include one or two <b>
- * CommentType</b> fields in the request. If no
- * <b>CommentType</b> value is specified,
- * Feedback records of all types are returned.
+ * <br> <B>Input property:</B> <code>CommentType</code> - This field is used to retrieve Feedback records of a specific type (Positive, Negative, or Neutral) in <b>FeedbackDetailArray</b>. You can include one or two <b> CommentType</b> fields in the request. If no <b>CommentType</b> value is specified, Feedback records of all types are returned.
  * <br> <B>Input property:</B> <code>FeedbackType</code> - This field is used to restrict retrieved Feedback records to those that the user left for other buyers, Feedback records received as a seller, Feedback records received as a buyer, or Feedback records received as a buyer and seller. The default value is <b>FeedbackReceived</b>, so if the  <b>FeedbackType</b> field is omitted in the request, all Feedback records received by the user as a buyer and seller are returned in the response. "Feedback Left" data will not be returned in the call response.
  * <br> <B>Input property:</B> <code>Pagination</code> - Controls the pagination of the result set. Child elements, <b>EntriesPerPage</b> and
  * <b>PageNumber</b>, specify the maximum number of individual feedback records to return
@@ -52,30 +45,25 @@ import com.ebay.soap.eBLBaseComponents.*;
  * one and twenty-four, the value is rounded up to 25. Values between 26 and 199
  * that are not one of the accepted values are rounded down to the nearest
  * accepted value.
- * <br> <B>Input property:</B> <code>OrderLineItemID</code> - <b>OrderLineItemID</b> is a unique identifier for an eBay order line item and
- * is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a
- * hyphen in between these two IDs. An <b>OrderLineItemID</b> can be used as an
+ * <br> <B>Input property:</B> <code>OrderLineItemID</code> - <b>OrderLineItemID</b> is a unique identifier for an eBay order line item. An <b>OrderLineItemID</b> can be used as an
  * input filter in the <b>GetFeedback</b> request. If an <b>OrderLineItemID</b> value is
  * used to retrieve a feedback record on a specific order line item, the
  * <b>FeedbackType</b> and <b>Pagination</b> fields (if included) are ignored.
- * <br> <B>Output property:</B> <code>ReturnedFeedbackDetails</code> - Contains the individual feedback records for the user or order line item specified in the request. There is one <b>FeedbackDetailType</b> 
- * object for each feedback record. Only populated with data when a detail level of <b>ReturnAll</b> is specified in the request. Not returned if you specify <b>FeedbackID</b> in the request.
- * <br> <B>Output property:</B> <code>GrandTotal</code> - Indicates the number of <b>FeedbackDetailType</b> objects returned in the
- * <b>FeedbackDetailArray</b> property. Only applicable if feedback details are
- * returned.
- * <br> <B>Output property:</B> <code>FeedbackSummary</code> - Summary feedback data for the user. Contains counts of positive, neutral,
- * and negative feedback for pre-defined time periods. Only applicable if feedback details are returned.
- * <br> <B>Output property:</B> <code>FeedbackScore</code> - Indicates the total feedback score for the user.
- * <br> <B>Output property:</B> <code>ReturnedPaginationResult</code> - Contains information regarding the pagination of data (if pagination is
- * used), including total number of pages and total number of entries. This
- * is only applicable when a User ID or no ID (requester option) is specified.
- * <br> <B>Output property:</B> <code>ReturnedEntriesPerPage</code> - Indicates the number of entries (feedback detail) that are being 
- * returned per page of data (i.e., per call).  
- * Only returned if entries are returned.
- * <br> <B>Output property:</B> <code>ReturnedPageNumber</code> - Indicates which page of data was just returned. Will be the same as the
- * value specified in <b>Pagination.PageNumber</b>. (If the input is
- * higher than the total number of pages, the call fails with an error.)
- * Only returned if items are returned.
+ * <br> <B>Output property:</B> <code>ReturnedFeedbackDetails</code> - Contains the individual Feedback records for the user or order line item specified in the request. There is one <b>FeedbackDetail</b> container returned for each Feedback record. Only populated with data when a detail level of <code>ReturnAll</code> is specified in the request. Not returned if you specify a <b>FeedbackID</b> in the request.
+ * <br> <B>Output property:</B> <code>GrandTotal</code> - Indicates the  total number of Feedback records returned in the the response. Only applicable if Feedback details are returned.
+ * <br> <B>Output property:</B> <code>FeedbackSummary</code> - Summary Feedback data for the user. Contains counts of positive, neutral,
+ * and negative Feedback for pre-defined time periods. Only applicable if Feedback details are returned.
+ * <br> <B>Output property:</B> <code>FeedbackScore</code> - Indicates the total Feedback score for the user.
+ * <br> <B>Output property:</B> <code>ReturnedPaginationResult</code> - Contains information regarding the pagination of data, including the total number of Feedback entries and the total number of pages required to show all of these Feedback entries. The total number of pages is dependent on the <b>Pagination.EntriesPerPage</b> value (if set). The <b>EntriesPerPage</b> value defaults to <code>25</code> if the <b>Pagination.EntriesPerPage</b> field is not used.
+ * <br><br>
+ * If the call request returns no Feedback entries because there are none, or because the <b>DetailLevel</b> field was not included and set to <code>ReturnAll</code>, the <b>PaginationResult.TotalNumberOfPages</b> and <b>PaginationResult.TotalNumberOfEntries</b> fields are still returned, but with values of <code>0</code>.
+ * <br> <B>Output property:</B> <code>ReturnedEntriesPerPage</code> - Indicates the number of Feedback records that are set to be
+ * returned per page of data (i.e., per call). The <b>EntriesPerPage</b> value defaults to <code>25</code> if the <b>Pagination.EntriesPerPage</b> field is not set in the request.
+ * <br><br>
+ * This field is always returned even if the response is not showing any Feedback entries.
+ * <br> <B>Output property:</B> <code>ReturnedPageNumber</code> - Indicates the page of data that is currently displaying. The page number to display is set in the <b>Pagination.PageNumber</b> field in the request. If this field is omitted, the <b>PageNumber</b>  value defaults to <code>1</code> (first page of Feedback entries). If the integer value input into the  <b>Pagination.PageNumber</b> field in the request is higher than the total number of available pages, the call fails with an error.
+ * <br><br>
+ * This field is always returned even if the response is not showing any Feedback entries.
  * 
  * @author Ron Murphy
  * @version 1.0

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -28,28 +28,21 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br>
  * <br>
  * If the user wishes to retrieve category data for the US eBay Motors site, the user must set the Site ID in the <code>X-EBAY-API-SITEID</code> request header to <code>0</code>, and then set this field's value to <code>100</code>.
- * <br> <B>Input property:</B> <code>ParentCategories</code> - Specifies the ID of the highest-level category to return,
- * along with its subcategories.
- * If no parent category is specified, all categories are
- * returned for the specified site. (Please do not pass a value of 0; zero (0) is an invalid value for CategoryParent.)
- * To determine available category IDs, call GetCategories with
- * no filters and use a DetailLevel value of ReturnAll.
- * If you specify multiple parent categories, the hierarchy for
- * each one is returned.
- * <br> <B>Input property:</B> <code>LevelLimit</code> - Specifies the maximum depth of the category hierarchy to retrieve,
- * where the top-level categories (meta-categories) are at level 1.
- * Retrieves all category nodes with a category level less than or
- * equal to this value.
- * If not specified, retrieves categories at all applicable levels.
- * As with all calls, the actual data returned will vary depending
- * on how you configure other fields in the request
- * (including DetailLevel).
- * <br> <B>Input property:</B> <code>ViewAllNodes</code> - This flag controls whether all eBay categories (that satisfy input filters) are
- * returned, or only leaf categories (you can only list items in leaf categories)
- * are returned. The default value is 'true', so if this field is omitted, all eBay
- * categories will be returned. If you only want to retrieve leaf categories,
- * include this flag and set it to 'false'. The actual data returned will vary
- * depending on how you configure other fields in the request.
+ * <br> <B>Input property:</B> <code>ParentCategories</code> - This field is used if the user wishes to retrieve category hierarchy information on one or more specific eBay categories, and optionally, one or more levels of each category's children (if a category has one or more levels of children). For example, if you wanted to view the entire category hierarchy under the <em>Home & Garden</em> L1 category, you would include this field and set its value to <code>11700</code>. As long as the <b>LevelLimit</b> field is omitted, all of  <em>Home & Garden</em>'s child categories are returned. If you only wanted to see the next level (L2s) of <em>Home & Garden</em> categories, you would include the <b>LevelLimit</b> field and set its value to <code>2</code>, allowing the L1 category (<em>Home & Garden</em>) and all of its L2 categories to appear in the response.
+ * <br>
+ * <br>
+ * If you wanted to see all of the Category IDs for the eBay site's L1 categories, you could omit the <b>CategoryParent</b> field but include the  <b>LevelLimit</b> field and set its value to <code>1</code>.
+ * <br>
+ * <br>
+ * <span class="tablenote"><b>Note:</b>
+ * Numerous Category IDs may be specified under multiple <b>CategoryParent</b> fields in a <b>GetCategories</b> request, but if multiple <b>CategoryParent</b> fields are used, the specified Category IDs should all be at the same level (L1, L2, L3, etc.).
+ * </span>
+ * <br> <B>Input property:</B> <code>LevelLimit</code> - This field is used if the user wants to control the maximum depth of the category hierarchy to retrieve, or in other words, how many levels of eBay categories that are returned in the response. If this field is omitted, every eBay category from the root on down will be returned, or, if a <b>CategoryParent</b> category is specified, the specified category and all of its children (down to the leaf categories) are returned.
+ * <br>
+ * <br>
+ * If the <b>CategoryParent</b> is not used, but the <b>LevelLimit</b> field is used and set to <code>1</code>, only the top-level categories (also known as L1 categories) are returned in the response.
+ * <br> <B>Input property:</B> <code>ViewAllNodes</code> - This flag controls whether all eBay categories (that satisfy input filters) are returned, or only leaf categories (you can only list items in leaf categories) are returned. The default value is 'true', so if this field is omitted, all eBay categories will be returned. If you only want to retrieve leaf categories, include this flag and set it to <code>false</code>.
+ * <br>
  * <br> <B>Output property:</B> <code>ReturnedCategoryArray</code> - List of the returned categories. The category array contains one CategoryType
  * object for each returned category. Returns empty if no detail level is specified.
  * <br> <B>Output property:</B> <code>ReturnedCategoryCount</code> - Indicates the number of categories returned (i.e., the number of CategoryType
@@ -58,26 +51,26 @@ import com.ebay.soap.eBLBaseComponents.*;
  * specified eBay site.
  * <br> <B>Output property:</B> <code>ReturnedCategoryVersion</code> - Indicates the version of the category hierarchy on the
  * specified eBay site.
- * <br> <B>Output property:</B> <code>ReturnedReservePriceAllowed</code> - If true, ReservePriceAllowed indicates that all categories on the
+ * <br> <B>Output property:</B> <code>ReturnedReservePriceAllowed</code> - If true, <b>ReservePriceAllowed</b> indicates that all categories on the
  * site allow the seller to specify a reserve price for an item.
  * If false, this field is not returned in the response and all categories on the site do not normally allow sellers to specify reserve prices.
  * The Category.ORPA (override reserve price allowed) field can override (or toggle)
  * the reserve price allowed setting for a given category.
- * For example, if ReservePriceAllowed is false and Category.ORPA is true,
+ * For example, if <b>ReservePriceAllowed</b> is false and Category.ORPA is true,
  * the category overrides the site setting and supports reserve prices.
- * If ReservePriceAllowed is true and Category.ORPA is true, the category
- * overrides the site setting and does not support reserve prices.
+ * If <b>ReservePriceAllowed</b> is true and Category.ORPA is true, the category
+ * overrides the site setting and does does not support reserve prices.
  * <br> <B>Output property:</B> <code>MinimumReservePrice</code> - Indicates the lowest possible reserve price allowed for any item
- * listed in any category on the site. You can use the fields returned by GetCategoryFeatures to determine if a different Minimum Reserve Price is defined for the category you want to use.
- * <br> <B>Output property:</B> <code>ReturnedReduceReserveAllowed</code> - If true, ReduceReserveAllowed indicates that all categories on the
+ * listed in any category on the site. You can use the fields returned by <b>GetCategoryFeatures</b> to determine if a different Minimum Reserve Price is defined for the category you want to use.
+ * <br> <B>Output property:</B> <code>ReturnedReduceReserveAllowed</code> - If true, <b>ReduceReserveAllowed</b> indicates that all categories on the
  * site allow the seller to reduce an item's reserve price.
  * If false, this field is not returned in the response and all categories on the site do not normally allow sellers to reduce an
  * item's reserve price.
  * The Category.ORRA (override reduce reserve price) field can override (or toggle)
  * the reserve price reduction setting for a given category.
- * For example, if ReduceReserveAllowed is false and Category.ORRA is true,
+ * For example, if <b>ReduceReserveAllowed</b> is false and Category.ORRA is true,
  * the category overrides the site setting and supports reducing reserve prices.
- * If ReduceReserveAllowed is true and Category.ORRA is true, the category
+ * If <b>ReduceReserveAllowed</b> is true and Category.ORRA is true, the category
  * overrides the site setting and does does not support reducing reserve prices.
  * 
  * @author Ron Murphy

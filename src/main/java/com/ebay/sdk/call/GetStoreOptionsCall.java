@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,16 +20,12 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Output property:</B> <code>ReturnedBasicThemeArray</code> - The current set of basic themes. Each basic theme definition
- * specifies a valid color scheme for the theme.
- * <br> <B>Output property:</B> <code>ReturnedAdvancedThemeArray</code> - The current set of advances themes. Unlike basic themes, you
- * can use any color	scheme with an advanced theme. These themes 
- * are suitable for more advanced customization.
- * <br> <B>Output property:</B> <code>ReturnedLogoArray</code> - The current set of Store logos. These logos are used in the Store header.
- * <br> <B>Output property:</B> <code>ReturnedSubscriptionArray</code> - The current set of eBay Store subscription tiers and corresponding 
- * subscription prices.
- * <br> <B>Output property:</B> <code>MaxCategories</code> - The maximum number of categories in this store.
- * <br> <B>Output property:</B> <code>MaxCategoryLevels</code> - The maximum number of category levels in this store.
+ * <br> <B>Output property:</B> <code>ReturnedBasicThemeArray</code> - This container consists of the current set of basic themes available for eBay Stores. Each basic theme definition consists of settings like colors, font style, and font size. This theme data can be reused in a <b>SetStore</b> call to set/modify the theme for an eBay Store.
+ * <br> <B>Output property:</B> <code>ReturnedAdvancedThemeArray</code> - This container consists of the current set of advanced themes available for eBay Stores. Each advanced theme definition consists of settings like colors, font style, and font size. This theme data can be reused in a <b>SetStore</b> call to set/modify the theme for an eBay Store. Unlike basic themes, you can use any color	scheme with an advanced theme. These themes are suitable for more advanced customization.
+ * <br> <B>Output property:</B> <code>ReturnedLogoArray</code> - An array of logo identifiers for numerous product categories. These <b>LogoID</b> values can be reused in a <b>SetStore</b> call to set the logo for an eBay Store.
+ * <br> <B>Output property:</B> <code>ReturnedSubscriptionArray</code> - This container consists of the different levels of eBay Store subscriptions along with the monthly subscription price.
+ * <br> <B>Output property:</B> <code>MaxCategories</code> - This value indicates the maximum number of categories (meta and leaf) that can be set up in an eBay Store.
+ * <br> <B>Output property:</B> <code>MaxCategoryLevels</code> - This is the maximum number of category levels that can be set up in an eBay Store.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -63,7 +59,7 @@ public class GetStoreOptionsCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves the current list of eBay store configuration settings.
+   * This call is used to retrieve the current list of eBay Store configuration settings.
    * 
    * <br>
    * @throws ApiException

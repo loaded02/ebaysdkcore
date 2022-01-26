@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,17 +21,13 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>UserID</code> - eBay user ID for the seller whose events are to be returned.
- * If not specified, retrieves events for the user identified by
- * the authentication token passed in the request. 
- * <br/><br/>
- * <b>Note:</b> Since user information is anonymous to everyone except the bidder and the seller (during an active auction), only sellers looking for information about
- * their own listings and bidders who know the user IDs of their sellers
- * will be able to make this API call successfully.
+ * <br> <B>Input property:</B> <code>UserID</code> - <span class="tablenote"><strong>Note:</strong>
+ * This field should no longer be used, and will be ignored if it is included in a <b>GetSellerEvents</b> request. There are plans to remove this field from the public WSDL. The only eBay user ID that can be used is the one associated with the authentication token.
+ * </span>
  * <br> <B>Input property:</B> <code>StartTimeFilter</code> - Helper wrapper to set GetSellerEventsRequestType StartTimeFrom, StartTimeTo:
  * TimeFrom sets GetSellerEventsRequestType.StartTimeFrom: 
  * Describes the earliest (oldest) time to use in a time range filter based
- * on item start time. Must be specified if <b>StartTimeTo</b> is specified. 
+ * on item start time. Must be specified if <b>StartTimeTo</b> is specified.
  * <br/><br/>
  * Either
  * the <b>StartTimeFrom</b>, <b>EndTimeFrom</b>, or <b>ModTimeFrom</b> filter must be specified.
@@ -54,7 +50,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br> <B>Input property:</B> <code>EndTimeFilter</code> - Helper wrapper to set GetSellerEventsRequestType EndTimeFrom, EndTimeTo:
  * TimeFrom sets GetSellerEventsRequestType.EndTimeFrom: 
  * Describes the earliest (oldest) date to use in a time range filter based
- * on item end time. Must be specified if <b>EndTimeTo</b> is specified. 
+ * on item end time. Must be specified if <b>EndTimeTo</b> is specified.
  * <br/><br/>
  * Either
  * the <b>StartTimeFrom</b>, <b>EndTimeFrom</b>, or <b>ModTimeFrom</b> filter must be specified.
@@ -66,11 +62,11 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br>
  * Include a 2-minute, overlapping buffer between requests.
  * For example, if <b>EndTimeTo</b> was 6:58 in a prior request,
- * the current request should use 6:56 in <b>EndTimeFrom</b> 
+ * the current request should use 6:56 in <b>EndTimeFrom</b>
  * (e.g., use ranges like 5:56-6:58, 6:56-7:58, 7:56-8:58).
  * TimeTo sets GetSellerEventsRequestType.EndTimeTo: 
  * Describes the latest (most recent) date to use in a time range filter
- * based on item end time. 
+ * based on item end time.
  * <br/><br/>
  * If you specify the corresponding <b>From</b> filter,
  * but you do not include <b>EndTimeTo</b>, then <b>EndTimeTo</b> is set
@@ -85,7 +81,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br>
  * Include a 2-minute, overlapping buffer between requests.
  * For example, if <b>ModTimeTo</b> was 6:58 in a prior request,
- * the current request should use 6:56 in <b>ModTimeFrom</b> 
+ * the current request should use 6:56 in <b>ModTimeFrom</b>
  * (e.g., use ranges like 5:56-6:58, 6:56-7:58, 7:56-8:58).
  * <br><br>
  * For better results, the time range you use should be less than 48 hours.
@@ -93,22 +89,14 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br><br>
  * If an unexpected item is returned (including an old item
  * or an unchanged active item), please ignore the item.
- * Although a maintenance process may have triggered a change in the modification time,
- * item characteristics are unchanged.
+ * Although a maintenance process may have triggered a change in the modification time, item characteristics are unchanged.
  * TimeTo sets GetSellerEventsRequestType.ModTimeTo: 
- * Describes the latest (most recent) date and time to use in a time range filter
- * based on the time an item's record was modified. If you specify
- * the corresponding <b>From</b> filter, but you do not include <b>ModTimeTo</b> ,
- * then <b>ModTimeTo</b> is set to the time you make the call.
- * Include a 2-minute buffer between the current time and
- * the <b>ModTimeTo</b> filter.
+ * Describes the latest (most recent) date and time to use in a time range filter based on the time an item's record was modified. If you specify the corresponding <b>From</b> filter, but you do not include <b>ModTimeTo</b> , then <b>ModTimeTo</b> is set to the time you make the call. Include a 2-minute buffer between the current time and the <b>ModTimeTo</b> filter.
  * <br> <B>Input property:</B> <code>IncludeNewItem</code> - If true, response includes only items that have been modified
  * within the <b>ModTime</b> range. If false, response includes all items.
- * <br> <B>Input property:</B> <code>IncludeWatchCount</code> - Specifies whether to include WatchCount in Item nodes returned. WatchCount
- * is the number of watches buyers have placed on the item from their My eBay
- * accounts.
+ * <br> <B>Input property:</B> <code>IncludeWatchCount</code> - The seller can include this field and set its value to <code>true</code> if that seller wants to see how many prospective bidders/buyers currently have an item added to their Watch Lists. The Watch count is returned in the <b>WatchCount</b> field for each item in the response.
  * <br> <B>Input property:</B> <code>IncludeVariationSpecifics</code> - Specifies whether to force the response to include
- * variation specifics for multi-variation listings. <br>
+ * variation specifics for multiple-variation listings. <br>
  * <br>
  * If false (or not specified), eBay keeps the response as small as
  * possible by not returning <b>Variation.VariationSpecifics</b>.
@@ -132,30 +120,28 @@ import com.ebay.soap.eBLBaseComponents.*;
  * once. For example, you may need to use shorter time ranges in
  * the <b>StartTimeFrom</b>, <b>EndTimeFrom</b>, or <b>ModTimeFrom</b> filters.
  * <br> <B>Input property:</B> <code>HideVariations</code> - Specifies whether to force the response to hide
- * variation details for multi-variation listings.<br>
+ * variation details for multiple-variation listings.<br>
  * <br>
  * If false (or not specified), eBay returns variation details (if
  * any). In this case, the amount of detail can be controlled by
  * using <b>IncludeVariationSpecifics</b>.<br>
  * <br>
  * If true, variation details are not returned (and
- * <b>IncludeVariationSpecifics</b> has no effect). This may be useful for
- * applications that use other calls, notifications, alerts,
- * or reports to track price and quantity details.
+ * <b>IncludeVariationSpecifics</b> has no effect). This may be useful for applications that use other calls, notifications, alerts, or reports to track price and quantity details.
  * <br> <B>Output property:</B> <code>TimeTo</code> - Indicates the latest (most recent) date for any date-based filtering specified as
  * input. Specifically, this field contains the value you specified in the <b>StartTimeFrom</b>, <b>EndTimeFrom</b>, or <b>ModTimeFrom</b> filter, if you used a time filter in the request. If no time filter was specified, <b>TimeTo</b> returns the current time.
  * <br> <B>Output property:</B> <code>ReturnedSellerEvents</code> - Collection of items whose last modified time matches
- * the filters specified in the request. 
- * Returns empty if no items were modified within the 
- * time range of the request.<br/><br/> 
- * If 1 to 2999 items are returned, then the results are 
- * complete. If 3000 or more items are returned, it usually means 
- * additional items exist within the time range you requested, 
- * but they were not all returned. 
+ * the filters specified in the request.
+ * Returns empty if no items were modified within the
+ * time range of the request.<br/><br/>
+ * If 1 to 2999 items are returned, then the results are
+ * complete. If 3000 or more items are returned, it usually means
+ * additional items exist within the time range you requested,
+ * but they were not all returned.
  * <br/><br/>
  * To retrieve complete results,
- * use a smaller time range in the request so that fewer than 
- * 3000 are returned per response. 
+ * use a smaller time range in the request so that fewer than
+ * 3000 are returned per response.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -193,9 +179,9 @@ public class GetSellerEventsCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves price changes, item revisions, description revisions,
-   * and other changes that have occurred within the last 48 hours
-   * related to a seller's eBay listings.
+   * This call is used by a seller to retrieve changes to their own listings that have occurred within the last 48 hours, including price changes, available quantity, and other revisions to listing.
+   * <br/><br/>
+   * One of the available date range filters must be used with this call.
    * 
    * <br>
    * @throws ApiException

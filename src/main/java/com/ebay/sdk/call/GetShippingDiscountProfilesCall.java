@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,31 +20,15 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Output property:</B> <code>ReturnedCurrencyID</code> - The three-digit code of the currency to be used for shipping cost discounts and
- * insurance for Combined Invoice orders. A discount profile can only be associated
- * with a listing if the <b>CurrencyID</b> value of the profile matches the 
- * <b>Item.Currency</b> value specified in a listing.
- * <br> <B>Output property:</B> <code>ReturnedFlatShippingDiscount</code> - Details of an individual discount profile defined by the
- * user for flat rate shipping--one for each profile defined by the user.
- * Empty if no shipping discount profiles were defined.
- * <br> <B>Output property:</B> <code>ReturnedCalculatedShippingDiscount</code> - Details of an individual discount profile defined by the
- * user for calculated shipping--one for each profile defined by the user.
- * Empty if no shipping discount profiles were defined.
- * <br> <B>Output property:</B> <code>ReturnedPromotionalShippingDiscount</code> - Indicates whether the user defined a promotional discount (the discount is active
- * as soon as it exists).
- * <br> <B>Output property:</B> <code>ReturnedCalculatedHandlingDiscount</code> - This container is used by the seller to specify/modify packaging and handling discounts that are applied 
- * for Combined Invoice orders. This container is only returned if it is set for the Shipping Discount Profile.
- * <br> <B>Output property:</B> <code>ReturnedPromotionalShippingDiscountDetails</code> - The data for the specific promotional shipping discount.
- * Returned only if it has been defined.
- * <br> <B>Output property:</B> <code>ReturnedShippingInsurance</code> - The data for the domestic insurance for Combined Invoice.
- * Returned only if it has been defined.
- * <br> <B>Output property:</B> <code>ReturnedInternationalShippingInsurance</code> - The data for the international insurance for Combined Invoice.
- * Returned only if it has been defined.
- * <br> <B>Output property:</B> <code>ReturnedCombinedDuration</code> - This field indicates the number of days after the sale of an
- * item in which the buyer or seller can combine multiple and mutual order
- * line items into one Combined Invoice order. In a Combined Invoice order,
- * the buyer makes one payment for all order line items, hence only unpaid
- * order line items can be combined into a Combined Invoice order.
+ * <br> <B>Output property:</B> <code>ReturnedCurrencyID</code> - The three-digit code of the currency to be used for shipping cost discounts. A discount profile can only be associated with a listing if the <b>CurrencyID</b> value of the profile matches the <b>Item.Currency</b> value specified in a listing.
+ * <br> <B>Output property:</B> <code>ReturnedFlatShippingDiscount</code> - This container consists of one or more flat-rate shipping discount rules that are set up for a seller's account. This container is returned as an empty element if no flat-rate shipping discount rules are currently set for the seller's account.
+ * <br> <B>Output property:</B> <code>ReturnedCalculatedShippingDiscount</code> - This container consists of one or more calculated shipping discount rules that are set up for a seller's account. This container is returned as an empty element if no calculated shipping discount rules are currently set for the seller's account.
+ * <br> <B>Output property:</B> <code>ReturnedPromotionalShippingDiscount</code> - This field indicates whether or not a seller has set up a promotional shipping discount rule in the seller's account. Only one promotional shipping discount may be defined for a seller's account at any given time. This field is returned whether <code>false</code> or <code>true</code>. If <code>true</code>, details of the rule can be found in the <b>PromotionalShippingDiscountDetails</b> container.
+ * <br> <B>Output property:</B> <code>ReturnedCalculatedHandlingDiscount</code> - This container consists of the handling discount applicable to a calculated shipping discount rule that is set up for a seller's account. This container is not returned if no calculated shipping discount rules are currently set for the seller's account.
+ * <br> <B>Output property:</B> <code>ReturnedPromotionalShippingDiscountDetails</code> - This container consists of information related to the promotional shipping discount rule that is set up for a seller's account. This container is not returned if no promotional shipping discount rule is set up for the seller's account.
+ * <br> <B>Output property:</B> <code>ReturnedShippingInsurance</code> - This container is deprecated.
+ * <br> <B>Output property:</B> <code>ReturnedInternationalShippingInsurance</code> - This container is deprecated.
+ * <br> <B>Output property:</B> <code>ReturnedCombinedDuration</code> - This field indicates the number of days after the sale of an item in which the buyer or seller can combine multiple and mutual order line items into one Combined Invoice order. In a Combined Invoice order, the buyer makes one payment for all order line items, hence only unpaid order line items can be combined into a Combined Invoice order.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -81,8 +65,7 @@ public class GetShippingDiscountProfilesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Returns the shipping discount profiles defined by the user, along with other Combined
-   * Invoice-related details such as packaging and handling costs.
+   * This call retrieves all shipping discount profiles currently defined by the user, along with other Combined Invoice-related details such as packaging and handling costs.
    * 
    * <br>
    * @throws ApiException

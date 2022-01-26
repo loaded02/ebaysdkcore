@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,14 +21,9 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ReasonCodeID</code> - Unique identifier for a reason code. If this ReasonCodeID is passed then 
- * only details of this ReasonCodeID will be returned. If no reason code is 
- * specified, all reason codes are returned.
- * <br> <B>Input property:</B> <code>ReturnAllSites</code> - Set to true to retrieve reason codes for all sites. If not specified, 
- * reason codes are returned for the site specified in the request header 
- * only. 
- * If ReasonCodeID is specified, this parameter is ignored.
- * <br> <B>Output property:</B> <code>ReturnedVeROReasonCodeDetails</code> - Contains the list of the status codes for a site.
+ * <br> <B>Input property:</B> <code>ReasonCodeID</code> - Unique identifier for a reason code. If this <strong>ReasonCodeID</strong> field is passed in, only the details related to this <strong>ReasonCodeID</strong> will be returned. If no reason code is specified, all reason codes are returned.
+ * <br> <B>Input property:</B> <code>ReturnAllSites</code> - Set to true to retrieve reason codes for all sites. If not specified, reason codes are returned for the site specified in the request header only. If a <strong>ReasonCodeID</strong> value is specified, this parameter is ignored.
+ * <br> <B>Output property:</B> <code>ReturnedVeROReasonCodeDetails</code> - This container consists of one or more VeRO Program copyright/intellectual property infringement violation types for one or more eBay sites.
  * 
  * @author Ron Murphy
  * @version 1.0
@@ -59,11 +54,11 @@ public class GetVeROReasonCodeDetailsCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Retrieves details for VeRO reason codes and their descriptions. You can specify a 
-   * reason code ID to get details for a specific reason on the site specified in the 
-   * request header. If ReasonCodeID is not passed in the request, all reason codes are 
-   * returned. Set ReturnAllSites to true to retrieve reason codes for all sites.
-   * You must be a member of the Verified Rights Owner (VeRO) Program to use this call. 
+   * Retrieves details for VeRO reason codes and their descriptions. You can specify a
+   * reason code ID to get details for a specific reason on the site specified in the
+   * request header. If <strong>ReasonCodeID</strong> is not passed in the request, all reason codes are
+   * returned. Set <strong>ReturnAllSites</strong> to <code>true</code> to retrieve reason codes for all sites.
+   * You must be a member of the Verified Rights Owner (VeRO) Program to use this call.
    * 
    * <br>
    * @throws ApiException

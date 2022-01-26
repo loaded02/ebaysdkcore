@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -20,17 +20,14 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemID</code> - ID of the item to which the My eBay note will be
+ * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier of the listing to which the My eBay note will be
  * attached. Notes can only be added to items that are
  * currently being tracked in My eBay.
- * <br> <B>Input property:</B> <code>Action</code> - The seller must include this field and set it to 'AddOrUpdate' to add a new 
- * user note or update an existing user note, or set it to 'Delete' to delete a 
- * an existing user note.
- * <br> <B>Input property:</B> <code>NoteText</code> - Text of the note. Maximum 250 characters. Required only
- * if the Action is <b>AddOrUpdate</b>. This note text will
+ * <br> <B>Input property:</B> <code>Action</code> - The seller must include this field and set it to 'AddOrUpdate' to add a new user note or update an existing user note, or set it to 'Delete' to delete an existing user note.
+ * <br> <B>Input property:</B> <code>NoteText</code> - This field is needed if the <b>Action</b> is <code>AddOrUpdate</code>. The text supplied in this field will
  * completely replace any existing My eBay note for the
  * specified item.
- * <br> <B>Input property:</B> <code>TransactionID</code> - Unique identifier for the order line item (transaction) to which the My
+ * <br> <B>Input property:</B> <code>TransactionID</code> - Unique identifier for the order line item to which the My
  * eBay note will be attached. Notes can only be added to order line items
  * that are currently being tracked in My eBay. Buyers can
  * view user notes made on order line items in the
@@ -39,7 +36,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * the <b>PrivateNotes</b> field of the <b>SoldList</b> and <b>DeletedFromSoldList</b>
  * containers in <b>GetMyeBaySellinging</b>.
  * <br> <B>Input property:</B> <code>VariationSpecifics</code> - Container consisting of name-value pairs that identify (match) one
- * variation within a fixed-price, multi-variation listing. The specified
+ * variation within a fixed-price, multiple-variation listing. The specified
  * name-value pair(s) must exist in the listing specified by either the
  * <b>ItemID</b> or <b>SKU</b> values specified in the request. If a specific order line
  * item is targeted in the request with an
@@ -48,7 +45,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <br> <B>Input property:</B> <code>SKU</code> - SKU value of the item variation to which the My eBay note will be
  * attached. Notes can only be added to items that are currently being
  * tracked in My eBay. A SKU (stock keeping unit) value is defined by and
- * used by the seller to identify a variation within a fixed-price, multi-
+ * used by the seller to identify a variation within a fixed-price, multiple-
  * variation listing. The SKU value is assigned to a variation of an item
  * through the <b>Variations.Variation.SKU</b> element.
  * <br>
@@ -62,10 +59,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * with an <b>ItemID</b>/<b>TransactionID</b> pair or an <b>OrderLineItemID</b> value, any
  * specified <b>SKU</b> is ignored by the call.
  * <br> <B>Input property:</B> <code>OrderLineItemID</code> - A unique identifier for an eBay order line item. This field is created as
- * soon as there is a commitment to buy from the seller, and its value is
- * based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in
- * between these two IDs. <b>OrderLineItemID</b> can be used in the input instead of
- * an <b>ItemID</b>/<b>TransactionID</b> pair to identify an order line item. 
+ * soon as there is a commitment to buy from the seller. <b>OrderLineItemID</b> can be used in the input instead of
+ * an <b>ItemID</b>/<b>TransactionID</b> pair to identify an order line item.
  * <br>
  * <br>
  * Notes can only be added to order line items that are currently being
@@ -108,9 +103,7 @@ public class SetUserNotesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables users to add, replace, and delete My eBay notes for
-   * items that are being tracked in the My eBay All Selling and
-   * All Buying areas.
+   * Enables users to add, modify, or delete a pinned note for any item that is being tracked in the My eBay All Selling and All Buying areas.
    * 
    * <br>
    * @throws ApiException

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -27,9 +27,7 @@ import com.ebay.soap.eBLBaseComponents.*;
  * Confirmation Request (TCR) can be created for the item. If this field is included and its value set to <code>true</code>, no TCR is actually created. If this field is included and its value set to <code>false</code>, or if it is omitted, a Transaction
  * Confirmation Request is actually created.
  * <br> <B>Input property:</B> <code>RecipientPostalCode</code> - This field is used to specify the postal code of the user to whom the seller is offering the Transaction Confirmation Request. This field is only required if the user does not meet the other options listed in <b>RecipientRelationCodeType</b>.
- * <br> <B>Input property:</B> <code>RecipientRelationType</code> - The enumeration value supplied in this field specifies the current relationship between the seller and the potential
- * buyer. A Transaction Confirmation Request (TCR) for an
- * item can be sent to a potential buyer who has at least one of the following criteria: is an active bidder on the auction listing; has made a Best Offer on the fixed-price listing, is an eBay user who has used the Ask Seller a Question feature, or is an eBay user whose postal code is known.
+ * <br> <B>Input property:</B> <code>RecipientRelationType</code> - The enumeration value supplied in this field specifies the current relationship between the seller and the potential buyer. A Transaction Confirmation Request (TCR) for an item can be sent to a potential buyer who has at least one of the following criteria: is an active bidder on the auction listing; has made a Best Offer on the fixed-price listing, is an eBay user who has used the Ask Seller a Question feature, or is an eBay user whose postal code is known.
  * <br> <B>Input property:</B> <code>NegotiatedPrice</code> - The amount in this field is the price that the seller is asking for to purchase the motor vehicle.
  * <br> <B>Input property:</B> <code>ListingDuration</code> - The enumeration value specified in this field will control how many days that the recipient of the offer has to purchase the motor vehicle at the price listed in the <b>NegotiatedPrice</b> field.
  * <br> <B>Input property:</B> <code>ItemID</code> - This field is used to identify the eBay Motors listing using the unique identifier of the listing (<b>ItemID</b>).

@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,45 +21,16 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>DisputeFilterType</code> - An inclusive filter that isolates the returned disputes to a certain
- * type such as Item Not Received or Unpaid Item disputes. eBay Money Back Guarantee cases are not retrieved with this call, even if the
- * <b>ItemNotReceivedDisputes</b> filter is included in the request.
- * <br> <B>Input property:</B> <code>DisputeSortType</code> - The value and sequence to use to sort the returned disputes.
+ * <br> <B>Input property:</B> <code>DisputeFilterType</code> - An inclusive filter that isolates the returned disputes to a certain type such as Item Not Received or Unpaid Item disputes. eBay Money Back Guarantee cases are not retrieved with this call, even if the <b>ItemNotReceivedDisputes</b> filter is included in the request.
+ * <br> <B>Input property:</B> <code>DisputeSortType</code> - One of the values defined in <b>DisputeSortTypeCodeType</b> is used here to control the order of disputes that are returned.
  * <br> <B>Input property:</B> <code>TimeFilter</code> - Helper wrapper to set GetUserDisputesRequestType ModTimeFrom, ModTimeTo:
  * TimeFrom sets GetUserDisputesRequestType.ModTimeFrom: 
- * A filter that retrieves disputes whose <b>DisputeModifiedTime</b> is later
- * than or equal to this value. Specify the time value in GMT.
- * See the eBay Features Guide for information about specifying time values.
- * For more precise control of the date range filter, it is a good practice to also
- * specify <b>ModTimeTo</b>. Otherwise, the end of the date range is the present time.
- * Filtering by date range is optional. You can use date range filters in combination
- * with other filters like <b>DisputeFilterType</b> to control the amount of data returned.
+ * A filter that retrieves disputes whose <b>DisputeModifiedTime</b> is later than or equal to this value. Specify the time value in GMT. See the eBay Features Guide for information about specifying time values. For more precise control of the date range filter, it is a good practice to also specify <b>ModTimeTo</b>. Otherwise, the end of the date range is the present time. Filtering by date range is optional. You can use date range filters in combination with other filters like <b>DisputeFilterType</b> to control the amount of data returned.
  * TimeTo sets GetUserDisputesRequestType.ModTimeTo: 
- * A filter that retrieves disputes whose <b>DisputeModifiedTime</b> is earlier
- * than or equal to this value. Specify the time value in GMT.
- * See the eBay Features Guide for information about specifying time values.
- * For more precise control of the date range filter, it is a good practice to also
- * specify <b>ModTimeFrom</b>. Otherwise, all available disputes modified prior to the <b>ModTimeTo</b> value are returned.
- * Filtering by date range is optional. You can use date range filters in combination
- * with other filters like <b>DisputeFilterType</b> to control the amount of data returned.
- * <br> <B>Input property:</B> <code>Pagination</code> - The virtual page number of the result set to display. A result set has a number of disputes
- * divided into virtual pages, with 200 disputes per page. The response can only display one page.
- * The first page in the result set is number 1. Required. If not specified, a warning is returned
- * and <b>Pagination.PageNumber</b> is set to 1 by default.
- * <br> <B>Output property:</B> <code>ReturnedStartingDisputeID</code> - The index of the first dispute in the current result set, relative
- * to the total number of disputes available.
- * Primarily useful for interpreting paginated results.
- * For example, if 228 disputes are available and
- * 200 results are returned per page: The first page returns
- * a <b>StartingDisputeID</b> value of 1 and the second page returns a
- * <b>StartingDisputeID</b> value of 201.
- * <br> <B>Output property:</B> <code>ReturnedEndingDisputeID</code> - The index of the last dispute in the current result set, relative
- * to the total number of disputes available.
- * Primarily useful for interpreting paginated results.
- * For example, if 228 disputes are available and
- * 200 results are returned per page: The first page returns
- * an <b>EndingDisputeID</b> value of 200 and the second page returns an
- * <b>EndingDisputeID</b> value of 228.
+ * A filter that retrieves disputes whose <b>DisputeModifiedTime</b> is earlier than or equal to this value. Specify the time value in GMT. See the eBay Features Guide for information about specifying time values. For more precise control of the date range filter, it is a good practice to also specify <b>ModTimeFrom</b>. Otherwise, all available disputes modified prior to the <b>ModTimeTo</b> value are returned. Filtering by date range is optional. You can use date range filters in combination with other filters like <b>DisputeFilterType</b> to control the amount of data returned.
+ * <br> <B>Input property:</B> <code>Pagination</code> - The virtual page number of the result set to display. A result set has a number of disputes divided into virtual pages, with 200 disputes per page. The response can only display one page. The first page in the result set is number 1. Required. If not specified, a warning is returned and <b>Pagination.PageNumber</b> is set to 1 by default.
+ * <br> <B>Output property:</B> <code>ReturnedStartingDisputeID</code> - The index of the first dispute in the current result set, relative to the total number of disputes available. Primarily useful for interpreting paginated results. For example, if 228 disputes are available and 200 results are returned per page: The first page returns a <b>StartingDisputeID</b> value of 1 and the second page returns a <b>StartingDisputeID</b> value of 201.
+ * <br> <B>Output property:</B> <code>ReturnedEndingDisputeID</code> - The index of the last dispute in the current result set, relative to the total number of disputes available. Primarily useful for interpreting paginated results. For example, if 228 disputes are available and 200 results are returned per page: The first page returns an <b>EndingDisputeID</b> value of 200 and the second page returns an <b>EndingDisputeID</b> value of 228.
  * <br> <B>Output property:</B> <code>ReturnedDisputeArray</code> - The array of disputes returned.
  * <br> <B>Output property:</B> <code>ReturnedItemsPerPage</code> - The number of disputes on each virtual page in the result set.
  * The virtual page returned is determined by <b>PageNumber</b>.
@@ -108,9 +79,7 @@ public class GetUserDisputesCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Requests a list of disputes the requester is involved in as buyer or seller.
-   * eBay Money Back Guarantee Item Not Received and Significantly Not As Described cases
-   * are not returned with this call. To retrieve eBay Money Back Guarantee cases, use the Resolution Case Management API <b>getUserCases</b> call.
+   * Requests a list of disputes the requester is involved in as buyer or seller. eBay Money Back Guarantee Item Not Received and Return cases are not returned with this call. To retrieve eBay Money Back Guarantee cases, use the <b>Search Cases</b> call of the Post-Order API (or alternatively, the <b>getUserCases</b> call of the Resolution Case Management API.
    * 
    * <br>
    * @throws ApiException

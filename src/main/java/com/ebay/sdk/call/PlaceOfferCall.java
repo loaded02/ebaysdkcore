@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,57 +21,32 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>Offer</code> - Specifies the type of offer being made. If the item is a
- * competitive-bidding listing, the offer is a bid. If the item is a
- * fixed-price listing, then the offer purchases the item. If the item is a
- * competitive-bidding listing and the offer is of type with an active,
- * unexercised Buy It Now option, then the offer can either purchase the
- * item or be a bid. See the schema documentation for OfferType for details
- * on its properties and their meanings.
- * <br> <B>Input property:</B> <code>ItemID</code> - Unique item ID that identifies the item listing for which the action is being
- * submitted.
+ * <br> <B>Input property:</B> <code>Offer</code> - This container specifies the type of offer being made for the listing specified in the <b>ItemID</b> field. The <b>Offer.Action</b> is used to set the action that is being taken on the listing.
+ * <br> <B>Input property:</B> <code>ItemID</code> - Unique identifier that identifies the listing for which the action is being submitted.
  * <br><br>
- * If the item was listed with Variations, you must also specify
- * VariationSpecifics in the request to uniquely identify the
- * variant being purchased.
- * <br> <B>Input property:</B> <code>BlockOnWarning</code> - If a warning message exists and BlockOnWarning is true,
- * the warning message is returned and the bid is blocked. If no warning message
- * exists and BlockOnWarning is true, the bid is placed. If BlockOnWarning
- * is false, the bid is placed, regardless of warning.
+ * For a multiple-variation listing, you must also identify the specific variation within that listing using the <b>VariationSpecifics</b> container.
+ * <br> <B>Input property:</B> <code>BlockOnWarning</code> - If a warning message is generated when the call is made, this <b>BlockOnWarning</b> will block the bid/buy action if set to <code>true</code>. If <b>BlockOnWarning</b>
+ * is <code>false</code> or omitted, the bid/buy action is allowed, regardless of whether or not a warning message occurs.
+ * <br>
  * <br> <B>Input property:</B> <code>AffiliateTrackingDetails</code> - Container for affiliate-related tags, which enable the tracking of user
- * activity. If you include AffiliateTrackingDetails in your PlaceOffer call, then
+ * activity. If you include the <b>AffiliateTrackingDetails</b> container in your <b>PlaceOffer</b> call, then
  * it is possible to receive affiliate commissions based on calls made by your
  * application. (See the <a href=
  * "http://www.ebaypartnernetwork.com/" target="_blank">eBay Partner Network</a>
  * for information about commissions.) Please note that affiliate tracking is not
  * available in the Sandbox environment, and that affiliate tracking is not
- * available when you make a best offer.
- * <br> <B>Input property:</B> <code>VariationSpecifics</code> - Name-value pairs that identify a single variation within the
- * listing identified by ItemID. Required when the seller
- * listed the item with Item Variations.<br>
- * <br>
- * If you want to buy items from multiple variations in the same
- * listing, use a separate PlaceOffer request for each variation.
- * For example, if you want to buy 3 red shirts and 2 black shirts
- * from the same listing, use one PlaceOffer request for the
- * 3 red shirts, and another PlaceOffer request for the 2
- * black shirts.
- * <br> <B>Output property:</B> <code>ReturnedSellingStatus</code> - Indicates the current bidding/purchase state of the item listing regarding
- * the offer extended using <b>PlaceOffer</b>. See the schema documentation for
- * the <b>SellingStatus</b> object, the properties of which contain such
- * post-offer information as the current high bidder, the current price for
- * the item, and the bid increment.
- * <br> <B>Output property:</B> <code>ReturnedTransactionID</code> - Unique identifier for an eBay order line item (transaction). The
+ * available when you make a Best Offer.
+ * <br> <B>Input property:</B> <code>VariationSpecifics</code> - This container is used to identify a specific variation within a multiple-variation listing identified by the <b>ItemID</b> value. This container is required when attempting to perform an action on a multiple-variation listing.
+ * <br> <B>Output property:</B> <code>ReturnedSellingStatus</code> - This container indicates the current bidding/purchase state of the order line item regarding the offer extended using <b>PlaceOffer</b>. The fields that are returned under this container will depend on the attempted action and the results of that action.
+ * <br> <B>Output property:</B> <code>ReturnedTransactionID</code> - Unique identifier for an eBay order line item. The
  * <b>TransactionID</b> field is only returned if the <b>Offer.Action</b> field was set
  * to <b>Purchase</b> in the input and the purchase was successful. A Purchase
  * action in <b>PlaceOffer</b> can be used for a fixed-price listing, or for an
  * auction listing where the Buy It Now option is available.
  * <br> <B>Output property:</B> <code>ReturnedBestOffer</code> - Container consisting of the status for a Best Offer. This container is
  * only returned if applicable based on the listing and the value set for
- * <b>Offer.Action</b> field in the request. 
- * <br> <B>Output property:</B> <code>ReturnedOrderLineItemID</code> - <b>OrderLineItemID</b> is a unique identifier for an eBay order line item and
- * is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a
- * hyphen in between these two IDs. The <b>OrderLineItemID</b> field is only
+ * <b>Offer.Action</b> field in the request.
+ * <br> <B>Output property:</B> <code>ReturnedOrderLineItemID</code> - <b>OrderLineItemID</b> is a unique identifier for an eBay order line item. The <b>OrderLineItemID</b> field is only
  * returned if the <b>Offer.Action</b> field is set to <b>Purchase</b> in the input and
  * the purchase is successful. A Purchase action in <b>PlaceOffer</b> can be used
  * for a fixed-price listing, or for an auction listing where the Buy It
@@ -113,8 +88,7 @@ public class PlaceOfferCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Enables the authenticated user to make a bid, a Best Offer, or
-   * a purchase on the item specified by the ItemID input field.
+   * Enables the authenticated user to to make a bid on an auction item, propose a Best Offer, or purchase a fixed-price/Buy It Now item. Note that this call cannot be used to purchase items that require immediate payment.
    * 
    * <br>
    * @throws ApiException

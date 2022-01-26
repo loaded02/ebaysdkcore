@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -23,8 +23,8 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
  * <br> <B>Input property:</B> <code>AlertIDs</code> - This container is deprecated.
- * <br> <B>Input property:</B> <code>MessageIDs</code> - Container consisting of one to 10 MessageID fields.
- * <br> <B>Input property:</B> <code>FolderID</code> - A unique identifier for a My Messages folder. If a FolderID is provided,
+ * <br> <B>Input property:</B> <code>MessageIDs</code> - This container can be used to retrieve one or more specific messages identified with their unique <b>MessageID</b> values. Up to  10 <b>MessageID</b> values can be specified with one call.
+ * <br> <B>Input property:</B> <code>FolderID</code> - A unique identifier for a My Messages folder. If a <b>FolderID</b> value is provided,
  * only messages from the specified folder are returned in the response.
  * <br> <B>Input property:</B> <code>StartTime</code> - The beginning of the date-range filter.
  * Filtering takes into account the entire timestamp of when messages were sent.
@@ -37,26 +37,15 @@ import com.ebay.soap.eBLBaseComponents.*;
  * over message ID.
  * <br> <B>Input property:</B> <code>Pagination</code> - Specifies how to create virtual pages in the returned list (such as total
  * number of entries and total number of pages to return).
- * Default for EntriesPerPage with GetMyMessages is 25.
- * <br> <B>Input property:</B> <code>IncludeHighPriorityMessageOnly</code> - If this field is included in the request and set to True, only High Priority
- * messages are returned in the response.
- * <br> <B>Output property:</B> <code>ReturnedSummary</code> - Summary data for a given user's
- * messages. This includes the numbers of
- * new messages, flagged messages, and total messages.
- * The amount and type of data returned is the same
- * whether or not the request includes specific
- * MessageIDs.
- * Always/Conditionally returned logic assumes a
- * detail level of ReturnMessages.
- * <br> <B>Output property:</B> <code>ReturnedAlerts</code> - This container was deprecated in 685 version. Alerts are now considered
- * Flagged messages.
- * <br> <B>Output property:</B> <code>ReturnedMyMessages</code> - Contains the message information for each
- * message specified in MessageIDs. The amount and
- * type of information returned varies based on the
- * requested detail level. Contains one
- * MyMessagesMessageType object per message.
- * Returned as an empty node if user has no
- * messages.
+ * Default value for <b>EntriesPerPage</b> with <b>GetMyMessages</b> is 25.
+ * <br> <B>Input property:</B> <code>IncludeHighPriorityMessageOnly</code> - If this field is included in the request and set to <code>true</code>, only High Priority messages are returned in the response.
+ * <br> <B>Output property:</B> <code>ReturnedSummary</code> - Summary data for a given user's messages. This includes the numbers of new
+ * messages, flagged messages, and total messages. The amount and type of
+ * data returned is the same whether or not the request includes specific
+ * Message IDs. Always/Conditionally returned logic assumes a detail level of
+ * ReturnMessages.
+ * <br> <B>Output property:</B> <code>ReturnedAlerts</code> - This container is deprecated.
+ * <br> <B>Output property:</B> <code>ReturnedMyMessages</code> - This container consists of an array of one or more messages that match the search criteria in the call request.
  * 
  * @author Ron Murphy
  * @version 1.0

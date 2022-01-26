@@ -4,7 +4,7 @@ This program is licensed under the terms of the eBay Common Development and
 Distribution License (CDDL) Version 1.0 (the "License") and any subsequent  version 
 thereof released by eBay.  The then-current version of the License can be found 
 at http://www.opensource.org/licenses/cddl1.php and in the eBaySDKLicense file that 
-is under the root directory at /LICENSE.txt.
+is under the eBay SDK ../docs directory.
 */
 
 package com.ebay.sdk.call;
@@ -21,20 +21,10 @@ import com.ebay.soap.eBLBaseComponents.*;
  * <p>Description: Contains wrapper classes for eBay SOAP APIs.</p>
  * <p>Copyright: Copyright (c) 2009</p>
  * <p>Company: eBay Inc.</p>
- * <br> <B>Input property:</B> <code>ItemID</code> - An eBay item ID that uniquely identifies a currently active item.
- * <br> <B>Input property:</B> <code>ContactID</code> - An eBay ID that uniquely identifies a given user for whom the caller is seeking
- * information. This is the user's eBay username. Either a seller's or bidder's
- * username can be specified here, as long as a bidding relationship exists between
- * the requester and the user specified by this field. That is, a bidder must be
- * bidding on the seller's active item, or have made an offer on the item via Best
- * Offer.
- * <br> <B>Input property:</B> <code>RequesterID</code> - An eBay ID that uniquely identifies the person who is making the call. This is the
- * requester's eBay username. Either a seller's or bidder's username can be specified
- * here, as long as a bidding relationship exists between the requester and the
- * user for whom information is being requested.
- * <br> <B>Output property:</B> <code>ReturnedUserID</code> - An eBay ID that uniquely identifies a given
- * user. The eBay username of the requested
- * contact.
+ * <br> <B>Input property:</B> <code>ItemID</code> - A unique identifier for the eBay listing that the caller and order partner have in common.
+ * <br> <B>Input property:</B> <code>ContactID</code> - An eBay user ID that uniquely identifies a given user for whom the caller is seeking information. Either a seller's or bidder's/buyer's user ID can be specified here, as long as an bidding/order relationship exists between the requester and the user specified by this field. That is, a bidder must be bidding on the seller's active auction item, or a prospective buyer has proposed a Best Offer on a listing.
+ * <br> <B>Input property:</B> <code>RequesterID</code> - An eBay user ID that uniquely identifies the person who is making the call. Either a seller's or bidder's/buyer's user ID can be specified here, as long as a bidding/order relationship exists between the requester and the user for whom information is being requested.
+ * <br> <B>Output property:</B> <code>ReturnedUserID</code> - An eBay ID that uniquely identifies the given user whose information is given in the call response.
  * <br> <B>Output property:</B> <code>ReturnedContactAddress</code> - Contact information for the requested contact.
  * Note that the email address is NOT returned.
  * <br> <B>Output property:</B> <code>ReturnedRegistrationDate</code> - The date and time that the requested contact
@@ -72,8 +62,7 @@ public class GetUserContactDetailsCall extends com.ebay.sdk.ApiCall
   }
 
   /**
-   * Returns contact information for a specified user, given that a bidding relationship
-   * (as either a buyer or seller) exists between the caller and the user.
+   * This call is used to retrieve contact information for a specified eBay user, given that a bidding relationship (as either a buyer or seller) exists between the caller and the user.
    * 
    * <br>
    * @throws ApiException
